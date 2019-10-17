@@ -1,0 +1,38 @@
+// VARs
+@import 'variables';
+
+// FONTS and TYPO
+@import 'fonts';
+@import 'typography';
+
+// MIXINS
+@import 'mixins/fade';
+@import 'mixins/hover';
+@import 'mixins/rwd';
+@import 'mixins/shadow';
+
+// COMPONENTS
+@import 'components/navbar';
+@import 'components/footer';
+@import 'components/hamburger';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: grey;
+  font-family: 'Roboto', sans-serif;
+  // font-family: 'Quicksand', sans-serif;
+  background: $bg-color;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-bottom: 113px;
+  position: relative;
+
+  @include phones {
+    padding-bottom: 218px;
+  }
+}
+
+ul {
+  margin: 0;
+}

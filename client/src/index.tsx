@@ -4,6 +4,9 @@ import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
+import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import './App/styles/main.module.scss';
+
 const Root = () => {
   return (
     <BrowserRouter>

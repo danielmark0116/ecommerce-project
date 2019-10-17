@@ -1,0 +1,68 @@
+.footer {
+  background: $white;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 30px;
+
+  &_credits {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+
+  &_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    @include phones {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .rights {
+      color: $grey;
+      font-weight: 400;
+      font-size: 12px;
+      text-align: center;
+
+      @include phones {
+        margin-top: 20px;
+        order: 2;
+      }
+    }
+
+    .links {
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        @include phones {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        li {
+          margin: 0 5px;
+          color: $dark;
+
+          a {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: inherit;
+            font-size: 12px;
+
+            &.active_footer_link {
+              font-weight: 900;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+.navbar {
+  padding: 30px 0;
+  background: $white;
+  border-bottom: 1px solid darken($white, 10);
+  @include shadow(20px);
+
+  &_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    .navbar_btn {
+      position: absolute;
+      display: none;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: $grey;
+
+      @include phones {
+        display: inline-flex;
+        justify-content: flex-end;
+        justify-self: flex-end;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &_brand {
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: $dark-blue;
+  }
+
+  &_menu {
+    ul {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0 5px;
+
+        a {
+          text-decoration: none;
+          text-transform: uppercase;
+          color: $dark-blue;
+          font-size: 14px;
+          font-weight: 400;
+
+          &.navbar_link_active {
+            font-weight: 900;
+          }
+        }
+      }
+    }
+
+    &_desktop {
+      @include phones {
+        display: none;
+      }
+    }
+
+    &_mobile {
+      display: none;
+
+      @include phones {
+        display: inline;
+      }
+
+      ul {
+        display: none;
+      }
+    }
+  }
+}
