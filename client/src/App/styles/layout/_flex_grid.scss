@@ -1,0 +1,74 @@
+.flex_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+  overflow-x: scroll;
+
+  &.flex_fixed_width {
+    .flex_item {
+      max-width: 33.3%;
+    }
+  }
+
+  .flex_item {
+    flex: 1 0 33.3%;
+    width: auto;
+    max-width: none;
+    background: rgba(black, 0.05);
+    min-height: 100px;
+    margin: 5px 0;
+    padding: 10px;
+
+    &:nth-of-type(even) {
+      background: rgba(black, 0.15);
+    }
+  }
+
+  @include tablets {
+    &.flex_fixed_width {
+      .flex_item {
+        max-width: 50%;
+      }
+    }
+
+    .flex_item {
+      flex: 1 0 50%;
+    }
+  }
+
+  @include large-phones {
+    &.flex_fixed_width {
+      .flex_item {
+        max-width: 100%;
+      }
+    }
+
+    .flex_item {
+      flex: 1 0 100%;
+    }
+  }
+
+  &.flex_horizontal_scroll {
+    flex-wrap: nowrap;
+  }
+
+  &.flex_horizontal_scroll_phones {
+    @include large-phones {
+      flex-wrap: nowrap;
+
+      .flex_item {
+        flex: 1 0 60%;
+      }
+    }
+
+    @include phones {
+      .flex_item {
+        flex: 1 0 80%;
+      }
+    }
+  }
+}

@@ -11,6 +11,9 @@
 @import 'mixins/rwd';
 @import 'mixins/shadow';
 
+// GRID
+@import 'layout/flex_grid';
+
 // COMPONENTS
 @import 'components/navbar';
 @import 'components/footer';
@@ -19,7 +22,6 @@
 body {
   margin: 0;
   padding: 0;
-  background: grey;
   font-family: 'Roboto', sans-serif;
   // font-family: 'Quicksand', sans-serif;
   background: $bg-color;

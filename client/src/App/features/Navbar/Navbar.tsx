@@ -39,8 +39,15 @@ const Navbar = (props: IProps) => {
     </ul>
   );
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = async () => {
+    const pageBody = document.querySelector('body');
     toggleMenu(!showMenu);
+
+    if (pageBody) {
+      !showMenu
+        ? (pageBody.style.overflowY = 'hidden')
+        : (pageBody.style.overflowY = 'scroll');
+    }
   };
 
   return (
