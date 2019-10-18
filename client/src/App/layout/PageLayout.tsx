@@ -22,11 +22,11 @@ const PageLayout = (props: IProps) => {
     <div>
       <Navbar paths={paths} />
       <Route exact path="/">
-        Carousel
+        <h3 style={{ textAlign: 'center', paddingTop: 100 }}>CAROUSEL</h3>
       </Route>
-      <div style={{ margin: 40 }}></div>
+      <div style={{ padding: 60 }}></div>
       <Container>{children}</Container>
-      <div style={{ margin: 40 }}></div>
+      <div style={{ padding: 40 }}></div>
       <Footer paths={paths} />
     </div>
   );

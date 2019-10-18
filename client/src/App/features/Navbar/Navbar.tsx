@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container } from 'reactstrap';
+
+import HamburgerBtn from '../../common/HamburgerBtn/HamburgerBtn';
+
+import { animateLink } from '../../animations/mobile_menu';
 
 import style from '../../styles/main.module.scss';
 
@@ -11,42 +15,63 @@ interface IProps {
   }[];
 }
 
-const Links = (props: IProps) => (
-  <ul>
-    {props.paths.map((path, index) => (
-      <li key={index}>
-        <NavLink
-          exact
-          to={path.path}
-          activeClassName={style.navbar_link_active}
-        >
-          {path.title}
-        </NavLink>
-      </li>
-    ))}
-  </ul>
-);
-
 const Navbar = (props: IProps) => {
   const { paths } = props;
+  const mobileMenuRef = React.createRef<HTMLDivElement>();
+  const [showMenu, toggleMenu] = useState(false);
+
+  const Links = (props: IProps) => (
+    <ul>
+      {props.paths.map((path, index) => {
+        return (
+          <li key={index}>
+            <NavLink
+              exact
+              to={path.path}
+              activeClassName={style.navbar_link_active}
+              onClick={toggleMobileMenu}
+            >
+              {path.title}
+            </NavLink>
+          </li>
+        );
+      })}
+    </ul>
+  );
+
+  const toggleMobileMenu = () => {
+    toggleMenu(!showMenu);
+  };
 
   return (
-    <nav className={style.navbar}>
-      <Container>
-        <div className={style.navbar_container}>
-          <div className={style.navbar_brand}>ecommerce</div>
-          <div className={style.navbar_btn}></div>
-          <div className={style.navbar_menu}>
-            <div className={style.navbar_menu_mobile}>
-              <Links paths={paths} />
+    <Fragment>
+      <nav className={style.navbar}>
+        <div
+          ref={mobileMenuRef}
+          className={`${style.navbar_menu_mobile} ${
+            showMenu ? style.navbar_menu_mobile_active : ''
+          }`}
+        >
+          <Links paths={paths} />
+        </div>
+        <Container>
+          <div className={style.navbar_container}>
+            <div className={style.navbar_brand}>ecommerce</div>
+            <div className={style.navbar_btn}>
+              <HamburgerBtn
+                onClick={toggleMobileMenu}
+                action={showMenu}
+              ></HamburgerBtn>
             </div>
-            <div className={style.navbar_menu_desktop}>
-              <Links paths={paths} />
+            <div className={style.navbar_menu}>
+              <div className={style.navbar_menu_desktop}>
+                <Links paths={paths} />
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
-    </nav>
+        </Container>
+      </nav>
+    </Fragment>
   );
 };
 
