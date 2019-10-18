@@ -26,7 +26,7 @@ const PageLayout = (props: IProps) => {
       </Route>
       <div style={{ padding: 60 }}></div>
       <Container>{children}</Container>
-      <div style={{ padding: 40 }}></div>
+      <div style={{ padding: 20 }}></div>
       <Footer paths={paths} />
     </div>
   );
