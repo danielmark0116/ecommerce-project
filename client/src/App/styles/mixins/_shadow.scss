@@ -1,3 +1,7 @@
 @mixin shadow($blur) {
   box-shadow: 0 0 $blur rgba($shadow-color, 0.05);
 }
+
+@mixin shadow-strong($blur) {
+  box-shadow: 0 4px $blur rgba($shadow-color, 0.1);
+}

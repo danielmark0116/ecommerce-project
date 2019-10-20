@@ -15,3 +15,9 @@
     @content;
   }
 }
+
+@mixin large-tablets {
+  @media screen and (max-width: $bp-xl) {
+    @content;
+  }
+}

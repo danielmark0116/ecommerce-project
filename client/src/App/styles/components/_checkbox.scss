@@ -1,0 +1,51 @@
+$box_size: 15px;
+
+.checkbox_container {
+  width: 100%;
+  margin: 0 auto 40px;
+  padding: 5px 10px 30px;
+  min-height: 50px;
+  border-radius: 5px;
+  background: $white;
+  @include shadow-strong(10px);
+  @include fade;
+
+  @include large-tablets {
+    max-width: 80%;
+  }
+
+  @include hover-supported {
+    &:hover {
+      transform: scale(1.01);
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0 0 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .checkbox_label {
+      color: $dark-blue;
+      padding-left: 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .checkbox_box {
+      width: $box_size;
+      height: $box_size;
+      display: block;
+      background: transparent;
+      border: 1px solid $grey;
+      border-radius: 2px;
+      @include shadow(10px);
+    }
+  }
+}

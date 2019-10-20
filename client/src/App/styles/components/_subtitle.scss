@@ -1,0 +1,11 @@
+.subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 20px 0;
+  font-family: 'Quicksand', sans-serif;
+
+  &.subtitle_small {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
