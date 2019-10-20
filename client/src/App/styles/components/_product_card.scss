@@ -1,0 +1,43 @@
+.product_card_container {
+  width: 100%;
+  padding: 10px 0;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  a {
+    text-decoration: none;
+    text-transform: none;
+    color: inherit;
+  }
+
+  .product_title {
+    color: $dark;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+
+    span {
+      color: $grey;
+      font-weight: 300;
+      padding: 0 5px;
+    }
+  }
+
+  .product_more {
+    font-size: 10px;
+    margin: 10px 0;
+    font-weight: 300;
+    color: $dark;
+  }
+
+  .product_price {
+    font-size: 22px;
+    margin: 0;
+    font-weight: 700;
+    color: $dark;
+  }
+}

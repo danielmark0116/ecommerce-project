@@ -1,0 +1,109 @@
+$hover_card_translate: 10px;
+$hover_card_translate_increment: 2.4;
+$border-radius: 5px;
+
+.product_image {
+  width: 220px;
+  height: 320px;
+  background: transparent;
+  display: block;
+  margin: 10px auto;
+  position: relative;
+  z-index: 2;
+  @include fade;
+
+  .product_category {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    display: inline;
+    background: $white;
+    padding: 8px 12px;
+    border-radius: $border-radius * 3;
+    font-size: 10px;
+    border: 1px solid $bg-color;
+    font-weight: 300;
+    text-transform: uppercase;
+    @include shadow(20px);
+    @include fade;
+  }
+
+  .product_ribbon {
+    @extend .product_category;
+    box-shadow: none;
+    border: none;
+    bottom: unset;
+    top: 5px;
+    background: transparent;
+    font-weight: 400;
+  }
+
+  .product_image_container {
+    @include shadow(10px);
+    overflow: hidden;
+    border-radius: $border-radius;
+    width: 100%;
+    height: 100%;
+    background: $white;
+
+    img {
+      height: 100%;
+      object-fit: contain;
+      z-index: 2;
+    }
+  }
+
+  .product_image_hover_card {
+    position: absolute;
+    border-radius: $border-radius;
+    top: $hover_card_translate * $hover_card_translate_increment;
+    left: $hover_card_translate;
+    width: 100%;
+    height: 100%;
+    background: $white;
+    border: 1px solid $bg-color;
+    z-index: -1;
+    @include shadow(10px);
+    @include fade;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    p {
+      padding: 7px 10px;
+      font-size: 10px;
+      color: $dark;
+    }
+  }
+
+  transform: translate(-$hover_card_translate, -$hover_card_translate);
+
+  @include hover-supported {
+    transform: translate(0, 0);
+
+    .product_image_hover_card {
+      top: 0;
+      left: 0;
+    }
+
+    &:hover {
+      transform: translate(-$hover_card_translate, -$hover_card_translate);
+      cursor: pointer;
+
+      .product_image_hover_card {
+        top: $hover_card_translate * $hover_card_translate_increment;
+        left: $hover_card_translate;
+      }
+
+      .product_category {
+        background: $dark;
+        color: $bg-color;
+      }
+
+      .product_ribbon {
+        background: transparent;
+        color: inherit;
+      }
+    }
+  }
+}
