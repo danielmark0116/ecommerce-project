@@ -1,0 +1,71 @@
+.main_button {
+  font-weight: 300;
+  font-size: 15px;
+  background: $dark-blue;
+  color: $white;
+  padding: 10px 25px;
+  margin: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid $dark-blue;
+  @include fade;
+  @include shadow-strong(10px);
+
+  &:disabled {
+    background: $bg-color;
+    border-color: $grey;
+    color: $grey;
+
+    @include hover-supported {
+      &:hover {
+        cursor: no-drop;
+        transform: scale(1);
+      }
+    }
+  }
+
+  @include hover-supported {
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &_primary {
+    @extend .main_button;
+  }
+
+  &_secondary {
+    @extend .main_button;
+    background: $white;
+    color: $dark-blue;
+    border-color: $white;
+
+    @include hover-supported {
+      &:hover {
+        background: $dark-blue;
+        color: $white;
+        border-color: $dark-blue;
+      }
+    }
+  }
+
+  &_transparent {
+    @extend .main_button;
+    @include shadow(0px);
+    background: transparent;
+    color: $dark-blue;
+    border: none;
+
+    @include hover-supported {
+      &:hover {
+        background: $white;
+        @include shadow(4px);
+        border-color: $dark-blue;
+      }
+    }
+  }
+}

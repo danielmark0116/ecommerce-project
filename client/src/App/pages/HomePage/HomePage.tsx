@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import Subtitle from '../../common/Subtitle/Subtitle';
 import ProductsList from '../../features/ProductsList/ProductsListContainer';
 
+import Button from '../../common/Button/Button';
+
 const HomePage = () => {
   return (
     <Fragment>
@@ -18,6 +20,11 @@ const HomePage = () => {
         fetchAll={true}
         productsState="latest"
       />
+      <Button disabled={false} type="primary">
+        Click
+      </Button>
+      <Button type="secondary">Click</Button>
+      <Button type="transparent">Click</Button>
     </Fragment>
   );
 };
