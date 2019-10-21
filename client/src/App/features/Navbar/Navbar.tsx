@@ -29,7 +29,7 @@ const Navbar = (props: IProps) => {
               exact
               to={path.path}
               activeClassName={style.navbar_link_active}
-              onClick={toggleMobileMenu}
+              onClick={closeMobileMenu}
             >
               {path.title}
             </NavLink>
@@ -39,15 +39,21 @@ const Navbar = (props: IProps) => {
     </ul>
   );
 
-  const toggleMobileMenu = async () => {
+  useEffect(() => {
     const pageBody = document.querySelector('body');
-    toggleMenu(!showMenu);
-
     if (pageBody) {
-      !showMenu
+      showMenu
         ? (pageBody.style.overflowY = 'hidden')
         : (pageBody.style.overflowY = 'scroll');
     }
+  }, [showMenu]);
+
+  const toggleMobileMenu = () => {
+    toggleMenu(!showMenu);
+  };
+
+  const closeMobileMenu = () => {
+    toggleMenu(false);
   };
 
   return (

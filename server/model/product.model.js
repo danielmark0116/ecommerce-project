@@ -11,6 +11,11 @@ const Product = new mongoose.Schema(
       type: String,
       required: true
     },
+    ribbon: {
+      type: String,
+      required: false,
+      default: ''
+    },
     category: {
       type: String,
       required: true

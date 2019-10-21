@@ -3,25 +3,31 @@ import React from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 
 import style from '../../styles/main.module.scss';
+import { productData } from '../../types/productData';
 
-interface IProps {}
+interface IProps {
+  productData: productData;
+}
 
-const ProductCard = () => {
+const ProductCard = (props: IProps) => {
+  const { name, sex, img, category, price, ribbon } = props.productData;
+
   return (
     <div className={style.product_card_container}>
       <ProductImage
-        pic={'https://s0.house.pl/media/catalog/product/W/A/WA960-99X-001.jpg'}
-        category="blouse"
-        ribbon="new"
+        pic={img}
+        category={category}
+        ribbon={ribbon}
       ></ProductImage>
       <br />
       <div className={style.product_title}>
         <a href="">
-          Dark Blouse <span>(male)</span>
+          {`${name}`}
+          <span>({sex})</span>
         </a>
       </div>
       <div className={style.product_more}>Click for details</div>
-      <div className={style.product_price}>19.99 $</div>
+      <div className={style.product_price}>{price} $</div>
     </div>
   );
 };

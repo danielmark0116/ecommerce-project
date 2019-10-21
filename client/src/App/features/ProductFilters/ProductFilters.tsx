@@ -9,12 +9,16 @@ import style from '../../styles/main.module.scss';
 const iniFiltersState = {
   category: '',
   sex: '',
-  date: '',
-  name: '',
-  price: ''
+  sort: ''
 };
 
-const ProductFilters = () => {
+interface IProps {
+  sexValues: string[];
+  categoryValues: string[];
+  applyFilters: Function;
+}
+
+const ProductFilters = (props: IProps) => {
   const [filtersState, setFilters] = useState(iniFiltersState);
 
   const mobileFiltersRef = React.createRef<HTMLDivElement>();
@@ -24,51 +28,55 @@ const ProductFilters = () => {
   };
 
   const applyFilters = () => {
-    console.log(filtersState);
+    const { applyFilters } = props;
+    applyFilters(filtersState);
   };
 
+  useEffect(() => {
+    props.applyFilters(filtersState);
+  }, [filtersState]);
+
   const filters = () => {
+    const { sexValues, categoryValues } = props;
+
     return (
       <Fragment>
         <Checkbox
           action={changeFilters}
+          label="Sort by"
+          category="sort"
+          inputs={[
+            'latest',
+            'oldest',
+            'priciest',
+            'cheapest',
+            'a - z',
+            'z - a'
+          ]}
+        />
+        <Checkbox
+          action={changeFilters}
           label="Category"
           category="category"
-          inputs={['t-shirt', 'blouse', 'trousers']}
+          inputs={['all', ...categoryValues]}
         />
         <Checkbox
           action={changeFilters}
           label="Sex"
           category="sex"
-          inputs={['unisex', 'female', 'male']}
+          inputs={['all', ...sexValues]}
         />
-        <Checkbox
-          action={changeFilters}
-          label="Date"
-          category="date"
-          inputs={['from latest', 'from oldest']}
-        />
-        <Checkbox
-          action={changeFilters}
-          label="Name"
-          category="name"
-          inputs={['a - z', 'z - a']}
-        />
-        <Checkbox
-          action={changeFilters}
-          label="Price"
-          category="price"
-          inputs={['from highest', 'from lowest']}
-        />
-        <br />
+
+        {/* <br />
         <br />
         <button
           onClick={() => {
             applyFilters();
+            triggerFiltersContainer(mobileFiltersRef.current, false);
           }}
         >
           apply
-        </button>
+        </button> */}
       </Fragment>
     );
   };

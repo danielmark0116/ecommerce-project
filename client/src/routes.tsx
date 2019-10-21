@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import PageLayout from './App/layout/PageLayout';
 
+import HomePage from './App/pages/HomePage/HomePage';
 import ProductsPage from './App/pages/ProductsPage/ProductsPage';
 
 const PritaveRoutes = () => {
@@ -20,7 +21,7 @@ const Routes = () => {
     <PageLayout>
       <Switch>
         <Route exact path="/">
-          <h2>home page</h2>
+          <HomePage />
         </Route>
         <Route exact path="/products">
           {true ? <ProductsPage /> : <Redirect to="/redirect"></Redirect>}

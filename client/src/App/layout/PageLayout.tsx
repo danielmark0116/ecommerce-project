@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Navbar from '../features/Navbar/Navbar';
 import Footer from '../features/Footer/Footer';
 import { Container } from 'reactstrap';
@@ -19,7 +19,7 @@ const PageLayout = (props: IProps) => {
   const { children } = props;
 
   return (
-    <div>
+    <Fragment>
       <Navbar paths={paths} />
       <Route exact path="/">
         <h3 style={{ textAlign: 'center', paddingTop: 100 }}>CAROUSEL</h3>
@@ -28,7 +28,7 @@ const PageLayout = (props: IProps) => {
       <Container>{children}</Container>
       <div style={{ padding: 20 }}></div>
       <Footer paths={paths} />
-    </div>
+    </Fragment>
   );
 };
 

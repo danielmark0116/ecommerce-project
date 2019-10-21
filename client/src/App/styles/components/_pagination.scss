@@ -1,0 +1,56 @@
+.pagination_container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 10px 25px;
+
+  @include large-tablets {
+    justify-content: center;
+    padding: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  button.pagination_button {
+    padding: 10px 15px;
+    margin: 5px;
+    background: transparent;
+    border: none;
+    font-weight: 300;
+    font-size: 14px;
+    text-shadow: 0 4px 10px rgba($dark-blue, 0.1);
+    border-radius: 5px;
+    color: $dark-blue;
+    @include fade;
+
+    @include large-tablets {
+      background: $white;
+      @include shadow(10px);
+    }
+
+    &_active {
+      color: $white;
+      background: $dark-blue;
+
+      @include hover-supported {
+        &:hover {
+          cursor: pointer;
+          background: $white;
+          color: $dark-blue;
+          @include shadow(10px);
+        }
+      }
+    }
+
+    @include hover-supported {
+      &:hover {
+        cursor: pointer;
+        background: $white;
+        @include shadow(10px);
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

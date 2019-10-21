@@ -1,12 +1,20 @@
 import React from 'react';
 
-import ProductsList from '../../features/ProductsList/ProductsList';
+import ProductsList from '../../features/ProductsList/ProductsListContainer';
 
 const ProductsPage = () => {
   return (
-    <div>
-      <ProductsList></ProductsList>
-    </div>
+    <ProductsList
+      fixedWidth={true}
+      horizontalScroll={false}
+      scrollOnlyPhones={true}
+      withFilters={true}
+      pagination={true}
+      itemsPerPage={6}
+      initFiltrString=""
+      fetchAll={true}
+      productsState="products"
+    />
   );
 };
 

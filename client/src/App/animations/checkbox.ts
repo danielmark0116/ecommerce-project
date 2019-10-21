@@ -1,9 +1,8 @@
 import { TimelineLite, Back } from 'gsap';
 
-const animationTime = 0.2;
-const easing = Back.easeIn.config(4);
+const animationTime = 0.1;
+const easing = Back.easeIn.config(1);
 const color = '#060036';
-// const
 
 export const animateCheckBox = (nodes: any[], index: number) => {
   nodes.forEach((node, key) => {
