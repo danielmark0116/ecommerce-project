@@ -30,33 +30,30 @@
     }
   }
 
-  .mobile_filters_close_button {
-    @extend button;
-    margin: 10px auto 20px;
-    width: 80%;
-  }
-
-  .desktop_filters {
-    @include large-tablets {
+  .filters_box {
+    .mobile_filters_close_button {
+      @extend button;
       display: none;
+      margin: 10px auto 20px;
+      width: 80%;
     }
-  }
-
-  .mobile_filters {
-    position: fixed;
-    padding-top: 100px;
-    padding-bottom: 200px;
-    top: 0;
-    left: -100%;
-    width: 100vw;
-    height: 100vh;
-    background: $white;
-    z-index: 10;
-    overflow-y: scroll;
-    display: none;
 
     @include large-tablets {
+      position: fixed;
+      padding-top: 100px;
+      padding-bottom: 200px;
+      top: 0;
+      left: -100%;
+      width: 100vw;
+      height: 100vh;
+      background: $white;
+      z-index: 10;
+      overflow-y: scroll;
       display: block;
+
+      .mobile_filters_close_button {
+        display: block;
+      }
     }
   }
 }

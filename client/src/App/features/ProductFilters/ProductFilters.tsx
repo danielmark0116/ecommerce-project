@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 import Checkbox from '../../common/Checkbox/Checkbox';
-import Subtitle from '../../common/Subtitle/Subtitle';
 
 import { triggerFiltersContainer } from '../../animations/filters';
 
@@ -35,7 +34,7 @@ const ProductFilters = () => {
           action={changeFilters}
           label="Category"
           category="category"
-          inputs={['t-shirt', 'blouse']}
+          inputs={['t-shirt', 'blouse', 'trousers']}
         />
         <Checkbox
           action={changeFilters}
@@ -80,18 +79,15 @@ const ProductFilters = () => {
         className={style.mobile_only}
         onClick={() => {
           triggerFiltersContainer(mobileFiltersRef.current, true);
-          //   setFilters(iniFiltersState);
         }}
       >
         Filters
       </button>
-      <div className={style.desktop_filters}>{filters()}</div>
-      <div ref={mobileFiltersRef} className={style.mobile_filters}>
+      <div ref={mobileFiltersRef} className={style.filters_box}>
         <button
           className={style.mobile_filters_close_button}
           onClick={() => {
             triggerFiltersContainer(mobileFiltersRef.current, false);
-            // setFilters(iniFiltersState);
           }}
         >
           CLOSE X
