@@ -9,6 +9,7 @@ import Text from '../../common/Text/Text';
 import SizeBtns from './SizeBtns';
 
 import { checkAvailableSizes } from '../../helpers/availableSizes';
+import { saveToLocalStore } from '../../helpers/cart';
 
 import { stateToProps, dispatchToProps } from './ProductDetailsContainer';
 
@@ -25,12 +26,11 @@ const ProductDetails = (props: Props) => {
   const addToCart = (productSize: string, quantity: number) => {
     const { singleProduct } = props;
 
-    console.table({
-      id: singleProduct && singleProduct._id,
-      quantity: {
-        [productSize]: quantity
-      }
-    });
+    saveToLocalStore(
+      singleProduct ? singleProduct._id : '',
+      productSize,
+      quantity
+    );
   };
 
   const renderProductDetails = () => {

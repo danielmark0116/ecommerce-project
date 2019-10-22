@@ -6,6 +6,7 @@ import PageLayout from './App/layout/PageLayout';
 import HomePage from './App/pages/HomePage/HomePage';
 import ProductsPage from './App/pages/ProductsPage/ProductsPage';
 import ProductPage from './App/pages/ProductPage/ProductPage';
+import CartPage from './App/pages/CartPage/CartPage';
 
 const PritaveRoutes = () => {
   return (
@@ -31,7 +32,7 @@ const Routes = () => {
           <ProductPage></ProductPage>
         </Route>
         <Route exact path="/cart">
-          <h2>CART</h2>
+          <CartPage></CartPage>
         </Route>
         <Route exact path="/login">
           <h2>you are not logged in page</h2>

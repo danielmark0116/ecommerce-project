@@ -6,6 +6,8 @@ router.get('/', productController.getPublished);
 
 router.get('/all', productController.getAll);
 
+router.get('/cart', productController.getCart);
+
 // router.get('/range/:start/:limit', productController.getRangeProducts);
 
 // router.get('/all/range/:start/:limit', productController.getRangeAllProducts);

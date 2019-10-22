@@ -40,6 +40,27 @@ exports.getAll = async (req, res) => {
   }
 };
 
+exports.getCart = async (req, res) => {
+  try {
+    let response = await Product.find(
+      { _id: { $in: req.query.ids } },
+      'name category sex price img'
+    ).sort({
+      name: '1'
+    });
+
+    res.json({
+      response
+    });
+  } catch (e) {
+    res.status(500).json({
+      error: true,
+      success: false,
+      msg: e.message
+    });
+  }
+};
+
 exports.getById = async (req, res) => {
   try {
     let response = await Product.find({ _id: req.params.id });

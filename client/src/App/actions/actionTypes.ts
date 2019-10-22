@@ -1,4 +1,6 @@
 import { productData } from '../types/productData';
+import { productCartData } from '../types/productCartData';
+import { cartDataElements } from '../types/cartData';
 
 // PRODUCTS
 export const PRODUCTS_COUNT = 'PRODUCTS_COUNT';
@@ -83,6 +85,30 @@ interface productsGetOneFailActionType {
   payload: string;
 }
 
+// CART
+export const CART_GET = 'CART_GET';
+export const CART_GET_LOADING = 'CART_GET_LOADING';
+export const CART_GET_SUCCESS = 'CART_GET_SUCCESS';
+export const CART_GET_FAIL = 'CART_GET_FAIL';
+
+interface cartGetActionType {
+  type: typeof CART_GET;
+  payload: (productCartData & cartDataElements | any)[];
+}
+
+interface cartGetLoadingActionType {
+  type: typeof CART_GET_LOADING;
+}
+
+interface cartGetSuccessActionType {
+  type: typeof CART_GET_SUCCESS;
+}
+
+interface cartGetFailActionType {
+  type: typeof CART_GET_FAIL;
+  payload: string;
+}
+
 export type ActionTypes =
   | productsCountActionType
   | productsGetAllActionType
@@ -97,4 +123,8 @@ export type ActionTypes =
   | productsGetAllFailActionType
   | productsGetOneLoadingActionType
   | productsGetOneSuccessActionType
-  | productsGetOneFailActionType;
+  | productsGetOneFailActionType
+  | cartGetActionType
+  | cartGetLoadingActionType
+  | cartGetSuccessActionType
+  | cartGetFailActionType;
