@@ -10,6 +10,12 @@
   @include fade;
   @include shadow-strong(10px);
 
+  &.main_button_small {
+    font-size: 12px;
+    padding: 8px 10px;
+    margin: 5px 5px;
+  }
+
   &:disabled {
     background: $bg-color;
     border-color: $grey;

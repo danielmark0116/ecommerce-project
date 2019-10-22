@@ -1,12 +1,16 @@
 import * as types from '../actions/actionTypes';
 import { ActionTypes } from '../actions/actionTypes';
-import { productData } from '../types/productData';
+import { productData, productDataElements } from '../types/productData';
 import { AppState } from '.';
 import { requestData } from '../types/requestData';
 
 // SELECTORS
 export const selectorProductsGetAll = (state: AppState): productData[] => {
   return state.products.products;
+};
+
+export const selectorProductsGetOne = (state: AppState): productData | null => {
+  return state.products.singleProduct ? state.products.singleProduct : null;
 };
 
 export const selectorProductsGetLatest = (state: AppState): productData[] => {
@@ -23,6 +27,17 @@ export const selectorProductsRequestData = (state: AppState): requestData => {
     success: state.products.productsRequestData.success,
     error: state.products.productsRequestData.error,
     msg: state.products.productsRequestData.msg
+  };
+};
+
+export const selectorSingleProductRequestData = (
+  state: AppState
+): requestData => {
+  return {
+    pending: state.products.singleProductRequestData.pending,
+    success: state.products.singleProductRequestData.success,
+    error: state.products.singleProductRequestData.error,
+    msg: state.products.singleProductRequestData.msg
   };
 };
 
@@ -118,17 +133,43 @@ export function productReducer(state = initState, action: ActionTypes) {
         }
       };
     case types.PRODUCTS_GET_ONE_LOADING:
-      return { ...state };
+      return {
+        ...state,
+        singleProductRequestData: {
+          pending: true,
+          success: false,
+          error: false,
+          msg: ''
+        }
+      };
     case types.PRODUCTS_GET_ONE_SUCCESS:
-      return { ...state };
+      return {
+        ...state,
+        singleProductRequestData: {
+          pending: false,
+          success: true,
+          error: false,
+          msg: ''
+        }
+      };
     case types.PRODUCTS_GET_ONE_FAIL:
-      return { ...state };
+      return {
+        ...state,
+        singleProductRequestData: {
+          pending: false,
+          success: false,
+          error: true,
+          msg: action.payload
+        }
+      };
     case types.PRODUCTS_GET_ALL:
       return { ...state, products: action.payload };
     case types.PRODUCTS_GET_LATEST:
       return { ...state, latestProducts: action.payload };
     case types.PRODUCTS_GET_CAROUSEL:
       return { ...state, carouselProducts: action.payload };
+    case types.PRODUCTS_GET_ONE:
+      return { ...state, singleProduct: action.payload };
     default:
       return { ...state };
   }

@@ -5,6 +5,7 @@ import PageLayout from './App/layout/PageLayout';
 
 import HomePage from './App/pages/HomePage/HomePage';
 import ProductsPage from './App/pages/ProductsPage/ProductsPage';
+import ProductPage from './App/pages/ProductPage/ProductPage';
 
 const PritaveRoutes = () => {
   return (
@@ -27,7 +28,7 @@ const Routes = () => {
           {true ? <ProductsPage /> : <Redirect to="/redirect"></Redirect>}
         </Route>
         <Route exact path="/products/:id">
-          <h2>one product details page</h2>
+          <ProductPage></ProductPage>
         </Route>
         <Route exact path="/cart">
           <h2>CART</h2>

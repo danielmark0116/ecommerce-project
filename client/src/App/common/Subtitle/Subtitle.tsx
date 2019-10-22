@@ -12,14 +12,24 @@ interface IProps {
 const Subtitle = (props: IProps) => {
   const { children, align, transform, size } = props;
 
-  const styles = { textAlign: align, textTransform: transform };
+  const alignClass = () => {
+    switch (align) {
+      case 'left':
+        return style.text_left;
+      case 'center':
+        return style.text_center;
+      case 'right':
+        return style.text_right;
+      default:
+        return style.text_left;
+    }
+  };
 
   return (
     <h2
       className={`${style.subtitle} ${
         size === 'small' ? style.subtitle_small : ''
-      }`}
-      style={styles}
+      } ${alignClass()}`}
     >
       {children}
     </h2>

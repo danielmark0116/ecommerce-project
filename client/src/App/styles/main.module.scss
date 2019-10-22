@@ -15,16 +15,21 @@
 @import 'layout/flex_grid';
 
 // COMPONENTS
+@import 'components/center';
 @import 'components/navbar';
 @import 'components/footer';
 @import 'components/hamburger';
 @import 'components/product_image';
 @import 'components/product_card';
 @import 'components/product_filters';
+@import 'components/title';
 @import 'components/subtitle';
+@import 'components/sub_text';
+@import 'components/text';
 @import 'components/checkbox';
 @import 'components/pagination';
 @import 'components/button';
+@import 'components/image';
 
 body {
   margin: 0;

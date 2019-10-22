@@ -1,8 +1,10 @@
 .subtitle {
   font-size: 24px;
   font-weight: 400;
-  margin: 20px 0;
-  font-family: 'Quicksand', sans-serif;
+  margin: 10px 0;
+  padding: 0 10px;
+  // font-family: 'Quicksand', sans-serif;
+  color: $dark-blue;
 
   &.subtitle_small {
     font-size: 14px;

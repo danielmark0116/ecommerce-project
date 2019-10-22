@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import ProductImage from '../ProductImage/ProductImage';
 
@@ -10,24 +11,38 @@ interface IProps {
 }
 
 const ProductCard = (props: IProps) => {
-  const { name, sex, img, category, price, ribbon } = props.productData;
+  const {
+    name,
+    sex,
+    img,
+    category,
+    price,
+    ribbon,
+    _id,
+    size
+  } = props.productData;
 
   return (
     <div className={style.product_card_container}>
-      <ProductImage
-        pic={img}
-        category={category}
-        ribbon={ribbon}
-      ></ProductImage>
+      <Link to={`/products/${_id}`}>
+        <ProductImage
+          sizes={size}
+          pic={img}
+          category={category}
+          ribbon={ribbon}
+        />
+      </Link>
       <br />
       <div className={style.product_title}>
-        <a href="">
+        <Link to={`/products/${_id}`}>
           {`${name}`}
           <span>({sex})</span>
-        </a>
+        </Link>
       </div>
-      <div className={style.product_more}>Click for details</div>
-      <div className={style.product_price}>{price} $</div>
+      <Link to={`/products/${_id}`}>
+        <div className={style.product_more}>Click for details</div>
+        <div className={style.product_price}>{price} $</div>
+      </Link>
     </div>
   );
 };

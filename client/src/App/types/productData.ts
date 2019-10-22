@@ -1,4 +1,5 @@
 export interface productData {
+  _id: string;
   name: string;
   desc: string;
   category: string;
@@ -21,11 +22,13 @@ export interface productData {
     xl: number;
     xxl: number;
   };
+  sold: number;
   img: string;
   published: Boolean;
 }
 
 export interface productDataElements {
+  _id?: string;
   name?: string;
   desc?: string;
   category?: string;
@@ -48,6 +51,7 @@ export interface productDataElements {
     xl: number;
     xxl: number;
   };
+  sold?: number;
   img?: string;
   published?: Boolean;
 }

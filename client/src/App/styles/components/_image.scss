@@ -1,0 +1,37 @@
+$ribbon_position: 20px;
+
+.image_container {
+  position: relative;
+  background: transparent;
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 5px;
+  overflow: hidden;
+  @include fade;
+  @include shadow(10px);
+
+  @include hover-supported {
+    &:hover {
+      transform: scale(1.02);
+      cursor: pointer;
+    }
+  }
+
+  .image_ribbon {
+    position: absolute;
+    top: $ribbon_position;
+    left: $ribbon_position * 1.5;
+    font-weight: 300;
+    font-size: 15px;
+    color: $dark-blue;
+    text-transform: uppercase;
+  }
+
+  img.image {
+    display: block;
+    width: 100%;
+    object-fit: contain;
+  }
+}

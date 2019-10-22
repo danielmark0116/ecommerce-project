@@ -7,6 +7,7 @@ interface IProps {
   type: 'primary' | 'secondary' | 'transparent';
   disabled: Boolean;
   action: Function;
+  size: 'normal' | 'small';
 }
 
 const Button = (props: IProps) => {
@@ -27,11 +28,24 @@ const Button = (props: IProps) => {
     }
   };
 
+  const btnSize = () => {
+    const { size } = props;
+
+    switch (size) {
+      case 'normal':
+        return '';
+      case 'small':
+        return style.main_button_small;
+      default:
+        return '';
+    }
+  };
+
   return (
     <button
       onClick={!disabled ? () => action() : () => null}
       disabled={disabled ? true : false || false}
-      className={`${btnType()}`}
+      className={`${btnType()} ${btnSize()}`}
     >
       {children}
     </button>
@@ -40,7 +54,8 @@ const Button = (props: IProps) => {
 
 Button.defaultProps = {
   disabled: false,
-  action: () => null
+  action: () => null,
+  size: 'normal'
 };
 
 export default Button;

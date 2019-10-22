@@ -100,3 +100,19 @@ export const productsGetAllThunk = (
     }
   };
 };
+
+export const productsGetByIdThunk = (id: string) => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
+    dispatch(productsGetOneLoading());
+
+    try {
+      let response = await axios.get(`/products/${id}`);
+      let product = response.data.response[0];
+
+      dispatch(productsGetOne(product));
+      dispatch(productsGetOneSuccess());
+    } catch (e) {
+      dispatch(productsGetOneFail(e.message));
+    }
+  };
+};
