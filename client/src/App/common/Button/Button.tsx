@@ -8,10 +8,11 @@ interface IProps {
   disabled: Boolean;
   action: Function;
   size: 'normal' | 'small';
+  submitType: Boolean;
 }
 
 const Button = (props: IProps) => {
-  const { children, disabled, action } = props;
+  const { children, disabled, action, submitType } = props;
 
   const btnType = () => {
     const { type } = props;
@@ -46,6 +47,7 @@ const Button = (props: IProps) => {
       onClick={!disabled ? () => action() : () => null}
       disabled={disabled ? true : false || false}
       className={`${btnType()} ${btnSize()}`}
+      type={submitType ? 'submit' : 'button'}
     >
       {children}
     </button>
@@ -55,7 +57,8 @@ const Button = (props: IProps) => {
 Button.defaultProps = {
   disabled: false,
   action: () => null,
-  size: 'normal'
+  size: 'normal',
+  submitType: false
 };
 
 export default Button;

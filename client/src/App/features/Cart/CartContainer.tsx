@@ -16,12 +16,15 @@ import {
   selectorCartRequestData
 } from '../../reducers/cartReducer';
 import { cartItemsType } from '../../types/productCartData';
+import { selectorCoupons } from '../../reducers/generalsReducer';
+import { couponsData } from '../../types/couponsData';
 
 export interface stateToProps {
   cartItems: cartItemsType;
   pending: Boolean;
   success: Boolean;
   error: Boolean;
+  coupons: couponsData;
 }
 
 export interface dispatchToProps {
@@ -34,7 +37,8 @@ const mapStateToProps = (state: AppState) => ({
   cartItems: selectorCartGetAllItems(state),
   pending: selectorCartRequestData(state).pending,
   success: selectorCartRequestData(state).success,
-  error: selectorCartRequestData(state).error
+  error: selectorCartRequestData(state).error,
+  coupons: selectorCoupons(state)
 });
 
 const mapDispatchToState = (

@@ -1,0 +1,49 @@
+.input_container {
+  width: 100%;
+  font-family: inherit;
+  color: inherit;
+  font-weight: 300;
+  padding: 10px 0;
+  font-size: 15px;
+
+  label {
+    display: block;
+    margin: 5px 20px;
+  }
+
+  .input_error_msg {
+    @extend label;
+    color: $red;
+    margin: 5px;
+  }
+
+  .input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba($dark-blue, 0.1);
+    background: $white;
+
+    &_error {
+      @extend .input;
+      border-color: $red;
+
+      input {
+        color: inherit;
+
+        &::placeholder {
+          color: $grey;
+        }
+      }
+    }
+
+    input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      padding: 10px;
+      font-size: inherit;
+      font-weight: inherit;
+    }
+  }
+}

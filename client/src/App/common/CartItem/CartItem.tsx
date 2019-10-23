@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Col, Row } from 'reactstrap';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 import Image from '../Image/Image';
 import Subtitle from '../Subtitle/Subtitle';
@@ -31,10 +32,14 @@ const CartItem = (props: IProps) => {
       <div key={index} className={style.cart_item_container}>
         <Row>
           <Col xs="12" sm="auto" md="3">
-            <Image size="small" picString={img}></Image>
+            <Link to={`/products/${_id}`}>
+              <Image size="small" picString={img}></Image>
+            </Link>
           </Col>
           <Col xs="12" sm="auto" md="9">
-            <Title size="small">{name}</Title>
+            <Link to={`/products/${_id}`}>
+              <Title size="small">{name}</Title>
+            </Link>
             <Subtext size="small">{`${category}  |  ${sex}`}</Subtext>
             <Subtitle size="small">{`Size: ${productSize.toUpperCase()}`}</Subtitle>
             <Flex>

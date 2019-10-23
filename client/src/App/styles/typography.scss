@@ -20,3 +20,12 @@ p {
 .text_right {
   text-align: right;
 }
+
+.text_success {
+  color: $green;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

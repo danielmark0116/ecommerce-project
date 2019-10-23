@@ -1,5 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Col, Row } from 'reactstrap';
 import { dispatchToProps, stateToProps } from './CartContainer';
+import _ from 'lodash';
 
 import Title from '../../common/Title/Title';
 import Subtitle from '../../common/Subtitle/Subtitle';
@@ -7,10 +9,19 @@ import CartItem from '../../common/CartItem/CartItem';
 import Loader from '../../common/Loader/Loader';
 
 import { evalCartTotal } from '../../helpers/evalCartTotal';
+import CouponInput from '../CouponInput/CouponInput';
+import Text from '../../common/Text/Text';
+import CrossedPrice from '../../common/CrossedPrice/CrossedPrice';
+
+import style from '../../styles/main.module.scss';
 
 type Props = stateToProps & dispatchToProps;
 
 const Cart = (props: Props) => {
+  const [discount, toggleDiscount] = useState(false);
+  const [discountValue, setDiscountValue] = useState(1);
+  const [discountName, setDiscountName] = useState('');
+
   const {
     getCartData,
     cartItems,
@@ -18,12 +29,19 @@ const Cart = (props: Props) => {
     deleteCartItem,
     pending,
     success,
-    error
+    error,
+    coupons
   } = props;
 
   useEffect(() => {
     getCartData();
   }, ['']);
+
+  const applyCoupon = (name: string, value: number) => {
+    toggleDiscount(true);
+    setDiscountName(name);
+    setDiscountValue(value);
+  };
 
   if (!pending && !error && success && cartItems.length > 0)
     return (
@@ -36,10 +54,35 @@ const Cart = (props: Props) => {
             cartItem={item}
           />
         ))}
-        <Subtitle size="small" align="right">
-          Total:
-        </Subtitle>
-        <Title align="right">{`${evalCartTotal(cartItems)} $`}</Title>
+        <Row>
+          <Col sm="12" xl="8">
+            <CouponInput action={applyCoupon} coupons={coupons} />
+          </Col>
+          <Col sm="12" xl="4">
+            {discount && (
+              <Text align="right">
+                <div className={style.text_success}>
+                  Active discount: <b>{discountName}</b>
+                  {' ('}
+                  {_.round((1 - discountValue) * 100, 0)}
+                  {'%)'}
+                </div>
+              </Text>
+            )}
+            <Subtitle size="small" align="right">
+              Total:
+            </Subtitle>
+            {discount && (
+              <CrossedPrice align="right">{`${evalCartTotal(
+                cartItems
+              )} $`}</CrossedPrice>
+            )}
+            <Title align="right">{`${_.round(
+              evalCartTotal(cartItems) * discountValue,
+              2
+            )} $`}</Title>
+          </Col>
+        </Row>
       </Fragment>
     );
   if (pending) return <Loader></Loader>;
