@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 import { stateToProps, dispatchToProps } from './ProductsListContainer';
 import { formatFilterString } from '../../helpers/filterStringFormatter';
 
+import Loader from '../../common/Loader/Loader';
 import FlexContainer from '../../common/FlexGrid/FlexContainer';
 import FlexItem from '../../common/FlexGrid/FlexItem';
 import ProductCard from '../../common/ProductCard/ProductCard';
@@ -33,6 +34,8 @@ const ProductsList = (props: Props) => {
     fetchAll
   } = props;
 
+  const { pending, error, success } = props.productsRequestData;
+
   useEffect(() => {
     const { getProducts } = props;
 
@@ -42,7 +45,7 @@ const ProductsList = (props: Props) => {
       itemsPerPage,
       filterString
     );
-  }, ['']);
+  }, [1]);
 
   const handlePageChange = (callbackPage: number) => {
     const { getProducts, fetchAll } = props;
@@ -87,14 +90,18 @@ const ProductsList = (props: Props) => {
           scrollOnlyPhones={scrollOnlyPhones}
         >
           <Fragment>
-            {products.map((product, index) => (
-              <FlexItem key={index}>
-                <ProductCard productData={product}></ProductCard>
-              </FlexItem>
-            ))}
+            {error && <p>Error</p>}
+            {pending && <Loader></Loader>}
+            {success && products.length === 0 && <p>Shop is empty</p>}
+            {success &&
+              products.map((product, index) => (
+                <FlexItem key={index}>
+                  <ProductCard productData={product}></ProductCard>
+                </FlexItem>
+              ))}
           </Fragment>
         </FlexContainer>
-        {pagination && (
+        {pagination && success && (
           <Pagination
             action={handlePageChange}
             activePage={activePage}

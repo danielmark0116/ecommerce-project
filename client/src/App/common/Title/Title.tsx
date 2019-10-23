@@ -5,10 +5,11 @@ import style from '../../styles/main.module.scss';
 interface IProps {
   children: React.ReactChild;
   align: 'left' | 'center' | 'right';
+  size: 'small' | 'large';
 }
 
 const Title = (props: IProps) => {
-  const { children, align } = props;
+  const { children, align, size } = props;
 
   const alignClass = () => {
     switch (align) {
@@ -23,11 +24,23 @@ const Title = (props: IProps) => {
     }
   };
 
-  return <h1 className={`${style.title} ${alignClass()}`}>{children}</h1>;
+  const sizeClass = () => {
+    switch (size) {
+      case 'small':
+        return style.title_small;
+      case 'large':
+        return style.title_large;
+      default:
+        return style.title_large;
+    }
+  };
+
+  return <h1 className={`${sizeClass()} ${alignClass()}`}>{children}</h1>;
 };
 
 Title.defaultProps = {
-  align: 'left'
+  align: 'left',
+  size: 'large'
 };
 
 export default Title;

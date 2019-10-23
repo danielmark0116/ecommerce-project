@@ -22,23 +22,13 @@ export const selectorProductsGetCarousel = (state: AppState): productData[] => {
 };
 
 export const selectorProductsRequestData = (state: AppState): requestData => {
-  return {
-    pending: state.products.productsRequestData.pending,
-    success: state.products.productsRequestData.success,
-    error: state.products.productsRequestData.error,
-    msg: state.products.productsRequestData.msg
-  };
+  return state.products.productsRequestData;
 };
 
 export const selectorSingleProductRequestData = (
   state: AppState
 ): requestData => {
-  return {
-    pending: state.products.singleProductRequestData.pending,
-    success: state.products.singleProductRequestData.success,
-    error: state.products.singleProductRequestData.error,
-    msg: state.products.singleProductRequestData.msg
-  };
+  return state.products.singleProductRequestData;
 };
 
 export const selectorProductsCount = (state: AppState): number => {

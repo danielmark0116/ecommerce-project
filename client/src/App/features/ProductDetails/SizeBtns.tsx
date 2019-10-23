@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 
 import Center from '../../common/Center/Center';
 import Button from '../../common/Button/Button';
-import Subtext from '../../common/Subtext/Subtext';
 import Text from '../../common/Text/Text';
 
 interface IProps {

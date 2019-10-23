@@ -15,6 +15,7 @@ import { ActionTypes } from '../../actions/actionTypes';
 import { productsGetAllThunk } from '../../actions/productActions';
 
 import ProductsList from './ProductsList';
+import { requestData } from '../../types/requestData';
 
 interface IProps {
   itemsPerPage: number;
@@ -30,9 +31,7 @@ interface IProps {
 
 export interface stateToProps {
   products: productData[];
-  pending: Boolean;
-  error: Boolean;
-  success: Boolean;
+  productsRequestData: requestData;
   productsCount: number;
   itemsPerPage: number;
   pagination: Boolean;
@@ -59,9 +58,7 @@ const mapStateToProps = (state: AppState, ownProps: IProps) => ({
       : ownProps.productsState === 'carousel'
       ? selectorProductsGetCarousel(state)
       : [],
-  pending: selectorProductsRequestData(state).pending,
-  error: selectorProductsRequestData(state).error,
-  success: selectorProductsRequestData(state).success,
+  productsRequestData: selectorProductsRequestData(state),
   productsCount: selectorProductsCount(state),
   itemsperPage: ownProps.itemsPerPage,
   pagination: ownProps.pagination,

@@ -6,11 +6,20 @@ $ribbon_position: 20px;
   width: 100%;
   max-width: 500px;
   display: block;
-  margin: 10px auto 0;
+  margin: 10px auto 20px;
   border-radius: 5px;
   overflow: hidden;
   @include fade;
   @include shadow(10px);
+
+  &_normal {
+    @extend .image_container;
+  }
+
+  &_small {
+    @extend .image_container;
+    max-width: 150px;
+  }
 
   @include hover-supported {
     &:hover {

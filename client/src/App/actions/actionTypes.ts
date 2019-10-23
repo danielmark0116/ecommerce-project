@@ -87,6 +87,8 @@ interface productsGetOneFailActionType {
 
 // CART
 export const CART_GET = 'CART_GET';
+export const CART_UPDATE = 'CART_UPDATE';
+export const CART_DELETE_ITEM = 'CART_DELETE_ITEM';
 export const CART_GET_LOADING = 'CART_GET_LOADING';
 export const CART_GET_SUCCESS = 'CART_GET_SUCCESS';
 export const CART_GET_FAIL = 'CART_GET_FAIL';
@@ -94,6 +96,19 @@ export const CART_GET_FAIL = 'CART_GET_FAIL';
 interface cartGetActionType {
   type: typeof CART_GET;
   payload: (productCartData & cartDataElements | any)[];
+}
+
+interface cartUpdateActionType {
+  type: typeof CART_UPDATE;
+  payload: {
+    id: string;
+    quantity: any;
+  };
+}
+
+interface cartDeleteItemActionType {
+  type: typeof CART_DELETE_ITEM;
+  payload: string;
 }
 
 interface cartGetLoadingActionType {
@@ -125,6 +140,8 @@ export type ActionTypes =
   | productsGetOneSuccessActionType
   | productsGetOneFailActionType
   | cartGetActionType
+  | cartUpdateActionType
+  | cartDeleteItemActionType
   | cartGetLoadingActionType
   | cartGetSuccessActionType
   | cartGetFailActionType;
