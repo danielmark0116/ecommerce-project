@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container } from 'reactstrap';
+import LoginBox from '../LoginBox/LoginBox';
 
 import HamburgerBtn from '../../common/HamburgerBtn/HamburgerBtn';
 
@@ -19,6 +20,7 @@ const Navbar = (props: IProps) => {
   const { paths } = props;
   const mobileMenuRef = React.createRef<HTMLDivElement>();
   const [showMenu, toggleMenu] = useState(false);
+  const [showLoginBox, toggleLoginBox] = useState(false);
 
   const Links = (props: IProps) => (
     <ul>
@@ -36,6 +38,9 @@ const Navbar = (props: IProps) => {
           </li>
         );
       })}
+      <li>
+        <a onClick={openLoginBox}>Login2</a>
+      </li>
     </ul>
   );
 
@@ -48,6 +53,18 @@ const Navbar = (props: IProps) => {
     }
   }, [showMenu]);
 
+  useEffect(() => {
+    //
+  }, [showLoginBox]);
+
+  const openLoginBox = () => {
+    toggleLoginBox(true);
+  };
+
+  const closeLoginBox = () => {
+    toggleLoginBox(false);
+  };
+
   const toggleMobileMenu = () => {
     toggleMenu(!showMenu);
   };
@@ -58,6 +75,7 @@ const Navbar = (props: IProps) => {
 
   return (
     <Fragment>
+      <LoginBox closeAction={closeLoginBox} active={showLoginBox}></LoginBox>
       <nav className={style.navbar}>
         <div
           ref={mobileMenuRef}

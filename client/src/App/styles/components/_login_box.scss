@@ -1,0 +1,33 @@
+$desktop_width: 400px;
+
+.login_box_overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 19;
+  background: rgba(black, 0.4);
+  display: none;
+  opacity: 0;
+}
+
+.login_box {
+  position: fixed;
+  top: 0;
+  right: -$desktop_width;
+  width: $desktop_width;
+  height: 100vh;
+  background: red;
+  z-index: 20;
+  display: none;
+
+  @include tablets {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  .login_box_close {
+    width: 50px;
+    height: 100px;
+    background: green;
+  }
+}
