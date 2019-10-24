@@ -1,1 +1,1 @@
-export const devToolsMode = false;
+export const devToolsMode = true;

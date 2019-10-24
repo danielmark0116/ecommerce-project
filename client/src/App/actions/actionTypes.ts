@@ -124,6 +124,47 @@ interface cartGetFailActionType {
   payload: string;
 }
 
+// AUTH
+export const AUTH_CHECK = 'AUTH_CHECK';
+export const AUTH_LOGIN = 'AUTH_LOGIN';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_LOADING = 'AUTH_LOADING';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
+
+interface authCheckActionType {
+  type: typeof AUTH_CHECK;
+  payload: {
+    isLoggedIn: Boolean;
+    isAdmin: Boolean;
+  };
+}
+
+interface authLoginActionType {
+  type: typeof AUTH_LOGIN;
+  payload: {
+    isLoggedIn: Boolean;
+    isAdmin: Boolean;
+  };
+}
+
+interface authLogoutActionType {
+  type: typeof AUTH_LOGOUT;
+}
+
+interface authLoadingActionType {
+  type: typeof AUTH_LOADING;
+}
+
+interface authSuccessActionType {
+  type: typeof AUTH_SUCCESS;
+}
+
+interface authFailActionType {
+  type: typeof AUTH_FAIL;
+  payload: string;
+}
+
 export type ActionTypes =
   | productsCountActionType
   | productsGetAllActionType
@@ -144,4 +185,10 @@ export type ActionTypes =
   | cartDeleteItemActionType
   | cartGetLoadingActionType
   | cartGetSuccessActionType
-  | cartGetFailActionType;
+  | cartGetFailActionType
+  | authCheckActionType
+  | authLoginActionType
+  | authLogoutActionType
+  | authLoadingActionType
+  | authSuccessActionType
+  | authFailActionType;

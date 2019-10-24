@@ -9,6 +9,14 @@ p {
   padding: 0;
 }
 
+.text_uppercase {
+  text-transform: uppercase;
+}
+
+.text_nonuppercase {
+  text-transform: none;
+}
+
 .text_left {
   text-align: left;
 }

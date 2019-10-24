@@ -31,9 +31,11 @@ export const toggleLoginBox = (node: any, isAcitve: Boolean) => {
 
 export const toggleOverlay = (node: any, isAcitve: Boolean) => {
   if (isAcitve) {
+    // TweenMax.set(node, { display: 'block' });
+
     TweenMax.fromTo(
       node,
-      0.8,
+      0.4,
       {
         opacity: '0',
         display: 'block'
@@ -53,7 +55,10 @@ export const toggleOverlay = (node: any, isAcitve: Boolean) => {
       {
         opacity: '0',
         display: 'none',
-        ease: Power4.easeInOut
+        ease: Power4.easeInOut,
+        onComplete: () => {
+          // TweenMax.set(node, { display: 'block' });
+        }
       }
     );
   }

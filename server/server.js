@@ -17,7 +17,10 @@ app.use(express.json());
 
 // ROUTES
 const productsRotues = require('./routes/products.routes');
+const authRotues = require('./routes/auth.routes');
+
 app.use('/api/products', productsRotues);
+app.use('/api/auth', authRotues);
 
 app.get('/', (req, res) => {
   res.send('ECOMMERCE API');

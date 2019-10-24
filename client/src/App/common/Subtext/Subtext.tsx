@@ -6,10 +6,11 @@ interface IProps {
   children: React.ReactChild;
   size: 'small' | 'normal';
   align: 'left' | 'center' | 'right';
+  uppercase: Boolean;
 }
 
 const Subtext = (props: IProps) => {
-  const { children, size, align } = props;
+  const { children, size, align, uppercase } = props;
 
   const sizeClass = () => {
     switch (size) {
@@ -35,12 +36,28 @@ const Subtext = (props: IProps) => {
     }
   };
 
-  return <h1 className={`${sizeClass()} ${alignClass()}`}>{children}</h1>;
+  const transformClass = () => {
+    switch (uppercase) {
+      case true:
+        return style.text_uppercase;
+      case false:
+        return style.text_nonuppercase;
+      default:
+        return style.text_uppercase;
+    }
+  };
+
+  return (
+    <h1 className={`${sizeClass()} ${alignClass()} ${transformClass()}`}>
+      {children}
+    </h1>
+  );
 };
 
 Subtext.defaultProps = {
   size: 'normal',
-  align: 'left'
+  align: 'left',
+  uppercase: true
 };
 
 export default Subtext;

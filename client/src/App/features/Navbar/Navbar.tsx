@@ -39,7 +39,7 @@ const Navbar = (props: IProps) => {
         );
       })}
       <li>
-        <a onClick={openLoginBox}>Login2</a>
+        <a onClick={openLoginBox}>Login</a>
       </li>
     </ul>
   );
@@ -53,16 +53,13 @@ const Navbar = (props: IProps) => {
     }
   }, [showMenu]);
 
-  useEffect(() => {
-    //
-  }, [showLoginBox]);
-
   const openLoginBox = () => {
     toggleLoginBox(true);
   };
 
   const closeLoginBox = () => {
     toggleLoginBox(false);
+    closeMobileMenu();
   };
 
   const toggleMobileMenu = () => {

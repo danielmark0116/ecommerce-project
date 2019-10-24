@@ -7,8 +7,7 @@ import { Route } from 'react-router-dom';
 const paths = [
   { path: '/', title: 'home' },
   { path: '/products', title: 'products' },
-  { path: '/cart', title: 'cart' },
-  { path: '/login', title: 'login' }
+  { path: '/cart', title: 'cart' }
 ];
 
 interface IProps {
