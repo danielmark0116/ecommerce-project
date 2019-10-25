@@ -7,6 +7,7 @@ import Center from '../../common/Center/Center';
 import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import SizedBox from '../../common/SizedBox/SizedBox';
+import Loader from '../../common/Loader/Loader';
 
 import style from '../../styles/main.module.scss';
 
@@ -15,6 +16,11 @@ import { providerUserData } from '../../types/userData';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionTypes } from '../../actions/actionTypes';
 import { authLoginThunk } from '../../actions/authActions';
+import { AppState } from '../../reducers';
+import {
+  selectorAuthIsLoggedIn,
+  selectorAuthRequestData
+} from '../../reducers/authReducer';
 
 interface IProps {
   children?: React.ReactChild;
@@ -22,8 +28,15 @@ interface IProps {
   closeAction: Function;
 }
 
-const LoginBox = (props: IProps & dispatchToProps) => {
-  const { children, active, closeAction, loginThunk } = props;
+const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
+  const {
+    children,
+    active,
+    closeAction,
+    loginThunk,
+    isLoggedIn,
+    authLoading
+  } = props;
   const loginBoxRef = React.createRef<HTMLDivElement>();
   const overlayRef = React.createRef<HTMLDivElement>();
 
@@ -32,12 +45,20 @@ const LoginBox = (props: IProps & dispatchToProps) => {
     toggleOverlay(overlayRef.current, active);
   }, [active]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      toggleLoginBox(loginBoxRef.current, false);
+      toggleOverlay(overlayRef.current, false);
+    }
+  }, [isLoggedIn]);
+
   const handleGoogleLogin = (data: any) => {
     const providerData: providerUserData = {
       providerId: data.googleId,
       name: `${data.profileObj.givenName} ${data.profileObj.familyName}`,
       email: data.profileObj.email,
-      userPic: data.profileObj.imageUrl
+      userPic: data.profileObj.imageUrl,
+      providerToken: data.Zi.id_token
     };
 
     loginThunk('google', providerData);
@@ -48,7 +69,8 @@ const LoginBox = (props: IProps & dispatchToProps) => {
       providerId: data.id,
       name: data.name,
       email: data.email,
-      userPic: data.picture.data.url
+      userPic: data.picture.data.url,
+      providerToken: data.signedRequest
     };
 
     loginThunk('facebook', providerData);
@@ -68,31 +90,37 @@ const LoginBox = (props: IProps & dispatchToProps) => {
         </div>
         <Subtitle align="center">Login</Subtitle>
 
-        <SizedBox>
-          <Fragment>
-            <Center>
-              <GoogleLogin
-                clientId="1093567595027-41es3no16kqfkfo5sj016cp6eutbkn72.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={handleGoogleLogin}
-                onFailure={() => null}
-                cookiePolicy={'single_host_origin'}
-              />
-            </Center>
-            <br />
-            <Center>
-              <FacebookLogin
-                appId="2451717065086054"
-                autoLoad={false}
-                fields="name,email,picture"
-                cssClass={style.fb_btn}
-                onClick={() => null}
-                callback={handleFacebookLogin}
-                onFailure={() => null}
-              />
-            </Center>
-          </Fragment>
-        </SizedBox>
+        {authLoading ? (
+          <Loader />
+        ) : (
+          <SizedBox>
+            <Fragment>
+              <Center>
+                <GoogleLogin
+                  clientId="1093567595027-41es3no16kqfkfo5sj016cp6eutbkn72.apps.googleusercontent.com"
+                  buttonText="Login with Google"
+                  onSuccess={handleGoogleLogin}
+                  onFailure={(data: any) =>
+                    console.log('google login error', data)
+                  }
+                  cookiePolicy={'single_host_origin'}
+                />
+              </Center>
+              <br />
+              <Center>
+                <FacebookLogin
+                  appId="2451717065086054"
+                  autoLoad={false}
+                  fields="name,email,picture"
+                  cssClass={style.fb_btn}
+                  onClick={() => null}
+                  callback={handleFacebookLogin}
+                  onFailure={() => null}
+                />
+              </Center>
+            </Fragment>
+          </SizedBox>
+        )}
 
         <Subtext uppercase={false} size="small" align="center">
           <Fragment>
@@ -107,9 +135,19 @@ const LoginBox = (props: IProps & dispatchToProps) => {
   );
 };
 
+interface stateToProps {
+  isLoggedIn: Boolean;
+  authLoading: Boolean;
+}
+
 interface dispatchToProps {
   loginThunk: Function;
 }
+
+const mapStateToProps = (state: AppState) => ({
+  isLoggedIn: selectorAuthIsLoggedIn(state),
+  authLoading: selectorAuthRequestData(state).pending
+});
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, ActionTypes>
@@ -119,6 +157,6 @@ const mapDispatchToProps = (
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LoginBox);

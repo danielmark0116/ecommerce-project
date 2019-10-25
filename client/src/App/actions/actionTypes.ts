@@ -1,6 +1,7 @@
 import { productData } from '../types/productData';
 import { productCartData } from '../types/productCartData';
 import { cartDataElements } from '../types/cartData';
+import { userData } from '../types/userData';
 
 // PRODUCTS
 export const PRODUCTS_COUNT = 'PRODUCTS_COUNT';
@@ -134,18 +135,12 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 
 interface authCheckActionType {
   type: typeof AUTH_CHECK;
-  payload: {
-    isLoggedIn: Boolean;
-    isAdmin: Boolean;
-  };
+  payload: userData;
 }
 
 interface authLoginActionType {
   type: typeof AUTH_LOGIN;
-  payload: {
-    isLoggedIn: Boolean;
-    isAdmin: Boolean;
-  };
+  payload: userData;
 }
 
 interface authLogoutActionType {
@@ -158,6 +153,7 @@ interface authLoadingActionType {
 
 interface authSuccessActionType {
   type: typeof AUTH_SUCCESS;
+  payload: string;
 }
 
 interface authFailActionType {

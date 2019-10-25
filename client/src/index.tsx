@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './App/styles/main.module.scss';
+import { authCheckThunk } from './App/actions/authActions';
 
 const Root = () => {
   return (
@@ -20,6 +21,8 @@ const Root = () => {
 };
 
 ReactDOM.render(<Root />, document.getElementById('root'));
+
+store.dispatch(authCheckThunk());
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

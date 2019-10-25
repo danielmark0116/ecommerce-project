@@ -5,8 +5,10 @@ import _ from 'lodash';
 
 import Title from '../../common/Title/Title';
 import Subtitle from '../../common/Subtitle/Subtitle';
+import Subtext from '../../common/Subtext/Subtext';
 import CartItem from '../../common/CartItem/CartItem';
 import Loader from '../../common/Loader/Loader';
+import Button from '../../common/Button/Button';
 
 import { evalCartTotal } from '../../helpers/evalCartTotal';
 import CouponInput from '../CouponInput/CouponInput';
@@ -30,7 +32,9 @@ const Cart = (props: Props) => {
     pending,
     success,
     error,
-    coupons
+    coupons,
+    isLoggedIn,
+    createNewOrder
   } = props;
 
   useEffect(() => {
@@ -60,13 +64,13 @@ const Cart = (props: Props) => {
           </Col>
           <Col sm="12" xl="4">
             {discount && (
-              <Text align="right">
-                <div className={style.text_success}>
+              <Text color="success" align="right">
+                <Fragment>
                   Active discount: <b>{discountName}</b>
                   {' ('}
                   {_.round((1 - discountValue) * 100, 0)}
                   {'%)'}
-                </div>
+                </Fragment>
               </Text>
             )}
             <Subtitle size="small" align="right">
@@ -81,6 +85,20 @@ const Cart = (props: Props) => {
               evalCartTotal(cartItems) * discountValue,
               2
             )} $`}</Title>
+            <div className="d-flex justify-content-end m-0 p-0">
+              <Button
+                disabled={!isLoggedIn}
+                action={() => createNewOrder()}
+                type="primary"
+              >
+                Place an order
+              </Button>
+            </div>
+            {!isLoggedIn && (
+              <Subtext align="right" size="small">
+                Log in to order
+              </Subtext>
+            )}
           </Col>
         </Row>
       </Fragment>

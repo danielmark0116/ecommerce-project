@@ -30,7 +30,15 @@ p {
 }
 
 .text_success {
-  color: $green;
+  color: $green !important;
+}
+
+.text_danger {
+  color: $red !important;
+}
+
+.text_warning {
+  color: $yellow !important;
 }
 
 a {

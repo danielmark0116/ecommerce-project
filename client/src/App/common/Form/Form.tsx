@@ -19,6 +19,7 @@ interface IProps {
   }[];
   onSubmit: Function;
   submitBtnText: string;
+  buttonType: 'primary' | 'secondary' | 'transparent';
 }
 
 interface IState {
@@ -37,6 +38,10 @@ interface IState {
 }
 
 export default class Form extends Component<IProps, IState> {
+  static defaultProps = {
+    buttonType: 'primary'
+  };
+
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -95,7 +100,7 @@ export default class Form extends Component<IProps, IState> {
   };
 
   render() {
-    const { inputs, submitBtnText } = this.props;
+    const { inputs, submitBtnText, buttonType } = this.props;
     const { inputsData, submitTrigger } = this.state;
 
     return (
@@ -126,7 +131,7 @@ export default class Form extends Component<IProps, IState> {
               />
             </div>
           ))}
-          <Button type="primary" submitType={true}>
+          <Button type={buttonType} submitType={true}>
             {submitBtnText}
           </Button>
         </form>

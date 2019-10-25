@@ -18,6 +18,7 @@ import {
 import { cartItemsType } from '../../types/productCartData';
 import { selectorCoupons } from '../../reducers/generalsReducer';
 import { couponsData } from '../../types/couponsData';
+import { selectorAuthIsLoggedIn } from '../../reducers/authReducer';
 
 export interface stateToProps {
   cartItems: cartItemsType;
@@ -25,12 +26,14 @@ export interface stateToProps {
   success: Boolean;
   error: Boolean;
   coupons: couponsData;
+  isLoggedIn: Boolean;
 }
 
 export interface dispatchToProps {
   getCartData: Function;
   updateCart: Function;
   deleteCartItem: Function;
+  createNewOrder: Function;
 }
 
 const mapStateToProps = (state: AppState) => ({
@@ -38,7 +41,8 @@ const mapStateToProps = (state: AppState) => ({
   pending: selectorCartRequestData(state).pending,
   success: selectorCartRequestData(state).success,
   error: selectorCartRequestData(state).error,
-  coupons: selectorCoupons(state)
+  coupons: selectorCoupons(state),
+  isLoggedIn: selectorAuthIsLoggedIn(state)
 });
 
 const mapDispatchToState = (
@@ -47,7 +51,8 @@ const mapDispatchToState = (
   getCartData: (ids: string[] = getCartIds()) => dispatch(cartGetThunk(ids)),
   updateCart: (id: string, size: string, quantity: number) =>
     dispatch(cartUpdateThunk(id, size, quantity)),
-  deleteCartItem: (id: string) => dispatch(cartDeleteItemThunk(id))
+  deleteCartItem: (id: string) => dispatch(cartDeleteItemThunk(id)),
+  createNewOrder: () => console.log('Creating new order')
 });
 
 export default connect(

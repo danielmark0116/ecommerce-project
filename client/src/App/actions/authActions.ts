@@ -1,24 +1,24 @@
 import { ActionTypes } from './actionTypes';
 import * as types from './actionTypes';
 import { Dispatch } from 'redux';
-import { providerUserData } from '../types/userData';
+import { providerUserData, userData } from '../types/userData';
 import { async } from 'q';
 import axios from 'axios';
-import { saveToken } from '../helpers/fetchToken';
+import {
+  saveToken,
+  decodeToken,
+  fetchToken,
+  verifyToken,
+  deleteToken
+} from '../helpers/fetchToken';
 
 // ACTIONS
-export const authCheck = (payload: {
-  isLoggedIn: Boolean;
-  isAdmin: Boolean;
-}): ActionTypes => ({
+export const authCheck = (payload: userData): ActionTypes => ({
   type: types.AUTH_CHECK,
   payload
 });
 
-export const authLogin = (payload: {
-  isLoggedIn: Boolean;
-  isAdmin: Boolean;
-}): ActionTypes => ({
+export const authLogin = (payload: userData): ActionTypes => ({
   type: types.AUTH_LOGIN,
   payload
 });
@@ -31,8 +31,9 @@ export const authLoading = (): ActionTypes => ({
   type: types.AUTH_LOADING
 });
 
-export const authSuccess = (): ActionTypes => ({
-  type: types.AUTH_SUCCESS
+export const authSuccess = (payload: string = ''): ActionTypes => ({
+  type: types.AUTH_SUCCESS,
+  payload
 });
 
 export const authFail = (payload: string): ActionTypes => ({
@@ -45,10 +46,18 @@ export const authCheckThunk = () => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(authLoading());
 
-    try {
-      //
-    } catch {
-      //
+    const token = fetchToken();
+
+    if (token && verifyToken(token)) {
+      const decoded = decodeToken(token);
+
+      dispatch(authCheck(decoded));
+
+      dispatch(
+        authSuccess(`User authenticated. Token is valid. User is now logged In`)
+      );
+    } else {
+      dispatch(authFail('No token/invalid token'));
     }
   };
 };
@@ -59,18 +68,34 @@ export const authLoginThunk = (
 ) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(authLoading());
-    //  /auth/login/:proder
 
     try {
       let response = await axios.post(`/auth/login/${provider}`, userData);
 
-      const token = await response.data.token;
+      let data = await response.data;
 
-      saveToken(token);
+      const token = await response.data.authToken;
 
-      console.log(response.data);
+      if (data.success && token) {
+        saveToken(token);
+        dispatch(authLogin(decodeToken(token)));
+        dispatch(
+          authSuccess(
+            `Logged in succesfully with ${provider}. User is Logged In`
+          )
+        );
+      } else {
+        dispatch(authFail('Auth not verified'));
+      }
     } catch (e) {
       dispatch(authFail(e.message));
     }
+  };
+};
+
+export const authLogOutThunk = () => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
+    deleteToken();
+    dispatch(authLogout());
   };
 };

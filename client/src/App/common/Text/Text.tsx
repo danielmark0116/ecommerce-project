@@ -5,10 +5,11 @@ import style from '../../styles/main.module.scss';
 interface IProps {
   children: React.ReactChild;
   align: 'left' | 'center' | 'right';
+  color: 'primary' | 'success' | 'danger' | 'warning';
 }
 
 const Text = (props: IProps) => {
-  const { children, align } = props;
+  const { children, align, color } = props;
 
   const alignClass = () => {
     switch (align) {
@@ -23,11 +24,31 @@ const Text = (props: IProps) => {
     }
   };
 
-  return <p className={`${style.text} ${alignClass()}`}>{children}</p>;
+  const colorClass = () => {
+    switch (color) {
+      case 'primary':
+        return '';
+      case 'success':
+        return style.text_success;
+      case 'danger':
+        return style.text_danger;
+      case 'warning':
+        return style.text_warning;
+      default:
+        return '';
+    }
+  };
+
+  return (
+    <p className={`${style.text} ${alignClass()} ${colorClass()}`}>
+      {children}
+    </p>
+  );
 };
 
 Text.defaultProps = {
-  align: 'left'
+  align: 'left',
+  color: 'primary'
 };
 
 export default Text;

@@ -15,6 +15,7 @@ const CouponInput = (props: IProps) => {
   return (
     <Fragment>
       <Form
+        buttonType="secondary"
         submitBtnText="Apply"
         onSubmit={(data: any) => {
           const appliedCoupon = _.find(coupons, o => o.code === data[0].code);

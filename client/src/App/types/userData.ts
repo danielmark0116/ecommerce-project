@@ -3,6 +3,7 @@ export interface userData {
   userEmail: string;
   userPic: string;
   userOrders: string[];
+  userAddresses: any[];
   isAdmin: Boolean;
   isLoggedIn: Boolean;
 }
@@ -12,4 +13,5 @@ export interface providerUserData {
   email: string;
   name: string;
   userPic: string;
+  providerToken: string;
 }
