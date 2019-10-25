@@ -21,6 +21,11 @@ $ribbon_position: 20px;
     max-width: 150px;
   }
 
+  &_medium {
+    @extend .image_container;
+    max-width: 300px;
+  }
+
   @include hover-supported {
     &:hover {
       transform: scale(1.02);

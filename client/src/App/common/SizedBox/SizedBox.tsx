@@ -3,7 +3,7 @@ import React from 'react';
 import style from '../../styles/main.module.scss';
 
 interface IProps {
-  children: React.ReactChild;
+  children?: React.ReactChild;
 }
 
 const SizedBox = (props: IProps) => {

@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
-import Navbar from '../features/Navbar/Navbar';
-import Footer from '../features/Footer/Footer';
 import { Container } from 'reactstrap';
 import { Route } from 'react-router-dom';
+
+import Carousel from '../features/Carousel/CarouselContainer';
+import Navbar from '../features/Navbar/Navbar';
+import Footer from '../features/Footer/Footer';
+import SizedBox from '../common/SizedBox/SizedBox';
 
 const paths = [
   { path: '/', title: 'home' },
@@ -21,9 +24,9 @@ const PageLayout = (props: IProps) => {
     <Fragment>
       <Navbar paths={paths} />
       <Route exact path="/">
-        <h3 style={{ textAlign: 'center', paddingTop: 100 }}>CAROUSEL</h3>
+        <Carousel></Carousel>
       </Route>
-      <div style={{ padding: 60 }}></div>
+      <SizedBox></SizedBox>
       <Container>{children}</Container>
       <div style={{ padding: 20 }}></div>
       <Footer paths={paths} />

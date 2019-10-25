@@ -18,16 +18,11 @@ const HomePage = () => {
         scrollOnlyPhones={false}
         withFilters={false}
         pagination={false}
-        itemsPerPage={4}
+        itemsPerPage={6}
         initFiltrString="sort=date-1"
         fetchAll={true}
         productsState="latest"
       />
-      <Button disabled={false} type="primary">
-        Click
-      </Button>
-      <Button type="secondary">Click</Button>
-      <Button type="transparent">Click</Button>
     </Fragment>
   );
 };

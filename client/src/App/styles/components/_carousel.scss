@@ -1,0 +1,73 @@
+.custom_carousel_container {
+  margin-top: 86px;
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  .custom_carousel {
+    &_box {
+      height: 100%;
+      width: auto;
+      min-width: 100%;
+      display: flex;
+    }
+
+    &_item {
+      flex: 1 0 100%;
+      max-width: 100%;
+      position: relative;
+      padding: 40px;
+
+      @include tablets {
+        padding: 40px 80px;
+      }
+
+      &_price {
+        @extend .title;
+        color: $dark-blue;
+        font-size: 58px;
+
+        span {
+          font-size: 20px;
+          font-weight: 300;
+          font-family: 'Robot', sans-serif;
+          margin-left: -15px;
+          padding: 0;
+        }
+      }
+
+      &_bg {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.2;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+
+  .carousel_btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: $purple;
+    display: block;
+    z-index: 2;
+
+    &_prev {
+      @extend .carousel_btn;
+      left: 40px;
+    }
+
+    &_next {
+      @extend .carousel_btn;
+      right: 40px;
+    }
+  }
+}

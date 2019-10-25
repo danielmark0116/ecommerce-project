@@ -5,7 +5,7 @@ import style from '../../styles/main.module.scss';
 interface IProps {
   picString: string;
   ribbon: string;
-  size: 'normal' | 'small';
+  size: 'normal' | 'small' | 'medium';
 }
 
 const Image = (props: IProps) => {
@@ -17,6 +17,8 @@ const Image = (props: IProps) => {
         return style.image_container_normal;
       case 'small':
         return style.image_container_small;
+      case 'medium':
+        return style.image_container_medium;
       default:
         return style.image_container_normal;
     }
