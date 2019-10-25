@@ -49,6 +49,7 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
     if (isLoggedIn) {
       toggleLoginBox(loginBoxRef.current, false);
       toggleOverlay(overlayRef.current, false);
+      closeAction();
     }
   }, [isLoggedIn]);
 

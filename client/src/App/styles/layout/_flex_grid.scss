@@ -8,12 +8,6 @@
   justify-content: flex-start;
   overflow-x: scroll;
 
-  &.flex_fixed_width {
-    .flex_item {
-      max-width: 33.3%;
-    }
-  }
-
   .flex_item {
     flex: 1 0 33.3%;
     width: auto;
@@ -21,6 +15,13 @@
     margin: 5px 0;
     padding: 10px;
     min-height: 10px;
+  }
+
+  &.flex_fixed_width {
+    .flex_item {
+      flex: 1 0 300px;
+      max-width: 300px;
+    }
   }
 
   @include tablets {
@@ -49,6 +50,13 @@
 
   &.flex_horizontal_scroll {
     flex-wrap: nowrap;
+
+    @include tablets {
+      .flex_item {
+        flex: 1 0 60%;
+        max-width: 280px;
+      }
+    }
   }
 
   &.flex_horizontal_scroll_phones {
@@ -57,12 +65,14 @@
 
       .flex_item {
         flex: 1 0 60%;
+        max-width: 280px;
       }
     }
 
     @include phones {
       .flex_item {
         flex: 1 0 80%;
+        max-width: 280px;
       }
     }
   }

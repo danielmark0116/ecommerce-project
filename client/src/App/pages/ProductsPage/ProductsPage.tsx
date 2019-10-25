@@ -5,7 +5,7 @@ import ProductsList from '../../features/ProductsList/ProductsListContainer';
 const ProductsPage = () => {
   return (
     <ProductsList
-      fixedWidth={true}
+      fixedWidth={false}
       horizontalScroll={false}
       scrollOnlyPhones={true}
       withFilters={true}
