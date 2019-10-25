@@ -105,7 +105,12 @@ const Cart = (props: Props) => {
     );
   if (pending) return <Loader></Loader>;
   if (error) return <p>Upss... Sth went wrong</p>;
-  if (success) return <p>Cart is empty</p>;
+  if (success)
+    return (
+      <Subtitle size="small" align="center">
+        Cart is empty
+      </Subtitle>
+    );
   return null;
 };
 
