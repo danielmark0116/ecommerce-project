@@ -20,6 +20,13 @@ export const productsGetCarousel = (payload: productData[]): ActionTypes => ({
   payload
 });
 
+export const productsGetBestsellers = (
+  payload: productData[]
+): ActionTypes => ({
+  type: types.PRODUCTS_GET_BESTSELLERS,
+  payload
+});
+
 export const productsGetLatest = (payload: productData[]): ActionTypes => ({
   type: types.PRODUCTS_GET_LATEST,
   payload
@@ -77,7 +84,7 @@ export const productsGetAllThunk = (
   skip: number = 0,
   limit: number = 0,
   filter: string = '',
-  productsType: 'products' | 'latest' | 'carousel' = 'products'
+  productsType: 'products' | 'latest' | 'carousel' | 'bestsellers' = 'products'
 ) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(productsGetAllLoading());
@@ -96,6 +103,8 @@ export const productsGetAllThunk = (
       productsType === 'products' && dispatch(productsGetAll(products));
       productsType === 'latest' && dispatch(productsGetLatest(products));
       productsType === 'carousel' && dispatch(productsGetCarousel(products));
+      productsType === 'bestsellers' &&
+        dispatch(productsGetBestsellers(products));
       dispatch(productsGetAllSuccess());
     } catch (e) {
       dispatch(productsGetAllFail(e.message));

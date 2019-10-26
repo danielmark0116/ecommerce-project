@@ -21,6 +21,12 @@ export const selectorProductsGetCarousel = (state: AppState): productData[] => {
   return state.products.carouselProducts;
 };
 
+export const selectorProductsGetBestsellers = (
+  state: AppState
+): productData[] => {
+  return state.products.bestsellers;
+};
+
 export const selectorProductsRequestData = (state: AppState): requestData => {
   return state.products.productsRequestData;
 };
@@ -64,6 +70,7 @@ interface initState {
   singleProduct: productData | null;
   carouselProducts: productData[];
   latestProducts: productData[];
+  bestsellers: productData[];
 }
 
 const initState: initState = {
@@ -85,7 +92,8 @@ const initState: initState = {
   products: [],
   singleProduct: null,
   carouselProducts: [],
-  latestProducts: []
+  latestProducts: [],
+  bestsellers: []
 };
 
 export function productReducer(state = initState, action: ActionTypes) {
@@ -158,6 +166,8 @@ export function productReducer(state = initState, action: ActionTypes) {
       return { ...state, latestProducts: action.payload };
     case types.PRODUCTS_GET_CAROUSEL:
       return { ...state, carouselProducts: action.payload };
+    case types.PRODUCTS_GET_BESTSELLERS:
+      return { ...state, bestsellers: action.payload };
     case types.PRODUCTS_GET_ONE:
       return { ...state, singleProduct: action.payload };
     default:

@@ -183,6 +183,8 @@ const sortQuery = queries => {
           ? ['price', parseInt(sort.split('price')[1])]
           : /name/.test(sort)
           ? ['name', parseInt(sort.split('name')[1])]
+          : /sold/.test(sort)
+          ? ['sold', parseInt(sort.split('sold')[1])]
           : defaultSort
       ]
     : [defaultSort];

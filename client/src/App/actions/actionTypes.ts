@@ -19,6 +19,7 @@ export const PRODUCTS_GET_ONE_FAIL = 'PRODUCTS_GET_ONE_FAIL';
 
 export const PRODUCTS_GET_CAROUSEL = 'PRODUCTS_GET_CAROUSEL';
 export const PRODUCTS_GET_LATEST = 'PRODUCTS_GET_LATEST';
+export const PRODUCTS_GET_BESTSELLERS = 'PRODUCTS_GET_BESTSELLERS';
 
 interface productsCountActionType {
   type: typeof PRODUCTS_COUNT;
@@ -32,6 +33,11 @@ interface productsGetAllActionType {
 
 interface productsGetCarouselActionType {
   type: typeof PRODUCTS_GET_CAROUSEL;
+  payload: productData[];
+}
+
+interface productsGetBestSellersActionType {
+  type: typeof PRODUCTS_GET_BESTSELLERS;
   payload: productData[];
 }
 
@@ -165,6 +171,7 @@ export type ActionTypes =
   | productsCountActionType
   | productsGetAllActionType
   | productsGetCarouselActionType
+  | productsGetBestSellersActionType
   | productsGetLatestActionType
   | productsGetOneActionType
   | productsEditOneActionType

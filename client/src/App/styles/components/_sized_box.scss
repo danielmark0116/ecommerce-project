@@ -1,5 +1,9 @@
 .sized_box {
-  margin: 40px 0;
+  margin: 40px;
   padding: 0;
   min-height: 20px;
+
+  @include large-phones {
+    margin: 10px;
+  }
 }

@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
 
 import Title from '../../common/Title/Title';
-import Subtitle from '../../common/Subtitle/Subtitle';
 import ProductsList from '../../features/ProductsList/ProductsListContainer';
-
-import Button from '../../common/Button/Button';
+import SizedBox from '../../common/SizedBox/SizedBox';
 
 const HomePage = () => {
   return (
@@ -23,6 +21,22 @@ const HomePage = () => {
         initFiltrString="sort=price1"
         fetchAll={true}
         productsState="latest"
+      />
+      <SizedBox></SizedBox>
+      <Title size="small" align="center">
+        Bestsellers
+      </Title>
+      <ProductsList
+        productCardsSize="small"
+        fixedWidth={true}
+        horizontalScroll={true}
+        scrollOnlyPhones={false}
+        withFilters={false}
+        pagination={false}
+        itemsPerPage={3}
+        initFiltrString="sort=sold-1"
+        fetchAll={true}
+        productsState="bestsellers"
       />
     </Fragment>
   );
