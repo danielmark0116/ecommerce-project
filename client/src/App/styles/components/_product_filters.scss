@@ -1,5 +1,5 @@
 .product_filters_container {
-  margin: 0;
+  margin: 20px 0 0;
   padding: 10px;
   width: 100%;
   @include fade;
@@ -34,7 +34,7 @@
     .mobile_filters_close_button {
       @extend button;
       display: none;
-      margin: 10px auto 20px;
+      margin: 30px auto 20px;
       width: 80%;
     }
 

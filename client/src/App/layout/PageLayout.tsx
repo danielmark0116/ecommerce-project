@@ -5,7 +5,9 @@ import { Route } from 'react-router-dom';
 import Carousel from '../features/Carousel/CarouselContainer';
 import Navbar from '../features/Navbar/Navbar';
 import Footer from '../features/Footer/Footer';
-import SizedBox from '../common/SizedBox/SizedBox';
+import NewsBar from '../features/NewsBar/NewsBar';
+
+import style from '../styles/main.module.scss';
 
 const paths = [
   { path: '/', title: 'home' },
@@ -22,14 +24,16 @@ const PageLayout = (props: IProps) => {
 
   return (
     <Fragment>
+      <NewsBar></NewsBar>
       <Navbar paths={paths} />
       <Route exact path="/">
         <Carousel></Carousel>
+        {/* <SizedBox></SizedBox> */}
       </Route>
-      <SizedBox></SizedBox>
-      <Container>{children}</Container>
+      <div className={style.page_wrapper}>
+        <Container>{children}</Container>
+      </div>
 
-      <div style={{ padding: 20 }}></div>
       <Footer paths={paths} />
     </Fragment>
   );

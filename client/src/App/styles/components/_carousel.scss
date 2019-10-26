@@ -5,6 +5,12 @@
   position: relative;
   overflow-x: hidden;
 
+  @include large-phones {
+    .title {
+      font-size: 25px;
+    }
+  }
+
   .custom_carousel {
     &_box {
       height: 100%;
@@ -18,10 +24,10 @@
       max-width: 100%;
       position: relative;
       // padding: 40px;
-      padding: 150px 20px 200px;
+      padding: 100px 20px 0;
 
       @include tablets {
-        padding: 40px 20px;
+        padding: 40px 30px;
       }
 
       &_price {
@@ -57,9 +63,17 @@
     }
   }
 
-  .carousel_mobile_image {
+  .carousel_desktop_image {
     @include tablets {
       display: none;
+    }
+  }
+
+  .carousel_mobile_image {
+    display: none;
+
+    @include tablets {
+      display: block;
     }
   }
 
@@ -110,7 +124,7 @@
       }
 
       @include phones {
-        left: 10px;
+        left: 20px;
       }
     }
 
@@ -131,7 +145,7 @@
       }
 
       @include phones {
-        right: 10px;
+        right: 20px;
       }
     }
   }

@@ -13,6 +13,7 @@
 
 // GRID
 @import 'layout/flex_grid';
+@import 'layout/page_wrapper';
 
 // COMPONENTS
 @import 'components/center';
@@ -37,6 +38,7 @@
 @import 'components/login_box';
 @import 'components/sized_box';
 @import 'components/carousel';
+@import 'components/news_bar';
 
 body {
   margin: 0;

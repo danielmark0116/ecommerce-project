@@ -36,6 +36,7 @@ const ProductCard = (props: IProps) => {
       <div className={style.product_title}>
         <Link to={`/products/${_id}`}>
           {`${name}`}
+          <br />
           <span>({sex})</span>
         </Link>
       </div>

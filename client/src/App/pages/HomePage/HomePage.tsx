@@ -9,7 +9,7 @@ import Button from '../../common/Button/Button';
 const HomePage = () => {
   return (
     <Fragment>
-      <Title size="large" align="center">
+      <Title size="small" align="center">
         Latest products
       </Title>
       <ProductsList
@@ -19,7 +19,7 @@ const HomePage = () => {
         withFilters={false}
         pagination={false}
         itemsPerPage={5}
-        initFiltrString="sort=date-1"
+        initFiltrString="sort=price1"
         fetchAll={true}
         productsState="latest"
       />

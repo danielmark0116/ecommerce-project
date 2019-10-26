@@ -1,0 +1,12 @@
+.page_wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  margin-top: 140px;
+  margin-bottom: 100px;
+
+  @include large-phones {
+    margin-top: 100px;
+    margin-bottom: 0px;
+  }
+}

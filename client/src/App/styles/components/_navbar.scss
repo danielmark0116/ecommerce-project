@@ -5,8 +5,12 @@
   z-index: 12;
   background: $white;
   position: fixed;
-  top: 0;
+  top: 25px;
   width: 100%;
+
+  @include large-phones {
+    top: 20px;
+  }
 
   @include hover-supported {
     a {

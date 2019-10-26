@@ -33,6 +33,7 @@
 
     .flex_item {
       flex: 1 0 50%;
+      max-width: 50%;
     }
   }
 
@@ -45,6 +46,7 @@
 
     .flex_item {
       flex: 1 0 100%;
+      max-width: 100%;
     }
   }
 
@@ -53,7 +55,7 @@
 
     @include tablets {
       .flex_item {
-        flex: 1 0 60%;
+        flex: 1 0 80%;
         max-width: 280px;
       }
     }

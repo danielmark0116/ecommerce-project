@@ -7,8 +7,13 @@ export const selectorCoupons = (state: AppState): couponsData => {
   return state.generals.coupons;
 };
 
+export const selectorGeneralsNewsBarText = (state: AppState): string => {
+  return state.generals.newsBarText;
+};
+
 interface initState {
   coupons: couponsData;
+  newsBarText: string;
 }
 
 const initState: initState = {
@@ -23,7 +28,9 @@ const initState: initState = {
       code: 'santa',
       value: 0.7
     }
-  ]
+  ],
+  newsBarText:
+    "Don't miss this year's sales season! Use SANTA coupon code for even more discount!"
 };
 
 export function generalsReducer(state = initState, action: ActionTypes) {

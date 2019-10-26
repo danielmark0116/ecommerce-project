@@ -6,8 +6,6 @@ import LoginBox from '../LoginBox/LoginBox';
 
 import HamburgerBtn from '../../common/HamburgerBtn/HamburgerBtn';
 
-import { animateLink } from '../../animations/mobile_menu';
-
 import style from '../../styles/main.module.scss';
 import { AppState } from '../../reducers';
 import { selectorAuthIsLoggedIn } from '../../reducers/authReducer';
