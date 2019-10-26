@@ -18,7 +18,7 @@ const HomePage = () => {
         scrollOnlyPhones={false}
         withFilters={false}
         pagination={false}
-        itemsPerPage={6}
+        itemsPerPage={5}
         initFiltrString="sort=date-1"
         fetchAll={true}
         productsState="latest"

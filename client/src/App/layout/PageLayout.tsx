@@ -28,6 +28,7 @@ const PageLayout = (props: IProps) => {
       </Route>
       <SizedBox></SizedBox>
       <Container>{children}</Container>
+
       <div style={{ padding: 20 }}></div>
       <Footer paths={paths} />
     </Fragment>

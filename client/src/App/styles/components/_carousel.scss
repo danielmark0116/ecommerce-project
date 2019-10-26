@@ -3,6 +3,7 @@
   width: 100%;
   height: auto;
   position: relative;
+  overflow-x: hidden;
 
   .custom_carousel {
     &_box {
@@ -16,22 +17,28 @@
       flex: 1 0 100%;
       max-width: 100%;
       position: relative;
-      padding: 40px;
+      // padding: 40px;
+      padding: 150px 20px 200px;
 
       @include tablets {
-        padding: 40px 80px;
+        padding: 40px 20px;
       }
 
       &_price {
         @extend .title;
         color: $dark-blue;
         font-size: 58px;
+        font-weight: 900;
+        margin: 10px;
+        padding: 5px;
+        letter-spacing: -3px;
+        font-family: 'Robot', sans-serif;
 
         span {
-          font-size: 20px;
+          font-size: 35px;
           font-weight: 300;
-          font-family: 'Robot', sans-serif;
-          margin-left: -15px;
+          color: rgba($dark-blue, 0.3);
+          margin-left: -5px;
           padding: 0;
         }
       }
@@ -41,12 +48,18 @@
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 0.2;
+        opacity: 0.8;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: top;
       }
+    }
+  }
+
+  .carousel_mobile_image {
+    @include tablets {
+      display: none;
     }
   }
 
@@ -56,18 +69,70 @@
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    background: $purple;
     display: block;
     z-index: 2;
+    padding: 50px 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform-origin: center left;
+      width: 100%;
+      height: 2px;
+      background: $dark-blue;
+
+      &:nth-of-type(1) {
+        transform: translateY(-50%) rotate(-50deg);
+      }
+
+      &:nth-of-type(2) {
+        transform: translateY(-50%) rotate(50deg);
+      }
+    }
 
     &_prev {
       @extend .carousel_btn;
       left: 40px;
+
+      span {
+        &:nth-of-type(1) {
+          transform: translateY(-50%) rotate(-50deg);
+        }
+
+        &:nth-of-type(2) {
+          transform: translateY(-50%) rotate(50deg);
+        }
+      }
+
+      @include phones {
+        left: 10px;
+      }
     }
 
     &_next {
       @extend .carousel_btn;
       right: 40px;
+
+      span {
+        transform-origin: center right;
+
+        &:nth-of-type(1) {
+          transform: translateY(-50%) rotate(-50deg);
+        }
+
+        &:nth-of-type(2) {
+          transform: translateY(-50%) rotate(50deg);
+        }
+      }
+
+      @include phones {
+        right: 10px;
+      }
     }
   }
 }
