@@ -62,6 +62,8 @@
 
       li {
         margin: 0 5px;
+        display: flex;
+        align-items: center;
 
         a {
           text-decoration: none;
@@ -69,6 +71,8 @@
           color: $dark-blue;
           font-size: 14px;
           font-weight: 400;
+          display: flex;
+          align-items: center;
 
           &.navbar_link_active {
             font-weight: 900;
@@ -119,6 +123,8 @@
             color: $dark-blue;
             font-size: 18px;
             font-weight: 400;
+            display: flex;
+            align-items: center;
 
             &.navbar_link_active {
               font-weight: 900;

@@ -1,0 +1,28 @@
+.user_bar {
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+  background: $green;
+  position: fixed;
+  top: 111px;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  @include shadow-strong(5px);
+  @include fade;
+
+  p {
+    color: $white;
+    font-weight: 400;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  @include large-phones {
+    top: 106px;
+  }
+
+  //   @include phones {
+  //     display: none;
+  //   }
+}

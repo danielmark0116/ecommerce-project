@@ -12,6 +12,14 @@ export const selectorAuthIsAdmin = (state: AppState): Boolean => {
   return state.auth.isAdmin;
 };
 
+export const selectorAuthProfilePic = (state: AppState): string => {
+  return state.auth.userPic;
+};
+
+export const selectorAuthProfileName = (state: AppState): string => {
+  return state.auth.userName;
+};
+
 export const selectorAuthRequestData = (state: AppState): requestData => {
   return state.auth.authRequestData;
 };

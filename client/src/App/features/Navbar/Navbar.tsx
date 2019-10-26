@@ -5,13 +5,17 @@ import { Container } from 'reactstrap';
 import LoginBox from '../LoginBox/LoginBox';
 
 import HamburgerBtn from '../../common/HamburgerBtn/HamburgerBtn';
+import ProfileThumb from '../../common/ProfileThumb/ProfileThumb';
 
 import style from '../../styles/main.module.scss';
 import { AppState } from '../../reducers';
-import { selectorAuthIsLoggedIn } from '../../reducers/authReducer';
+import {
+  selectorAuthIsLoggedIn,
+  selectorAuthProfilePic
+} from '../../reducers/authReducer';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionTypes } from '../../actions/actionTypes';
-import { authLogout } from '../../actions/authActions';
+import { authLogOutThunk } from '../../actions/authActions';
 
 interface IProps {
   paths: {
@@ -21,7 +25,7 @@ interface IProps {
 }
 
 const Navbar = (props: IProps & stateToProps & dispatchToProps) => {
-  const { paths, isLoggedIn, logOutUser } = props;
+  const { paths, isLoggedIn, logOutUser, profilePic } = props;
   const mobileMenuRef = React.createRef<HTMLDivElement>();
   const [showMenu, toggleMenu] = useState(false);
   const [showLoginBox, toggleLoginBox] = useState(false);
@@ -42,23 +46,40 @@ const Navbar = (props: IProps & stateToProps & dispatchToProps) => {
           </li>
         );
       })}
-      <li>
-        {isLoggedIn ? (
-          <a
-            href="#"
-            onClick={() => {
-              logOutUser();
-              closeMobileMenu();
-            }}
-          >
-            Log out
-          </a>
-        ) : (
+
+      {isLoggedIn ? (
+        <Fragment>
+          <li>
+            <NavLink
+              exact
+              to={'/profile'}
+              activeClassName={style.navbar_link_active}
+              onClick={closeMobileMenu}
+            >
+              Profile
+              <ProfileThumb picString={profilePic}></ProfileThumb>
+            </NavLink>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              onClick={() => {
+                logOutUser();
+                closeMobileMenu();
+              }}
+            >
+              Log out
+            </a>
+          </li>
+        </Fragment>
+      ) : (
+        <li>
           <a href="#" onClick={openLoginBox}>
             Login
           </a>
-        )}
-      </li>
+        </li>
+      )}
     </ul>
   );
 
@@ -123,6 +144,7 @@ const Navbar = (props: IProps & stateToProps & dispatchToProps) => {
 
 interface stateToProps {
   isLoggedIn: Boolean;
+  profilePic: string;
 }
 
 interface dispatchToProps {
@@ -130,13 +152,14 @@ interface dispatchToProps {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  isLoggedIn: selectorAuthIsLoggedIn(state)
+  isLoggedIn: selectorAuthIsLoggedIn(state),
+  profilePic: selectorAuthProfilePic(state)
 });
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, ActionTypes>
 ) => ({
-  logOutUser: () => dispatch(authLogout())
+  logOutUser: () => dispatch(authLogOutThunk())
 });
 
 export default connect(
