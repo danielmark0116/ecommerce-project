@@ -1,11 +1,13 @@
 .custom_carousel_container {
-  margin-top: 86px;
+  margin-bottom: 40px;
   width: 100%;
   height: auto;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 
   @include large-phones {
+    margin-bottom: 80px;
+
     .title {
       font-size: 25px;
     }
@@ -24,10 +26,10 @@
       max-width: 100%;
       position: relative;
       // padding: 40px;
-      padding: 100px 20px 0;
+      padding: 0 20px;
 
       @include tablets {
-        padding: 40px 30px;
+        padding: 0 30px;
       }
 
       &_price {

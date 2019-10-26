@@ -10,20 +10,25 @@ interface IProps {
   category: string;
   ribbon: string;
   sizes: sizeData;
+  imageSize: 'small' | 'normal';
 }
 
 const ProductImage = (props: IProps) => {
-  const { ribbon, category, sizes } = props;
+  const { ribbon, category, sizes, imageSize } = props;
 
   return (
-    <div className={style.product_image}>
+    <div
+      className={
+        imageSize === 'small' ? style.product_image_small : style.product_image
+      }
+    >
       <div className={style.product_image_container}>
         <img src={props.pic} alt="" />
       </div>
 
       <div className={style.product_image_hover_card}>
         <p>
-          Available sizes:{' '}
+          {imageSize === 'small' ? 'Sizes: ' : 'Available sizes: '}
           {checkAvailableSizes(sizes).map((size, index) => (
             <span key={index}>
               {index !== 0 ? ' | ' : ''}
@@ -44,7 +49,8 @@ const ProductImage = (props: IProps) => {
 
 ProductImage.defaultProps = {
   category: '',
-  ribbon: ''
+  ribbon: '',
+  imageSize: 'normal'
 };
 
 export default ProductImage;

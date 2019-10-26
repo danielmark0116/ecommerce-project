@@ -13,6 +13,7 @@ const HomePage = () => {
         Latest products
       </Title>
       <ProductsList
+        productCardsSize="small"
         fixedWidth={true}
         horizontalScroll={true}
         scrollOnlyPhones={false}

@@ -56,7 +56,7 @@
     @include tablets {
       .flex_item {
         flex: 1 0 80%;
-        max-width: 280px;
+        max-width: 230px;
       }
     }
   }
@@ -67,14 +67,14 @@
 
       .flex_item {
         flex: 1 0 60%;
-        max-width: 280px;
+        max-width: 230px;
       }
     }
 
     @include phones {
       .flex_item {
         flex: 1 0 80%;
-        max-width: 280px;
+        max-width: 230px;
       }
     }
   }

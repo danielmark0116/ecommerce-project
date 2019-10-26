@@ -27,6 +27,7 @@ interface IProps {
   initFiltrString: string;
   fetchAll: Boolean;
   productsState: 'products' | 'carousel' | 'latest';
+  productCardsSize: 'small' | 'normal';
 }
 
 export interface stateToProps {
@@ -43,6 +44,7 @@ export interface stateToProps {
   sexValues: string[];
   categoryValues: string[];
   fetchAll: Boolean;
+  productCardsSize: 'small' | 'normal';
 }
 
 export interface dispatchToProps {
@@ -69,7 +71,8 @@ const mapStateToProps = (state: AppState, ownProps: IProps) => ({
   initFiltrString: ownProps.initFiltrString,
   sexValues: selectorProductsSexValues(state),
   categoryValues: selectorProductsCategoryValues(state),
-  fetchAll: ownProps.fetchAll
+  fetchAll: ownProps.fetchAll,
+  productCardsSize: ownProps.productCardsSize
 });
 
 const mapDispatchToProps = (

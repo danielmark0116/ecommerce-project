@@ -26,11 +26,11 @@ const PageLayout = (props: IProps) => {
     <Fragment>
       <NewsBar></NewsBar>
       <Navbar paths={paths} />
-      <Route exact path="/">
-        <Carousel></Carousel>
-        {/* <SizedBox></SizedBox> */}
-      </Route>
       <div className={style.page_wrapper}>
+        <Route exact path="/">
+          <Carousel></Carousel>
+          {/* <SizedBox></SizedBox> */}
+        </Route>
         <Container>{children}</Container>
       </div>
 

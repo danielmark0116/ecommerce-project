@@ -31,7 +31,8 @@ const ProductsList = (props: Props) => {
     scrollOnlyPhones,
     sexValues,
     categoryValues,
-    fetchAll
+    fetchAll,
+    productCardsSize
   } = props;
 
   const { pending, error, success } = props.productsRequestData;
@@ -96,7 +97,10 @@ const ProductsList = (props: Props) => {
             {success &&
               products.map((product, index) => (
                 <FlexItem key={index}>
-                  <ProductCard productData={product}></ProductCard>
+                  <ProductCard
+                    cardSize={productCardsSize}
+                    productData={product}
+                  ></ProductCard>
                 </FlexItem>
               ))}
           </Fragment>
@@ -112,5 +116,9 @@ const ProductsList = (props: Props) => {
     </Row>
   );
 };
+
+// ProductsList.defaultProps = {
+//   productCardsSize: 'normal'
+// };
 
 export default ProductsList;

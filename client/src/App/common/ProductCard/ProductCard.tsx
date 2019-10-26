@@ -8,6 +8,7 @@ import { productData } from '../../types/productData';
 
 interface IProps {
   productData: productData;
+  cardSize: 'small' | 'normal';
 }
 
 const ProductCard = (props: IProps) => {
@@ -22,10 +23,13 @@ const ProductCard = (props: IProps) => {
     size
   } = props.productData;
 
+  const { cardSize } = props;
+
   return (
     <div className={style.product_card_container}>
       <Link to={`/products/${_id}`}>
         <ProductImage
+          imageSize={cardSize}
           sizes={size}
           pic={img}
           category={category}
@@ -46,6 +50,10 @@ const ProductCard = (props: IProps) => {
       </Link>
     </div>
   );
+};
+
+ProductCard.defaultProps = {
+  cardSize: 'normal'
 };
 
 export default ProductCard;

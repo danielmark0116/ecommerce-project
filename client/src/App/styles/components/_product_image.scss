@@ -107,4 +107,13 @@ $border-radius: 5px;
       }
     }
   }
+
+  &_small {
+    @extend .product_image;
+
+    @include tablets {
+      width: 180px;
+      height: 260px;
+    }
+  }
 }
