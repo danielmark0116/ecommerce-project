@@ -97,5 +97,6 @@ export const authLogOutThunk = () => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     deleteToken();
     dispatch(authLogout());
+    dispatch(authFail('You have logged out'));
   };
 };

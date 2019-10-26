@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { dispatchToProps, stateToProps } from './CartContainer';
 import _ from 'lodash';
@@ -86,13 +87,15 @@ const Cart = (props: Props) => {
               2
             )} $`}</Title>
             <div className="d-flex justify-content-end m-0 p-0">
-              <Button
-                disabled={!isLoggedIn}
-                action={() => createNewOrder()}
-                type="primary"
-              >
-                Place an order
-              </Button>
+              <Link to="/checkout">
+                <Button
+                  disabled={!isLoggedIn}
+                  action={() => createNewOrder()}
+                  type="primary"
+                >
+                  Place an order
+                </Button>
+              </Link>
             </div>
             {!isLoggedIn && (
               <Subtext align="right" size="small">
