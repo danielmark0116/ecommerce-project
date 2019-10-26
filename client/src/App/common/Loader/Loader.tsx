@@ -8,9 +8,9 @@ const Loader = () => {
     <Center>
       <LoaderSpinner
         type="MutatingDots"
-        color="#060036"
         height={100}
         width={100}
+        color="#060036"
         timeout={0}
       />
     </Center>
