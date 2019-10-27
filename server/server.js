@@ -24,6 +24,7 @@ initJwtMiddleware();
 // ROUTES
 const productsRotues = require('./routes/products.routes');
 const authRotues = require('./routes/auth.routes');
+const userRotues = require('./routes/user.routes');
 
 app.get(
   '/secret',
@@ -38,6 +39,7 @@ app.get(
 
 app.use('/api/products', productsRotues);
 app.use('/api/auth', authRotues);
+app.use('/api/user', userRotues);
 
 app.get('/', (req, res) => {
   res.send('ECOMMERCE API');

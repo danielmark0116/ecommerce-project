@@ -18,11 +18,13 @@ const CouponInput = (props: IProps) => {
         buttonType="secondary"
         submitBtnText="Apply"
         onSubmit={(data: any) => {
-          const appliedCoupon = _.find(coupons, o => o.code === data[0].code);
+          const appliedCoupon = _.find(coupons, o => o.code === data.code);
           const couponName = _.get(appliedCoupon, 'name');
           const couponValue = _.get(appliedCoupon, 'value');
+          const couponCode = _.get(appliedCoupon, 'code');
 
           action(couponName, couponValue);
+          sessionStorage.setItem('discountCode', JSON.stringify(couponCode));
         }}
         inputs={[
           {

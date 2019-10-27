@@ -5,6 +5,7 @@ import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 
 import style from '../../styles/main.module.scss';
+import { Input } from 'reactstrap';
 
 interface IProps {
   inputs: {
@@ -18,7 +19,9 @@ interface IProps {
     errorMsg: string;
   }[];
   onSubmit: Function;
+  onCancel: Function;
   submitBtnText: string;
+  cancelBtnText: string;
   buttonType: 'primary' | 'secondary' | 'transparent';
 }
 
@@ -31,7 +34,7 @@ interface IState {
     fieldValue: string;
     onChange: Function;
     validateRegex: RegExp;
-    fieldError?: Boolean;
+    fieldError: Boolean;
     errorMsg: string;
   }[];
   submitTrigger: Boolean;
@@ -39,13 +42,18 @@ interface IState {
 
 export default class Form extends Component<IProps, IState> {
   static defaultProps = {
-    buttonType: 'primary'
+    buttonType: 'primary',
+    onCancel: () => null,
+    cancelBtnText: ''
   };
 
   constructor(props: IProps) {
     super(props);
     this.state = {
-      inputsData: props.inputs,
+      inputsData: props.inputs.map(input => ({
+        ...input,
+        fieldError: input.validateRegex.test(input.fieldValue) ? false : true
+      })),
       submitTrigger: false
     };
   }
@@ -95,12 +103,24 @@ export default class Form extends Component<IProps, IState> {
       const formToSubmit = inputsData.map(input => ({
         [_.get(input, 'fieldName')]: _.get(input, 'fieldValue')
       }));
-      this.props.onSubmit(formToSubmit);
+
+      this.props.onSubmit(
+        formToSubmit.reduce((obj: any, item: any, index: number) => ({
+          ...obj,
+          [Object.keys(item)[0]]: Object.values(item)[0]
+        }))
+      );
     }
   };
 
   render() {
-    const { inputs, submitBtnText, buttonType } = this.props;
+    const {
+      inputs,
+      submitBtnText,
+      buttonType,
+      cancelBtnText,
+      onCancel
+    } = this.props;
     const { inputsData, submitTrigger } = this.state;
 
     return (
@@ -114,8 +134,8 @@ export default class Form extends Component<IProps, IState> {
               <TextInput
                 error={
                   submitTrigger &&
-                  (inputsData[index].fieldValue.length === 0 ||
-                    !input.validateRegex.test(inputsData[index].fieldValue)) &&
+                  (inputsData[index].fieldError ||
+                    inputsData[index].fieldValue.length === 0) &&
                   true
                 }
                 key={index}
@@ -134,6 +154,15 @@ export default class Form extends Component<IProps, IState> {
           <Button type={buttonType} submitType={true}>
             {submitBtnText}
           </Button>
+          {cancelBtnText.length > 0 && (
+            <Button
+              action={() => onCancel()}
+              type="transparent"
+              submitType={true}
+            >
+              {cancelBtnText}
+            </Button>
+          )}
         </form>
       </Fragment>
     );

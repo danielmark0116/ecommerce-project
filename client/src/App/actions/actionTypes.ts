@@ -2,6 +2,7 @@ import { productData } from '../types/productData';
 import { productCartData } from '../types/productCartData';
 import { cartDataElements } from '../types/cartData';
 import { userData } from '../types/userData';
+import { userAddress } from '../types/userAddress';
 
 // PRODUCTS
 export const PRODUCTS_COUNT = 'PRODUCTS_COUNT';
@@ -167,6 +168,53 @@ interface authFailActionType {
   payload: string;
 }
 
+// USER DATA
+export const USER_GET_ADDRESSES = 'USER_GET_ADDRESSES';
+export const USER_GET_ADDRESSES_LOADING = 'USER_GET_ADDRESSES_LOADING';
+export const USER_GET_ADDRESSES_SUCCESS = 'USER_GET_ADDRESSES_SUCCESS';
+export const USER_GET_ADDRESSES_FAIL = 'USER_GET_ADDRESSES_FAIL';
+
+export const USER_ADD_ADDRESS = 'USER_ADD_ADDRESS';
+export const USER_ADD_ADDRESS_LOADING = 'USER_ADD_ADDRESS_LOADING';
+export const USER_ADD_ADDRESS_SUCCESS = 'USER_ADD_ADDRESS_SUCCESS';
+export const USER_ADD_ADDRESS_FAIL = 'USER_ADD_ADDRESS_FAIL';
+
+interface userGetAddressesActionType {
+  type: typeof USER_GET_ADDRESSES;
+  payload: userAddress[];
+}
+
+interface userGetAddressesLoadingActionType {
+  type: typeof USER_GET_ADDRESSES_LOADING;
+}
+
+interface userGetAddressesSuccessActionType {
+  type: typeof USER_GET_ADDRESSES_SUCCESS;
+}
+
+interface userGetAddressesFailActionType {
+  type: typeof USER_GET_ADDRESSES_FAIL;
+  payload: string;
+}
+
+interface userAddAddressActionType {
+  type: typeof USER_ADD_ADDRESS;
+  payload: userAddress[];
+}
+
+interface userAddAddressLoadingActionType {
+  type: typeof USER_ADD_ADDRESS_LOADING;
+}
+
+interface userAddAddressSuccessActionType {
+  type: typeof USER_ADD_ADDRESS_SUCCESS;
+}
+
+interface userAddAddressFailActionType {
+  type: typeof USER_ADD_ADDRESS_FAIL;
+  payload: string;
+}
+
 export type ActionTypes =
   | productsCountActionType
   | productsGetAllActionType
@@ -194,4 +242,12 @@ export type ActionTypes =
   | authLogoutActionType
   | authLoadingActionType
   | authSuccessActionType
-  | authFailActionType;
+  | authFailActionType
+  | userGetAddressesActionType
+  | userGetAddressesLoadingActionType
+  | userGetAddressesSuccessActionType
+  | userGetAddressesFailActionType
+  | userAddAddressActionType
+  | userAddAddressLoadingActionType
+  | userAddAddressSuccessActionType
+  | userAddAddressFailActionType;

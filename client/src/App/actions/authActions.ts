@@ -2,7 +2,6 @@ import { ActionTypes } from './actionTypes';
 import * as types from './actionTypes';
 import { Dispatch } from 'redux';
 import { providerUserData, userData } from '../types/userData';
-import { async } from 'q';
 import axios from 'axios';
 import {
   saveToken,
@@ -11,6 +10,7 @@ import {
   verifyToken,
   deleteToken
 } from '../helpers/fetchToken';
+import { deleteCouponDataFromSession } from '../helpers/couponSessionStorage';
 
 // ACTIONS
 export const authCheck = (payload: userData): ActionTypes => ({
@@ -58,6 +58,7 @@ export const authCheckThunk = () => {
       );
     } else {
       dispatch(authFail('No token/invalid token'));
+      deleteCouponDataFromSession();
     }
   };
 };
@@ -86,9 +87,11 @@ export const authLoginThunk = (
         );
       } else {
         dispatch(authFail('Auth not verified'));
+        deleteCouponDataFromSession();
       }
     } catch (e) {
       dispatch(authFail(e.message));
+      deleteCouponDataFromSession();
     }
   };
 };
@@ -98,5 +101,17 @@ export const authLogOutThunk = () => {
     deleteToken();
     dispatch(authLogout());
     dispatch(authFail('You have logged out'));
+    deleteCouponDataFromSession();
+  };
+};
+
+export const authGetUserAddressesThunk = () => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
+    //
+    try {
+      //
+    } catch (e) {
+      //
+    }
   };
 };
