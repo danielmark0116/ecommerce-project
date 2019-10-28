@@ -27,6 +27,10 @@ const Order = new mongoose.Schema(
       type: String,
       required: true
     },
+    deliveryValue: {
+      type: Number,
+      required: true
+    },
     cart: {
       type: Array,
       required: true
@@ -47,7 +51,7 @@ const Order = new mongoose.Schema(
     patronDiscount: {
       type: Number,
       required: false,
-      default: 0
+      default: 1
     },
     totalValue: {
       type: Number,
@@ -56,9 +60,23 @@ const Order = new mongoose.Schema(
     status: {
       type: String,
       required: true
+    },
+    deliveryId: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   { timestamps: true }
 );
 
 module.exports = mongoose.model('Order', Order);
+
+// STATUSES
+/*
+- init - order created NOT PAID yet -> can be deleted by user
+- paid - order PAID -> can be packed and sent
+- fail - PAYMENT FAILURE -> option to repay in the order page
+- sent - order paid, packed and sent to the client - DELIVERYID to update, so user can track
+- success - paid, sent, delivered
+*/

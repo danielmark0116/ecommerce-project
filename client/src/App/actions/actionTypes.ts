@@ -3,6 +3,7 @@ import { productCartData } from '../types/productCartData';
 import { cartDataElements } from '../types/cartData';
 import { userData } from '../types/userData';
 import { userAddress } from '../types/userAddress';
+import { orderData } from '../types/orderData';
 
 // PRODUCTS
 export const PRODUCTS_COUNT = 'PRODUCTS_COUNT';
@@ -215,6 +216,80 @@ interface userAddAddressFailActionType {
   payload: string;
 }
 
+// ORDER ACTIONS
+export const ORDER_CREATE = 'ORDER_CREATE';
+export const ORDER_CREATE_LOADING = 'ORDER_CREATE_LOADING';
+export const ORDER_CREATE_SUCCESS = 'ORDER_CREATE_SUCCESS';
+export const ORDER_CREATE_FAIL = 'ORDER_CREATE_FAIL';
+
+export const ORDER_GET_ONE = 'ORDER_GET_ONE';
+export const ORDER_GET_ONE_LOADING = 'ORDER_GET_ONE_LOADING';
+export const ORDER_GET_ONE_SUCCESS = 'ORDER_GET_ONE_SUCCESS';
+export const ORDER_GET_ONE_FAIL = 'ORDER_GET_ONE_FAIL';
+
+export const PAYMENT_LOADING = 'PAYMENT_LOADING';
+export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
+export const PAYMENT_FAIL = 'PAYMENT_FAIL';
+export const PAYMENT_ID = 'PAYMENT_ID';
+export const PAYMENT_REDIRECT = 'PAYMENT_REDIRECT';
+
+interface orderCreateActionType {
+  type: typeof ORDER_CREATE;
+  payload: string;
+}
+
+interface orderCreateLoadingActionType {
+  type: typeof ORDER_CREATE_LOADING;
+}
+
+interface orderCreateSuccessActionType {
+  type: typeof ORDER_CREATE_SUCCESS;
+}
+
+interface orderCreateFailActionType {
+  type: typeof ORDER_CREATE_FAIL;
+  payload: string;
+}
+
+interface orderGetOneActionType {
+  type: typeof ORDER_GET_ONE;
+  payload: orderData;
+}
+
+interface orderGetOneLoadingActionType {
+  type: typeof ORDER_GET_ONE_LOADING;
+}
+
+interface orderGetOneSuccessActionType {
+  type: typeof ORDER_GET_ONE_SUCCESS;
+}
+
+interface orderGetOneFailActionType {
+  type: typeof ORDER_GET_ONE_FAIL;
+  payload: string;
+}
+
+interface paymentLoadingActionType {
+  type: typeof PAYMENT_LOADING;
+}
+
+interface paymentSuccessActionType {
+  type: typeof PAYMENT_SUCCESS;
+}
+
+interface paymentFailActionType {
+  type: typeof PAYMENT_FAIL;
+}
+
+interface paymentIdActionType {
+  type: typeof PAYMENT_ID;
+  payload: string;
+}
+
+interface paymentRedirectActionType {
+  type: typeof PAYMENT_REDIRECT;
+}
+
 export type ActionTypes =
   | productsCountActionType
   | productsGetAllActionType
@@ -250,4 +325,17 @@ export type ActionTypes =
   | userAddAddressActionType
   | userAddAddressLoadingActionType
   | userAddAddressSuccessActionType
-  | userAddAddressFailActionType;
+  | userAddAddressFailActionType
+  | orderCreateActionType
+  | orderCreateLoadingActionType
+  | orderCreateSuccessActionType
+  | orderCreateFailActionType
+  | orderGetOneActionType
+  | orderGetOneLoadingActionType
+  | orderGetOneSuccessActionType
+  | orderGetOneFailActionType
+  | paymentLoadingActionType
+  | paymentSuccessActionType
+  | paymentFailActionType
+  | paymentIdActionType
+  | paymentRedirectActionType;

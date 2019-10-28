@@ -11,6 +11,7 @@ import ProductsPage from './App/pages/ProductsPage/ProductsPage';
 import ProductPage from './App/pages/ProductPage/ProductPage';
 import CartPage from './App/pages/CartPage/CartPage';
 import CheckoutPage from './App/pages/CheckoutPage/CheckoutPage';
+import NewOrderPage from './App/pages/NewOrder/NewOrgerPage';
 
 import { AppState } from './App/reducers';
 import {
@@ -47,6 +48,22 @@ const Routes = (props: stateToProps) => {
         </Route>
         <Route exact path="/checkout">
           {PritaveRoute(CheckoutPage)}
+        </Route>
+        <Route exact path="/new-order-success">
+          {PritaveRoute(NewOrderPage)}
+        </Route>
+        <Route exact path="/payment-success/:paymentSessionId">
+          {PritaveRoute(NewOrderPage)}
+        </Route>
+        <Route exact path="/order/:orderId">
+          <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h1>orer page</h1>
+          </div>
         </Route>
         <Route exact path="/profile">
           {PritaveRoute(() => (

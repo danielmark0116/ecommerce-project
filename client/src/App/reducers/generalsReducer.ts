@@ -1,10 +1,15 @@
 import { ActionTypes } from '../actions/actionTypes';
 import { AppState } from '.';
 import { couponsData, couponData } from '../types/couponsData';
+import { deliveryData } from '../types/deliveryData';
 
 // SELECTORS
 export const selectorCoupons = (state: AppState): couponsData => {
   return state.generals.coupons;
+};
+
+export const selectorDeliveryTypes = (state: AppState): deliveryData[] => {
+  return state.generals.deliveryTypes;
 };
 
 export const selectorGeneralsNewsBarText = (state: AppState): string => {
@@ -14,6 +19,7 @@ export const selectorGeneralsNewsBarText = (state: AppState): string => {
 interface initState {
   coupons: couponsData;
   newsBarText: string;
+  deliveryTypes: deliveryData[];
 }
 
 const initState: initState = {
@@ -27,6 +33,16 @@ const initState: initState = {
       name: 'Christmas Fever',
       code: 'santa',
       value: 0.7
+    }
+  ],
+  deliveryTypes: [
+    {
+      name: 'DPD',
+      cost: 15
+    },
+    {
+      name: 'Fedex',
+      cost: 25
     }
   ],
   newsBarText:

@@ -8,6 +8,8 @@ const passport = require('passport');
 const initJwtMiddleware = require('./middleware/JWTAuth.passport');
 const isAdmin = require('./middleware/isAdmin');
 
+const axios = require('axios');
+
 // DB
 const db = require('./utils/dbConnect');
 db();
@@ -25,6 +27,8 @@ initJwtMiddleware();
 const productsRotues = require('./routes/products.routes');
 const authRotues = require('./routes/auth.routes');
 const userRotues = require('./routes/user.routes');
+const stripeRotues = require('./routes/stripe.routes');
+const orderRoutes = require('./routes/order.routes');
 
 app.get(
   '/secret',
@@ -40,6 +44,12 @@ app.get(
 app.use('/api/products', productsRotues);
 app.use('/api/auth', authRotues);
 app.use('/api/user', userRotues);
+app.use('/api/stripe', stripeRotues);
+app.use('/api/order', orderRoutes);
+
+app.get('/api/test', (req, res) => {
+  console.log('sdojfsdijf');
+});
 
 app.get('/', (req, res) => {
   res.send('ECOMMERCE API');

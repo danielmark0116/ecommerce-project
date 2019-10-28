@@ -11,8 +11,6 @@ opts.secretOrKey = process.env.JWT_SECRET;
 module.exports = function() {
   passport.use(
     new JwtStrategy(opts, function(jwt_payload, done) {
-      console.log(jwt_payload);
-
       User.findOne({ email: jwt_payload.email }, function(err, user) {
         if (err) {
           return done(err, false);

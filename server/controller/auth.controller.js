@@ -45,7 +45,8 @@ exports.loginUser = async (req, res) => {
             email: newUser.email,
             name: newUser.name,
             photo: newUser.photo,
-            isAdmin: newUser.admin
+            isAdmin: newUser.admin,
+            userId: newUser._id
           },
           process.env.JWT_SECRET,
           { expiresIn: 60 * tokenValidMinutes }
@@ -65,7 +66,8 @@ exports.loginUser = async (req, res) => {
             email: loggedUser.email,
             name: loggedUser.name,
             photo: loggedUser.photo,
-            isAdmin: loggedUser.admin
+            isAdmin: loggedUser.admin,
+            userId: loggedUser._id
           },
           process.env.JWT_SECRET,
           { expiresIn: 60 * tokenValidMinutes }

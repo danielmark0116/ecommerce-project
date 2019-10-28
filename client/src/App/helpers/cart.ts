@@ -74,3 +74,7 @@ export const getCart = () => {
 
   return parsedCart;
 };
+
+export const clearCart = () => {
+  localStorage.setItem('cart', '[]');
+};

@@ -93,7 +93,7 @@ const Cart = (props: Props) => {
                   action={() => createNewOrder()}
                   type="primary"
                 >
-                  Place an order
+                  Go to chekout
                 </Button>
               </Link>
             </div>

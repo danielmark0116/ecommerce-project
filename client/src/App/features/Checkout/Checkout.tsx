@@ -1,8 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { dispatchToProps, stateToProps } from './CheckoutContainer';
 import _ from 'lodash';
+
+import axios from 'axios';
 
 import Title from '../../common/Title/Title';
 import Subtitle from '../../common/Subtitle/Subtitle';
@@ -12,6 +14,7 @@ import Loader from '../../common/Loader/Loader';
 import Button from '../../common/Button/Button';
 import NewAddressForm from '../NewAddressForm/NewAddressForm';
 import AddressThumb from '../../common/AddressThumb/AddressThumb';
+import DeliveryTab from '../../common/DeliveryTab/DeliveryTab';
 
 import { evalCartTotal } from '../../helpers/evalCartTotal';
 import Text from '../../common/Text/Text';
@@ -27,10 +30,16 @@ const Checkout = (props: Props) => {
   const [discountName, toggleDiscountName] = useState('');
   const [activeAddress, toggleActiveAddress] = useState(0);
   const [addNewAddress, toggleaddNewAddress] = useState(false);
+  const [activeDelivery, toggleActiveDelivery] = useState(0);
 
   const userLoading = props.userAddressesRequestData.pending;
   const userSuccess = props.userAddressesRequestData.success;
   const userError = props.userAddressesRequestData.error;
+
+  const newOrderLoading = props.newOrderRequestData.pending;
+  const newOrderSuccess = props.newOrderRequestData.success;
+  const newOrderFail = props.newOrderRequestData.error;
+  const newOrderId = props.newOrderId;
 
   const {
     getCartData,
@@ -45,7 +54,9 @@ const Checkout = (props: Props) => {
     userAddresses,
     getAddresses,
     userName,
-    userPic
+    deliveryTypes,
+    getOneLoading,
+    getOneSuccess
   } = props;
 
   useEffect(() => {
@@ -62,6 +73,9 @@ const Checkout = (props: Props) => {
       }
     }
   }, ['']);
+
+  if (newOrderSuccess)
+    return <Redirect push to="/new-order-success"></Redirect>;
 
   if (!pending && !error && success && cartItems.length > 0 && userSuccess)
     return (
@@ -103,6 +117,34 @@ const Checkout = (props: Props) => {
             </Fragment>
           )}
           <Title size="small">Delivery type</Title>
+          {deliveryTypes.map((type, index) => (
+            <DeliveryTab
+              active={activeDelivery}
+              deliveryNo={index}
+              clickAction={() => toggleActiveDelivery(index)}
+              deliveryData={type}
+              key={index}
+            />
+          ))}
+          <br />
+          <Button
+            disabled={!isLoggedIn || newOrderLoading}
+            action={() => {
+              createNewOrder(
+                userAddresses[activeAddress],
+                deliveryTypes[activeDelivery].name,
+                deliveryTypes[activeDelivery].cost,
+                cartItems,
+                _.round(evalCartTotal(cartItems), 2),
+                discount ? discountValue : 1,
+                discountName,
+                1
+              );
+            }}
+            type="primary"
+          >
+            {newOrderLoading ? 'Creating new order' : 'Order'}
+          </Button>
         </Col>
         <Col sm="12" xl="4">
           {cartItems.map((item, index) => (
@@ -127,37 +169,22 @@ const Checkout = (props: Props) => {
               cartItems
             )} $`}</CrossedPrice>
           )}
-          <Title align="right">{`${_.round(
+          <Title size="small" align="right">{`${_.round(
             evalCartTotal(cartItems) * (discount ? discountValue : 1),
             2
           )} $`}</Title>
-          <div className="d-flex justify-content-end m-0 p-0">
-            <Link to="/checkout">
-              <Button
-                disabled={!isLoggedIn}
-                action={() => createNewOrder()}
-                type="primary"
-              >
-                Place an order
-              </Button>
-            </Link>
-          </div>
-          {!isLoggedIn && (
-            <Subtext align="right" size="small">
-              Log in to order
-            </Subtext>
-          )}
+          <Text align="right">{`+ ${deliveryTypes[activeDelivery].cost} $ for delivery`}</Text>
+          <Title size="large" align="right">{`${_.round(
+            evalCartTotal(cartItems) * (discount ? discountValue : 1) +
+              deliveryTypes[activeDelivery].cost,
+            2
+          )} $`}</Title>
         </Col>
       </Row>
     );
   if (pending || userLoading) return <Loader></Loader>;
   if (error || userError) return <p>Upss... Sth went wrong</p>;
-  if (success)
-    return (
-      <Subtitle size="small" align="center">
-        Cart is empty
-      </Subtitle>
-    );
+  if (cartItems.length === 0) return <Redirect push to="/cart"></Redirect>;
   return null;
 };
 
