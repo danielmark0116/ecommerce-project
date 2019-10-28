@@ -1,12 +1,17 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const _ = require('lodash');
 
 exports.startPayment = async (req, res) => {
   const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
   const userEmail = userData.email;
   const userId = userData.userId;
   const { orderId, amount } = req.body;
+
+  // BEFORE ALL THAT
+  // Fetch the order by id and check if the status in INIT
+  // if it is, then you can create session and generate payment
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -17,7 +22,7 @@ exports.startPayment = async (req, res) => {
         {
           name: `Order ${orderId}`,
           description: 'ECOMMERCE Order',
-          amount: amount * 100,
+          amount: _.round(amount * 100, 0),
           currency: 'usd',
           quantity: 1
         }
@@ -34,6 +39,7 @@ exports.startPayment = async (req, res) => {
       sessionId: session.id
     });
   } catch (e) {
+    console.log(e.message);
     res.status(500).json({
       success: false,
       fail: true,
