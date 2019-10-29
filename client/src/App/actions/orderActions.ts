@@ -135,7 +135,7 @@ export const orderGetOneThunk = (id: string) => {
 
 export const orderPaymentThunk = (orderId: string, amount: number) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
-    //
+    dispatch(paymentLoading());
 
     try {
       let initPayRes = await axios.post('/stripe/startpayment', {
@@ -143,12 +143,28 @@ export const orderPaymentThunk = (orderId: string, amount: number) => {
         amount
       });
 
-      console.log(initPayRes);
+      // console.log(initPayRes);
 
       dispatch(paymentId(initPayRes.data.sessionId));
       dispatch(paymentRedirect());
     } catch (e) {
-      console.log(e.message);
+      dispatch(paymentFail());
+    }
+  };
+};
+
+export const orderPaymentFullFillThunk = (sessionId: string) => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
+    updateToken();
+
+    try {
+      let initPayRes = await axios.post('/stripe/fullfillpayment', {
+        sessionId
+      });
+
+      dispatch(paymentSuccess());
+    } catch (e) {
+      dispatch(paymentFail());
     }
   };
 };

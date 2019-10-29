@@ -90,7 +90,7 @@ export const productsGetAllThunk = (
     dispatch(productsGetAllLoading());
 
     try {
-      await new Promise((res, rej) => setTimeout(res, 1000));
+      await new Promise((res, rej) => setTimeout(res, 300));
 
       let response = await axios.get(
         `/products${fetchAll ? '/all/' : '/'}${skip}/${limit}/filter?${filter}`

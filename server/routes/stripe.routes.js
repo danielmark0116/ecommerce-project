@@ -17,4 +17,10 @@ router.post(
   stripeController.redirect
 );
 
+router.post(
+  '/fullfillpayment',
+  passport.authenticate('jwt', { session: false }),
+  stripeController.fullfillPayment
+);
+
 module.exports = router;

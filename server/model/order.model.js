@@ -76,6 +76,7 @@ module.exports = mongoose.model('Order', Order);
 /*
 - init - order created NOT PAID yet -> can be deleted by user
 - paid - order PAID -> can be packed and sent
+- processing - order PROCESSING / BUT rather SUCCESSFULL -> DOUBLE CHECK
 - fail - PAYMENT FAILURE -> option to repay in the order page
 - sent - order paid, packed and sent to the client - DELIVERYID to update, so user can track
 - success - paid, sent, delivered
