@@ -101,6 +101,7 @@ export const CART_DELETE_ITEM = 'CART_DELETE_ITEM';
 export const CART_GET_LOADING = 'CART_GET_LOADING';
 export const CART_GET_SUCCESS = 'CART_GET_SUCCESS';
 export const CART_GET_FAIL = 'CART_GET_FAIL';
+export const CART_CLEAR = 'CART_CLEAR';
 
 interface cartGetActionType {
   type: typeof CART_GET;
@@ -131,6 +132,10 @@ interface cartGetSuccessActionType {
 interface cartGetFailActionType {
   type: typeof CART_GET_FAIL;
   payload: string;
+}
+
+interface cartClearActionType {
+  type: typeof CART_CLEAR;
 }
 
 // AUTH
@@ -227,6 +232,11 @@ export const ORDER_GET_ONE_LOADING = 'ORDER_GET_ONE_LOADING';
 export const ORDER_GET_ONE_SUCCESS = 'ORDER_GET_ONE_SUCCESS';
 export const ORDER_GET_ONE_FAIL = 'ORDER_GET_ONE_FAIL';
 
+export const ORDER_GET_ALL_USERS = 'ORDER_GET_ALL_USERS';
+export const ORDER_GET_ALL_USERS_LOADING = 'ORDER_GET_ALL_USERS_LOADING';
+export const ORDER_GET_ALL_USERS_SUCCESS = 'ORDER_GET_ALL_USERS_SUCCESS';
+export const ORDER_GET_ALL_USERS_FAIL = 'ORDER_GET_ALL_USERS_FAIL';
+
 export const PAYMENT_LOADING = 'PAYMENT_LOADING';
 export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
 export const PAYMENT_FAIL = 'PAYMENT_FAIL';
@@ -266,6 +276,24 @@ interface orderGetOneSuccessActionType {
 
 interface orderGetOneFailActionType {
   type: typeof ORDER_GET_ONE_FAIL;
+  payload: string;
+}
+
+interface orderGetAllUsersActionType {
+  type: typeof ORDER_GET_ALL_USERS;
+  payload: orderData[];
+}
+
+interface orderGetAllUsersLoadingActionType {
+  type: typeof ORDER_GET_ALL_USERS_LOADING;
+}
+
+interface orderGetAllUsersSuccessActionType {
+  type: typeof ORDER_GET_ALL_USERS_SUCCESS;
+}
+
+interface orderGetAllUsersFailActionType {
+  type: typeof ORDER_GET_ALL_USERS_FAIL;
   payload: string;
 }
 
@@ -312,6 +340,7 @@ export type ActionTypes =
   | cartGetLoadingActionType
   | cartGetSuccessActionType
   | cartGetFailActionType
+  | cartClearActionType
   | authCheckActionType
   | authLoginActionType
   | authLogoutActionType
@@ -334,6 +363,10 @@ export type ActionTypes =
   | orderGetOneLoadingActionType
   | orderGetOneSuccessActionType
   | orderGetOneFailActionType
+  | orderGetAllUsersActionType
+  | orderGetAllUsersLoadingActionType
+  | orderGetAllUsersSuccessActionType
+  | orderGetAllUsersFailActionType
   | paymentLoadingActionType
   | paymentSuccessActionType
   | paymentFailActionType

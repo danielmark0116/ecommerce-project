@@ -6,6 +6,12 @@ const orderController = require('../controller/order.controller');
 
 // api/order
 router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  orderController.getUsersOrders
+);
+
+router.get(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   orderController.getOrderById

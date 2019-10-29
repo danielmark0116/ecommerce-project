@@ -5,10 +5,27 @@ import { updateToken } from '../helpers/fetchToken';
 import axios from 'axios';
 import { userAddress } from '../types/userAddress';
 import { cartItemsType } from '../types/productCartData';
-import { API_URL } from '../config';
 import { clearCart } from '../helpers/cart';
 import { cartGet, cartGetThunk } from './cartActions';
 import { orderData } from '../types/orderData';
+
+export const orderGetAllUsers = (payload: orderData[]): ActionTypes => ({
+  type: types.ORDER_GET_ALL_USERS,
+  payload
+});
+
+export const orderGetAllUsersLoading = (): ActionTypes => ({
+  type: types.ORDER_GET_ALL_USERS_LOADING
+});
+
+export const orderGetAllUsersSuccess = (): ActionTypes => ({
+  type: types.ORDER_GET_ALL_USERS_SUCCESS
+});
+
+export const orderGetAllUsersFail = (payload: string): ActionTypes => ({
+  type: types.ORDER_GET_ALL_USERS_FAIL,
+  payload
+});
 
 export const orderCreate = (payload: string): ActionTypes => ({
   type: types.ORDER_CREATE,

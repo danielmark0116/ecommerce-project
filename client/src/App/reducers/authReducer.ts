@@ -20,6 +20,10 @@ export const selectorAuthProfileName = (state: AppState): string => {
   return state.auth.userName;
 };
 
+export const selectorAuthProfileEmail = (state: AppState): string => {
+  return state.auth.userEmail;
+};
+
 export const selectorAuthRequestData = (state: AppState): requestData => {
   return state.auth.authRequestData;
 };

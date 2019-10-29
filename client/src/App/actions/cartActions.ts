@@ -28,6 +28,10 @@ export const cartDeleteItem = (payload: string): ActionTypes => ({
   payload
 });
 
+export const cartClearAction = (): ActionTypes => ({
+  type: types.CART_CLEAR
+});
+
 export const cartGetLoading = (): ActionTypes => ({
   type: types.CART_GET_LOADING
 });

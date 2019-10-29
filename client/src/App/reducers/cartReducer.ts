@@ -30,6 +30,17 @@ const initState: initState = {
 
 export function cartReducer(state = initState, action: ActionTypes) {
   switch (action.type) {
+    case types.CART_CLEAR:
+      return {
+        ...state,
+        cartProducts: [],
+        cartRequestData: {
+          pending: false,
+          success: true,
+          error: false,
+          msg: ''
+        }
+      };
     case types.CART_GET_LOADING:
       return {
         ...state,

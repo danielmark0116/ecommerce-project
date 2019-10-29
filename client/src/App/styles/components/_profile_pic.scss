@@ -1,0 +1,15 @@
+.profile_pic_container {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  @include shadow(10px);
+
+  img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

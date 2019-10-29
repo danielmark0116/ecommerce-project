@@ -12,6 +12,7 @@ import ProductPage from './App/pages/ProductPage/ProductPage';
 import CartPage from './App/pages/CartPage/CartPage';
 import CheckoutPage from './App/pages/CheckoutPage/CheckoutPage';
 import NewOrderPage from './App/pages/NewOrder/NewOrgerPage';
+import ProfilePage from './App/pages/ProfilePage/ProfilePage';
 import FullfillPaymentPage from './App/pages/FullfillPaymentPage/FullfillPaymentPage';
 
 import { AppState } from './App/reducers';
@@ -67,9 +68,7 @@ const Routes = (props: stateToProps) => {
           </div>
         </Route>
         <Route exact path="/profile">
-          {PritaveRoute(() => (
-            <p>profile page</p>
-          ))}
+          {PritaveRoute(ProfilePage)}
         </Route>
         <Route exact path="/login">
           <h2>you are not logged in page</h2>

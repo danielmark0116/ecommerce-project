@@ -11,6 +11,8 @@ import {
   deleteToken
 } from '../helpers/fetchToken';
 import { deleteCouponDataFromSession } from '../helpers/couponSessionStorage';
+import { clearCart } from '../helpers/cart';
+import { cartClearAction } from './cartActions';
 
 // ACTIONS
 export const authCheck = (payload: userData): ActionTypes => ({
@@ -102,6 +104,8 @@ export const authLogOutThunk = () => {
     dispatch(authLogout());
     dispatch(authFail('You have logged out'));
     deleteCouponDataFromSession();
+    clearCart();
+    dispatch(cartClearAction());
   };
 };
 

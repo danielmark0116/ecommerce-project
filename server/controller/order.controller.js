@@ -56,3 +56,16 @@ exports.createOrder = async (req, res) => {
     });
   }
 };
+
+exports.getUsersOrders = async (req, res) => {
+  // fetch user id form token and fitler orders by this id
+  try {
+    //
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      error: true,
+      msg: e.message
+    });
+  }
+};
