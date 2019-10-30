@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import OrderDetails from '../../features/OrderDetails/OrderDetailsContainer';
 
 const OrderPage = () => {
-  return <div>order page bitchez</div>;
+  return (
+    <Fragment>
+      <OrderDetails></OrderDetails>
+    </Fragment>
+  );
 };
 
 export default OrderPage;

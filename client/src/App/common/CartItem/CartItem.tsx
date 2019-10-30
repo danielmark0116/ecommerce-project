@@ -42,12 +42,24 @@ const CartItem = (props: IProps) => {
             </Link>
             <Subtext size="small">{`${category}  |  ${sex}`}</Subtext>
             <Subtitle size="small">{`Size: ${productSize.toUpperCase()}`}</Subtitle>
-            <Flex>
-              <Fragment>
-                <Subtitle>{`${price} $`}</Subtitle>
-                <Subtext size="small">for one</Subtext>
-              </Fragment>
-            </Flex>
+            {edit ? (
+              <Flex>
+                <Fragment>
+                  <Subtitle>{`${price} $`}</Subtitle>
+                  <Subtext size="small">for one</Subtext>
+                </Fragment>
+              </Flex>
+            ) : (
+              <Flex>
+                <Fragment>
+                  <Text>
+                    <Fragment>
+                      {sizeQ} x <b>{price} $</b>
+                    </Fragment>
+                  </Text>
+                </Fragment>
+              </Flex>
+            )}
             {edit && (
               <Flex>
                 <Fragment>

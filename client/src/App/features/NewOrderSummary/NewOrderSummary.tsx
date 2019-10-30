@@ -50,7 +50,7 @@ const NewOrderSummary = (props: Props) => {
           <Text>Or view the order details below and pay later</Text>
         </Center>
         <Center>
-          <Link to="/">
+          <Link to={`/order/${newOrderId}`}>
             <Button type="secondary">See you order</Button>
           </Link>
         </Center>

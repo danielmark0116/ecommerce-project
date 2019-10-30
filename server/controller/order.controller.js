@@ -6,7 +6,9 @@ exports.getOrderById = async (req, res) => {
   const userEmail = userData.email;
 
   try {
-    let response = await Order.findOne({ _id: req.params.id });
+    let response = await Order.findOne({ _id: req.params.id }, [
+      '-paymentIntentId'
+    ]);
 
     if (response.userEmail === userEmail) {
       res.json({
@@ -37,10 +39,16 @@ exports.createOrder = async (req, res) => {
   const userName = userData.name;
   const userId = userData.userId;
 
-  const newUserData = { ...req.body, userId, userEmail, userName };
+  const newOrderData = {
+    ...req.body,
+    userId,
+    userEmail,
+    userName,
+    status: 'init'
+  };
 
   try {
-    let newOrder = await new Order(newUserData).save();
+    let newOrder = await new Order(newOrderData).save();
 
     res.json({
       orders: new Array(newOrder),

@@ -1,4 +1,5 @@
 import { userAddress } from './userAddress';
+import { cartItemType } from './productCartData';
 
 export interface orderData {
   _id: string;
@@ -9,7 +10,7 @@ export interface orderData {
   address: userAddress;
   deliveryType: string;
   deliveryValue: number;
-  cart: any[];
+  cart: cartItemType[];
   cartValue: number;
   discount: number;
   discountName: string;

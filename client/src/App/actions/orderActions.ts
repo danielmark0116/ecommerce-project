@@ -10,6 +10,7 @@ import { cartGet, cartGetThunk } from './cartActions';
 import { orderData } from '../types/orderData';
 import { async } from 'q';
 import { deleteCouponDataFromSession } from '../helpers/couponSessionStorage';
+import _ from 'lodash';
 
 export const orderGetAllUsers = (payload: orderData[]): ActionTypes => ({
   type: types.ORDER_GET_ALL_USERS,
@@ -110,8 +111,7 @@ export const orderCreateThunk = (
       discount,
       discountName,
       patronDiscount,
-      totalValue: cartValue * discount * patronDiscount,
-      status: 'init'
+      totalValue: _.round(cartValue * discount * patronDiscount, 2)
     };
 
     try {
