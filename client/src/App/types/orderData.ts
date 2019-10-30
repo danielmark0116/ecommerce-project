@@ -25,4 +25,5 @@ export interface orderShortData {
   userEmail: string;
   status: string;
   totalValue: number;
+  deliveryValue: number;
 }

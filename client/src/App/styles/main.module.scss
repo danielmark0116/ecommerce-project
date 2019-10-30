@@ -44,12 +44,12 @@
 @import 'components/address_thumb';
 @import 'components/delivery_tab';
 @import 'components/profile_pic';
+@import 'components/order_thumb';
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  // font-family: 'Quicksand', sans-serif;
   background: $bg-color;
   min-height: 100vh;
   overflow-x: hidden;

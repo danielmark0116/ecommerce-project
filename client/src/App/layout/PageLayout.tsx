@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Carousel from '../features/Carousel/CarouselContainer';
 import Navbar from '../features/Navbar/Navbar';
@@ -32,11 +32,15 @@ const PageLayout = (props: IProps & stateToProps) => {
       <Navbar paths={paths} />
       {isLoggedIn && <UserBar />}
       <div className={style.page_wrapper}>
-        <Route exact path="/">
-          <Carousel></Carousel>
-          {/* <SizedBox></SizedBox> */}
-        </Route>
-        <Container>{children}</Container>
+        <Switch>
+          <Route exact path="/">
+            <Carousel></Carousel>
+            {children}
+          </Route>
+          <Route path="*">
+            <Container>{children}</Container>
+          </Route>
+        </Switch>
       </div>
 
       <Footer paths={paths} />

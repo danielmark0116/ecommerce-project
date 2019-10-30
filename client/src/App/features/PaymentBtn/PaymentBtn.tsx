@@ -5,7 +5,6 @@ import Button from '../../common/Button/Button';
 import { AppState } from '../../reducers';
 import { selectorAuthIsLoggedIn } from '../../reducers/authReducer';
 import {
-  selectorOrderNewOrderId,
   selectorOrderGetOne,
   selectorOrderPaymentRedirect,
   selectorOrderPaymentId
@@ -72,9 +71,13 @@ interface dispatchToProps {
   orderPayment: Function;
 }
 
-const mapStateToProps = (state: AppState) => ({
+interface ownProps {
+  newOrderId: string;
+}
+
+const mapStateToProps = (state: AppState, ownProps: ownProps) => ({
   isLoggedIn: selectorAuthIsLoggedIn(state),
-  newOrderId: selectorOrderNewOrderId(state),
+  newOrderId: ownProps.newOrderId,
   singleOrder: selectorOrderGetOne(state),
   paymentRedirect: selectorOrderPaymentRedirect(state),
   paymentId: selectorOrderPaymentId(state)

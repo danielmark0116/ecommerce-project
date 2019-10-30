@@ -58,9 +58,31 @@ exports.createOrder = async (req, res) => {
 };
 
 exports.getUsersOrders = async (req, res) => {
-  // fetch user id form token and fitler orders by this id
+  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userId = userData.userId;
+
   try {
-    //
+    let response = await Order.find({ userId }, [
+      '_id',
+      'userId',
+      'userEmail',
+      'status',
+      'totalValue',
+      'deliveryValue',
+      'status'
+    ]).sort({ createdAt: 'desc' });
+
+    //   _id: string;
+    // userId: string;
+    // userEmail: string;
+    // status: string;
+    // totalValue: number;
+
+    res.json({
+      success: true,
+      error: false,
+      response
+    });
   } catch (e) {
     res.status(500).json({
       success: false,

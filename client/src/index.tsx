@@ -9,8 +9,6 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './App/styles/main.module.scss';
 import { authCheckThunk } from './App/actions/authActions';
-import { userGetAddressesThunk } from './App/actions/userActions';
-import { orderGetOneThunk } from './App/actions/orderActions';
 
 import { StripeProvider, Elements } from 'react-stripe-elements';
 

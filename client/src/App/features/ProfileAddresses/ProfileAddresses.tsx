@@ -2,6 +2,7 @@ import React, { useEffect, Fragment, useState } from 'react';
 import { stateToProps, dispatchToProps } from './ProfileAddressesContainer';
 
 import Title from '../../common/Title/Title';
+import Subtitle from '../../common/Subtitle/Subtitle';
 import Text from '../../common/Text/Text';
 import Button from '../../common/Button/Button';
 import Loader from '../../common/Loader/Loader';

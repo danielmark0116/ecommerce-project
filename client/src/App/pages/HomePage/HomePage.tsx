@@ -17,7 +17,7 @@ const HomePage = () => {
         scrollOnlyPhones={false}
         withFilters={false}
         pagination={false}
-        itemsPerPage={5}
+        itemsPerPage={8}
         initFiltrString="sort=price1"
         fetchAll={true}
         productsState="latest"
@@ -33,7 +33,7 @@ const HomePage = () => {
         scrollOnlyPhones={false}
         withFilters={false}
         pagination={false}
-        itemsPerPage={3}
+        itemsPerPage={8}
         initFiltrString="sort=sold-1"
         fetchAll={true}
         productsState="bestsellers"

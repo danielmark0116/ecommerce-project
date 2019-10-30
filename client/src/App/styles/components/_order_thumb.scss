@@ -1,4 +1,4 @@
-.address_thumb_container {
+.order_thumb_container {
   border-radius: 5px;
   margin: 5px auto;
   border: 1px solid rgba($dark-blue, 0.1);
@@ -14,7 +14,7 @@
   }
 
   &_active {
-    @extend .address_thumb_container;
+    @extend .order_thumb_container;
     background: $white;
     border-color: $green;
   }

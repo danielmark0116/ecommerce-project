@@ -8,6 +8,8 @@ import { cartItemsType } from '../types/productCartData';
 import { clearCart } from '../helpers/cart';
 import { cartGet, cartGetThunk } from './cartActions';
 import { orderData } from '../types/orderData';
+import { async } from 'q';
+import { deleteCouponDataFromSession } from '../helpers/couponSessionStorage';
 
 export const orderGetAllUsers = (payload: orderData[]): ActionTypes => ({
   type: types.ORDER_GET_ALL_USERS,
@@ -129,6 +131,24 @@ export const orderCreateThunk = (
   };
 };
 
+export const orderGetAllUsersThunk = () => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
+    updateToken();
+    dispatch(orderGetAllUsersLoading());
+
+    try {
+      let response = await axios.get('/order');
+
+      let data = await response.data;
+
+      dispatch(orderGetAllUsers(data.response));
+      dispatch(orderGetAllUsersSuccess());
+    } catch (e) {
+      dispatch(orderGetAllUsersFail(e.message));
+    }
+  };
+};
+
 export const orderGetOneThunk = (id: string) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(orderGetOneLoading());
@@ -153,6 +173,7 @@ export const orderGetOneThunk = (id: string) => {
 export const orderPaymentThunk = (orderId: string, amount: number) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(paymentLoading());
+    deleteCouponDataFromSession();
 
     try {
       let initPayRes = await axios.post('/stripe/startpayment', {
@@ -173,6 +194,7 @@ export const orderPaymentThunk = (orderId: string, amount: number) => {
 export const orderPaymentFullFillThunk = (sessionId: string) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     updateToken();
+    deleteCouponDataFromSession();
 
     try {
       let initPayRes = await axios.post('/stripe/fullfillpayment', {

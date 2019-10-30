@@ -101,6 +101,8 @@ exports.fullfillPayment = async (req, res) => {
               ? 'processing'
               : 'init';
 
+          orderData.paymentIntentId = piId;
+
           await orderData.save();
 
           res.json({
@@ -110,6 +112,10 @@ exports.fullfillPayment = async (req, res) => {
             error: false
           });
         } else {
+          orderData.paymentIntentId = piId;
+
+          await orderData.save();
+
           errorResponse(res, 'Payment intent is not succeded');
         }
       } else {

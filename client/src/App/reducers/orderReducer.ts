@@ -25,6 +25,16 @@ export const selectorOrderGetOneRequestData = (
   return state.order.singleOrderRequestData;
 };
 
+export const selectorOrderGetAllUsers = (state: AppState): orderShortData[] => {
+  return state.order.userOrders;
+};
+
+export const selectorOrderGetAllUsersRequestData = (
+  state: AppState
+): requestData => {
+  return state.order.userOrdersRequestData;
+};
+
 export const selectorOrderPaymentRedirect = (state: AppState): Boolean => {
   return state.order.paymentRedirect;
 };
@@ -82,6 +92,38 @@ export function orderReducer(state = initState, action: ActionTypes) {
       return { ...state, paymentRedirect: true };
     case types.PAYMENT_ID:
       return { ...state, paymentId: action.payload };
+    case types.ORDER_GET_ALL_USERS:
+      return { ...state, userOrders: action.payload };
+    case types.ORDER_GET_ALL_USERS_LOADING:
+      return {
+        ...state,
+        userOrdersRequestData: {
+          pending: true,
+          success: false,
+          error: false,
+          msg: 'Fetching all users orders data'
+        }
+      };
+    case types.ORDER_GET_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        userOrdersRequestData: {
+          pending: false,
+          success: true,
+          error: false,
+          msg: 'Successfully fetched all users orders data'
+        }
+      };
+    case types.ORDER_GET_ALL_USERS_FAIL:
+      return {
+        ...state,
+        userOrdersRequestData: {
+          pending: false,
+          success: false,
+          error: true,
+          msg: action.payload
+        }
+      };
     case types.ORDER_GET_ONE:
       return {
         ...state,

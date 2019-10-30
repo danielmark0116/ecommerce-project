@@ -3,6 +3,7 @@ import { Col, Row } from 'reactstrap';
 
 import ProfileHeader from '../../features/ProfileHeader/ProfileHeader';
 import ProfileAddresses from '../../features/ProfileAddresses/ProfileAddressesContainer';
+import ProfileOrders from '../../features/ProfileOrders/ProfileOrdersContainer';
 
 const ProfilePage = () => {
   return (
@@ -14,7 +15,7 @@ const ProfilePage = () => {
           <ProfileAddresses></ProfileAddresses>
         </Col>
         <Col sm="12" xl="6">
-          dsf
+          <ProfileOrders></ProfileOrders>
         </Col>
       </Row>
     </Fragment>
