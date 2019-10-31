@@ -10,6 +10,8 @@ import CartItem from '../../common/CartItem/CartItem';
 import AddressThumb from '../../common/AddressThumb/AddressThumb';
 import Loader from '../../common/Loader/Loader';
 
+import _ from 'lodash';
+
 import style from '../../styles/main.module.scss';
 
 import { stateToProps, dispatchToProps } from './OrderDetailsContainer';
@@ -80,7 +82,8 @@ const OrderDetails = (props: Props) => {
       </Text>
       <Text>
         <Fragment>
-          <b>Total:</b> {orderData.totalValue + orderData.deliveryValue} $
+          <b>Total:</b>{' '}
+          {_.round(orderData.totalValue + orderData.deliveryValue, 2)} $
         </Fragment>
       </Text>
       {orderData.status === 'init' && (

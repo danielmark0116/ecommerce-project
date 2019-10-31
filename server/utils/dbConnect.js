@@ -1,10 +1,16 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
+const mongoUri =
+  process.env.MODE === 'production'
+    ? process.env.MONGO_URI
+    : 'mongodb://localhost:27017/ecommerce-v2';
+
 module.exports = () => {
-  mongoose.connect(`mongodb://localhost:27017/ecommerce-v2`, {
+  mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    createIndexes: true
+    useFindAndModify: false
   });
 
   db = mongoose.connection;
