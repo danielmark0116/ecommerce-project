@@ -51,9 +51,17 @@ app.get('/api/test', (req, res) => {
   console.log('sdojfsdijf');
 });
 
-app.get('/', (req, res) => {
-  res.send('ECOMMERCE API');
-});
+if (process.env.MODE === 'production') {
+  app.use(express.static(path.join(__dirname, '/../client/build/')));
+
+  app.use('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/../client/build/index.html'));
+  });
+} else {
+  app.use('/', (req, res) => {
+    res.send('no such endpoint / develpment mode');
+  });
+}
 
 app.listen(port, () =>
   console.log(chalk.bgBlue.blue(`Server is running on port ${port}`))
