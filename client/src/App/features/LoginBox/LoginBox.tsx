@@ -98,7 +98,7 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
             <Fragment>
               <Center>
                 <GoogleLogin
-                  clientId="1093567595027-41es3no16kqfkfo5sj016cp6eutbkn72.apps.googleusercontent.com"
+                  clientId={process.env.REACT_APP_CLIENT_ID_GOOGLE}
                   buttonText="Login with Google"
                   onSuccess={handleGoogleLogin}
                   onFailure={(data: any) =>
