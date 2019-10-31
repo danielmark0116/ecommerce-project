@@ -49,7 +49,7 @@ export const userGetAddressesThunk = () => {
     updateToken();
 
     try {
-      let response = await axios.get('/user/address');
+      let response = await axios.get('/api/user/address');
 
       const data = await response.data;
 
@@ -69,7 +69,7 @@ export const userAddAddressThunk = (userAddress: userAddress) => {
     updateToken();
 
     try {
-      let response = await axios.post('/user/address', userAddress);
+      let response = await axios.post('/api/user/address', userAddress);
 
       const data = await response.data;
 

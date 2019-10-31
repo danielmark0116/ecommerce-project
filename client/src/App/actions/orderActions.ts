@@ -117,7 +117,7 @@ export const orderCreateThunk = (
     try {
       await new Promise((res, rej) => setTimeout(res, 1000));
 
-      let response = await axios.post(`/order`, newOrder);
+      let response = await axios.post(`/api/order`, newOrder);
 
       let data = await response.data;
 
@@ -137,7 +137,7 @@ export const orderGetAllUsersThunk = () => {
     dispatch(orderGetAllUsersLoading());
 
     try {
-      let response = await axios.get('/order');
+      let response = await axios.get('/api/order');
 
       let data = await response.data;
 
@@ -157,7 +157,7 @@ export const orderGetOneThunk = (id: string) => {
     try {
       await new Promise((res, rej) => setTimeout(res, 1000));
 
-      let response = await axios.get(`/order/${id}`);
+      let response = await axios.get(`/api/order/${id}`);
 
       const data = await response.data;
 
@@ -176,7 +176,7 @@ export const orderPaymentThunk = (orderId: string, amount: number) => {
     deleteCouponDataFromSession();
 
     try {
-      let initPayRes = await axios.post('/stripe/startpayment', {
+      let initPayRes = await axios.post('/api/stripe/startpayment', {
         orderId,
         amount
       });
@@ -197,7 +197,7 @@ export const orderPaymentFullFillThunk = (sessionId: string) => {
     deleteCouponDataFromSession();
 
     try {
-      let initPayRes = await axios.post('/stripe/fullfillpayment', {
+      let initPayRes = await axios.post('/api/stripe/fullfillpayment', {
         sessionId
       });
 

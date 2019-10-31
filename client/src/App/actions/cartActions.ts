@@ -53,7 +53,7 @@ export const cartGetThunk = (ids: string[]) => {
     try {
       await new Promise((res, rej) => setTimeout(res, 500));
 
-      let response = await axios.get(`/products/cart`, {
+      let response = await axios.get(`/api/products/cart`, {
         params: {
           ids
         }

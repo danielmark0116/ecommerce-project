@@ -73,7 +73,7 @@ export const authLoginThunk = (
     dispatch(authLoading());
 
     try {
-      let response = await axios.post(`/auth/login/${provider}`, userData);
+      let response = await axios.post(`/api/auth/login/${provider}`, userData);
 
       let data = await response.data;
 

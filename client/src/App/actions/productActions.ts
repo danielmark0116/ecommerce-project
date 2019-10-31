@@ -93,7 +93,9 @@ export const productsGetAllThunk = (
       await new Promise((res, rej) => setTimeout(res, 300));
 
       let response = await axios.get(
-        `/products${fetchAll ? '/all/' : '/'}${skip}/${limit}/filter?${filter}`
+        `/api/products${
+          fetchAll ? '/all/' : '/'
+        }${skip}/${limit}/filter?${filter}`
       );
 
       let products = response.data.response;
@@ -117,7 +119,7 @@ export const productsGetByIdThunk = (id: string) => {
     dispatch(productsGetOneLoading());
 
     try {
-      let response = await axios.get(`/products/${id}`);
+      let response = await axios.get(`/api/products/${id}`);
       let product = response.data.response[0];
 
       dispatch(productsGetOne(product));
