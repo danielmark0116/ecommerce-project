@@ -32,8 +32,13 @@ exports.startPayment = async (req, res) => {
           }
         ],
         success_url:
-          'http://localhost:3000/payment-success/{CHECKOUT_SESSION_ID}',
-        cancel_url: `http://localhost:3000/order/${orderId}`
+          process.env.MODE === 'production'
+            ? 'https://grychtol.com.pl/payment-success/{CHECKOUT_SESSION_ID}'
+            : 'http://localhost:3000/payment-success/{CHECKOUT_SESSION_ID}',
+        cancel_url:
+          process.env.MODE === 'production'
+            ? `https://grychtol.com.pl/order/${orderId}`
+            : `http://localhost:3000/order/${orderId}`
       });
 
       res.json({
