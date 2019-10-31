@@ -36,7 +36,7 @@ const CouponInput = (props: IProps) => {
             onChange: () => null,
             validateRegex: new RegExp(
               ['^', ..._.map(coupons, 'code'), '&'].join('$|^'),
-              'i'
+              'g'
             ),
             errorMsg: 'Invalid code'
           }
