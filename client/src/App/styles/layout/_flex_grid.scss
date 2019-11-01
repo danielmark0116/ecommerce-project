@@ -55,7 +55,7 @@
 
     @include tablets {
       .flex_item {
-        flex: 1 0 80%;
+        flex: 1 0 230px;
         max-width: 230px;
       }
     }
@@ -66,7 +66,7 @@
       flex-wrap: nowrap;
 
       .flex_item {
-        flex: 1 0 60%;
+        flex: 1 0 230px;
         max-width: 230px;
       }
     }

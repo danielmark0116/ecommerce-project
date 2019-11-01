@@ -64,3 +64,12 @@ body {
 ul {
   margin: 0;
 }
+
+[class*='row'] {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+[class*='col'] {
+  padding: 0 !important;
+}
