@@ -46,11 +46,6 @@ const Carousel = () => {
       </div>
       <div ref={carouselRef} className={style.custom_carousel_box}>
         <div className={style.custom_carousel_item}>
-          {/* <img
-            src="https://image.freepik.com/darmowe-zdjecie/elegancki-mezczyzna-pozuje-na-prostym-tle_23-2148323694.jpg"
-            className={style.custom_carousel_item_bg}
-            alt=""
-          /> */}
           <Container>
             <Row>
               <Col sm="12" xl="6">
@@ -95,11 +90,6 @@ const Carousel = () => {
           </Container>
         </div>
         <div className={style.custom_carousel_item}>
-          {/* <img
-            src="https://image.freepik.com/darmowe-zdjecie/elegancki-mezczyzna-pozuje-na-prostym-tle_23-2148323694.jpg"
-            className={style.custom_carousel_item_bg}
-            alt=""
-          /> */}
           <Container>
             <Row>
               <Col sm="12" xl="6">

@@ -117,8 +117,4 @@ const ProductsList = (props: Props) => {
   );
 };
 
-// ProductsList.defaultProps = {
-//   productCardsSize: 'normal'
-// };
-
 export default ProductsList;

@@ -4,8 +4,6 @@ import { Col, Row } from 'reactstrap';
 import { dispatchToProps, stateToProps } from './CheckoutContainer';
 import _ from 'lodash';
 
-import axios from 'axios';
-
 import Title from '../../common/Title/Title';
 import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
@@ -19,8 +17,6 @@ import DeliveryTab from '../../common/DeliveryTab/DeliveryTab';
 import { evalCartTotal } from '../../helpers/evalCartTotal';
 import Text from '../../common/Text/Text';
 import CrossedPrice from '../../common/CrossedPrice/CrossedPrice';
-
-import style from '../../styles/main.module.scss';
 
 type Props = stateToProps & dispatchToProps;
 

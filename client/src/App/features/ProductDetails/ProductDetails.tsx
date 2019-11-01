@@ -7,6 +7,7 @@ import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import Text from '../../common/Text/Text';
 import SizeBtns from './SizeBtns';
+import Loader from '../../common/Loader/Loader';
 
 import { checkAvailableSizes } from '../../helpers/availableSizes';
 import { saveToLocalStore } from '../../helpers/cart';
@@ -84,7 +85,7 @@ const ProductDetails = (props: Props) => {
     );
   };
 
-  if (pending) return <p>loading</p>;
+  if (pending) return <Loader></Loader>;
   if (success && singleProduct !== null) return renderProductDetails();
   if (singleProduct === null && success)
     return <p>No such product available</p>;
