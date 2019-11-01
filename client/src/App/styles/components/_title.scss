@@ -4,6 +4,9 @@
   color: $dark-blue;
   font-size: 44px;
   font-family: 'Quicksand', sans-serif;
+  // font-family: 'Roboto', sans-serif;
+  // font-weight: 900;
+  // font-family: 'Yomolhari', serif;
 
   &_large {
     @extend .title;
@@ -11,6 +14,6 @@
 
   &_small {
     @extend .title;
-    font-size: 24px;
+    font-size: 28px;
   }
 }

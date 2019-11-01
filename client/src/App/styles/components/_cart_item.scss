@@ -4,10 +4,12 @@
   border-radius: 10px;
   border: 1px solid $bg-color;
   margin: 40px auto;
-  background: darken($white, 4);
-  @include shadow(70px);
+  // background: darken($white, 4);
+  background: transparent;
+  // @include shadow(70px);
 
   &:nth-child(even) {
-    background: darken($white, 5);
+    // background: darken($white, 5);
+    background: transparent;
   }
 }

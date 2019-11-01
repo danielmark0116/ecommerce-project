@@ -4,6 +4,7 @@
   height: auto;
   position: relative;
   overflow: hidden;
+  padding-bottom: 10px;
 
   @include large-phones {
     margin-bottom: 80px;

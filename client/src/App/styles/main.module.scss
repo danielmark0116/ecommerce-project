@@ -65,6 +65,14 @@ ul {
   margin: 0;
 }
 
+hr {
+  border-color: $dark-blue;
+  width: 20%;
+  margin: 20px auto 30px;
+  border-radius: 10px;
+  background: transparent;
+}
+
 [class*='row'] {
   padding: 0 !important;
   margin: 0 !important;

@@ -1,7 +1,8 @@
 .profile_pic_container {
   width: 150px;
   height: 150px;
-  border-radius: 10px;
+  // border-radius: 10px;
+  border-radius: $product-card-border;
   overflow: hidden;
   margin: 0 auto;
   @include shadow(10px);

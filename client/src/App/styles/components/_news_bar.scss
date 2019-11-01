@@ -1,3 +1,23 @@
+@keyframes slide {
+  from {
+    left: 100%;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slide-text {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: -100%;
+  }
+}
+
 $animation_time: 30s;
 
 .news_bar_container {
@@ -21,17 +41,24 @@ $animation_time: 30s;
     padding: 0;
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 100%;
 
     animation: slide $animation_time linear;
     animation-iteration-count: infinite;
 
     p {
-      display: inline;
+      display: block;
       color: $white;
       font-size: 12px;
       margin: 0;
       padding: 0;
       white-space: nowrap;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
 
       @include large-phones {
         font-size: 10px;
@@ -40,25 +67,5 @@ $animation_time: 30s;
       animation: slide-text $animation_time linear;
       animation-iteration-count: infinite;
     }
-  }
-}
-
-@keyframes slide {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-text {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-100%);
   }
 }

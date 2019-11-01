@@ -18,12 +18,16 @@
     color: $dark;
     font-weight: 700;
     font-family: 'Quicksand', sans-serif;
+    // font-family: 'Roboto', sans-serif;
+    // font-family: 'Yomolhari', serif;
+    // font-family: serif;
     font-size: 18px;
     text-align: center;
 
     span {
       color: $grey;
       font-weight: 300;
+      font-size: 12px;
       padding: 0 5px;
     }
   }
