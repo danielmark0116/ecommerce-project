@@ -163,11 +163,16 @@ exports.deleteProduct = async (req, res) => {
 };
 
 const filterQuery = queries => {
-  const { category, sex } = queries;
+  const { category, sex, title } = queries;
+
+  console.log(queries);
 
   return {
     category: category ? category : { $regex: /.*/, $options: 'i' },
-    sex: sex ? sex : { $regex: /.*/, $options: 'i' }
+    sex: sex ? sex : { $regex: /.*/, $options: 'i' },
+    name: title
+      ? { $regex: new RegExp(`${title}`), $options: 'gi' }
+      : { $regex: /.*/, $options: 'i' }
   };
 };
 

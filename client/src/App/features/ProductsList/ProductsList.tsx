@@ -11,6 +11,9 @@ import ProductCard from '../../common/ProductCard/ProductCard';
 import ProductFilters from '../ProductFilters/ProductFilters';
 import Pagination from '../../common/Pagination/Pagination';
 import { productFilters } from '../../types/productFilters';
+import ProductSearchBar from '../ProductSearchBar/ProductSearchBar';
+import Center from '../../common/Center/Center';
+import Text from '../../common/Text/Text';
 
 interface IProps {}
 
@@ -19,6 +22,7 @@ type Props = stateToProps & dispatchToProps & IProps;
 const ProductsList = (props: Props) => {
   const [activePage, setActivePage] = useState(1);
   const [filterString, setFilterString] = useState(props.initFiltrString);
+  const [titleString, setTitleFilterString] = useState('');
 
   const {
     products,
@@ -56,7 +60,7 @@ const ProductsList = (props: Props) => {
       fetchAll,
       (callbackPage - 1) * itemsPerPage,
       itemsPerPage,
-      filterString
+      filterString + titleString
     );
   };
 
@@ -69,51 +73,74 @@ const ProductsList = (props: Props) => {
       fetchAll,
       0 * itemsPerPage,
       itemsPerPage,
-      formatFilterString(filters)
+      formatFilterString(filters) + titleString
+    );
+  };
+
+  const applyNameSearch = (title: string) => {
+    const { getProducts, itemsPerPage, fetchAll } = props;
+    setActivePage(1);
+
+    setTitleFilterString(`&title=${title}`);
+
+    getProducts(
+      fetchAll,
+      0 * itemsPerPage,
+      itemsPerPage,
+      filterString + `&title=${title}`
     );
   };
 
   return (
-    <Row>
+    <Fragment>
       {withFilters && (
-        <Col md="12" xl="3">
-          <ProductFilters
-            applyFilters={applyFilters}
-            sexValues={sexValues}
-            categoryValues={categoryValues}
-          ></ProductFilters>
-        </Col>
+        <ProductSearchBar submitForm={applyNameSearch}></ProductSearchBar>
       )}
-      <Col md="12" xl={withFilters ? '9' : '12'}>
-        <FlexContainer
-          fixedWidth={fixedWidth}
-          horizontalScroll={horizontalScroll}
-          scrollOnlyPhones={scrollOnlyPhones}
-        >
-          <Fragment>
-            {error && <p>Error</p>}
-            {pending && <Loader></Loader>}
-            {success && products.length === 0 && <p>Shop is empty</p>}
-            {success &&
-              products.map((product, index) => (
-                <FlexItem key={index}>
-                  <ProductCard
-                    cardSize={productCardsSize}
-                    productData={product}
-                  ></ProductCard>
-                </FlexItem>
-              ))}
-          </Fragment>
-        </FlexContainer>
-        {pagination && success && (
-          <Pagination
-            action={handlePageChange}
-            activePage={activePage}
-            numberOfPages={Math.ceil(productsCount / itemsPerPage)}
-          />
+      <Row>
+        {withFilters && (
+          <Col md="12" xl="3">
+            <ProductFilters
+              applyFilters={applyFilters}
+              sexValues={sexValues}
+              categoryValues={categoryValues}
+            ></ProductFilters>
+          </Col>
         )}
-      </Col>
-    </Row>
+        <Col md="12" xl={withFilters ? '9' : '12'}>
+          <FlexContainer
+            fixedWidth={fixedWidth}
+            horizontalScroll={horizontalScroll}
+            scrollOnlyPhones={scrollOnlyPhones}
+          >
+            <Fragment>
+              {error && <p>Error</p>}
+              {pending && <Loader></Loader>}
+              {success && products.length === 0 && (
+                <Center>
+                  <Text align="center">No such products</Text>
+                </Center>
+              )}
+              {success &&
+                products.map((product, index) => (
+                  <FlexItem key={index}>
+                    <ProductCard
+                      cardSize={productCardsSize}
+                      productData={product}
+                    ></ProductCard>
+                  </FlexItem>
+                ))}
+            </Fragment>
+          </FlexContainer>
+          {pagination && success && (
+            <Pagination
+              action={handlePageChange}
+              activePage={activePage}
+              numberOfPages={Math.ceil(productsCount / itemsPerPage)}
+            />
+          )}
+        </Col>
+      </Row>
+    </Fragment>
   );
 };
 

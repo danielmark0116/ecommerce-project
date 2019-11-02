@@ -151,9 +151,11 @@ export default class Form extends Component<IProps, IState> {
               />
             </div>
           ))}
-          <Button type={buttonType} submitType={true}>
-            {submitBtnText}
-          </Button>
+          {submitBtnText.length > 0 && (
+            <Button type={buttonType} submitType={true}>
+              {submitBtnText}
+            </Button>
+          )}
           {cancelBtnText.length > 0 && (
             <Button
               action={() => onCancel()}
