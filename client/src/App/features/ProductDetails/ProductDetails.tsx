@@ -44,7 +44,9 @@ const ProductDetails = (props: Props) => {
           />
         </Col>
         <Col md="12" xl="7">
-          <Title>{(singleProduct && singleProduct.name) || ''}</Title>
+          <Title size="small">
+            {(singleProduct && singleProduct.name) || ''}
+          </Title>
           <Subtext size="small">
             <Fragment>
               {(singleProduct && singleProduct.sex) || ''}

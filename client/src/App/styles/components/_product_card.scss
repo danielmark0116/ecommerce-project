@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  color: $dark-blue;
 
   a {
     text-decoration: none;
@@ -15,9 +16,10 @@
   }
 
   .product_title {
-    color: $dark;
-    font-weight: 700;
-    font-family: 'Quicksand', sans-serif;
+    color: inherit;
+    font-weight: 400;
+    // font-family: 'Quicksand', sans-serif;
+    font-family: 'Nunito', sans-serif;
     // font-family: 'Roboto', sans-serif;
     // font-family: 'Yomolhari', serif;
     // font-family: serif;
@@ -36,13 +38,14 @@
     font-size: 10px;
     margin: 10px 0;
     font-weight: 300;
-    color: $dark;
+    color: inherit;
   }
 
   .product_price {
     font-size: 22px;
     margin: 0;
-    font-weight: 700;
-    color: $dark;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    color: inherit;
   }
 }

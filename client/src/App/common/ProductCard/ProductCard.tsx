@@ -45,7 +45,7 @@ const ProductCard = (props: IProps) => {
         </Link>
       </div>
       <Link to={`/products/${_id}`}>
-        <div className={style.product_more}>Click for details</div>
+        {/* <div className={style.product_more}>Click for details</div> */}
         <div className={style.product_price}>{price} $</div>
       </Link>
     </div>

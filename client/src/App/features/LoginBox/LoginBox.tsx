@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
 import Center from '../../common/Center/Center';
+import Title from '../../common/Title/Title';
 import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import SizedBox from '../../common/SizedBox/SizedBox';
@@ -89,7 +90,9 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
           <span className={style.cross_line}></span>
           <span className={style.cross_line}></span>
         </div>
-        <Subtitle align="center">Login</Subtitle>
+        <Title size="small" align="center">
+          Login
+        </Title>
 
         {authLoading ? (
           <Loader />

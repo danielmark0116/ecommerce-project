@@ -22,10 +22,10 @@ const ProfileHeader = (props: Props) => {
   return (
     <Fragment>
       <Row>
-        <Col xs="12" sm="4" lg="2" xl="2">
+        <Col xs="12" sm="2" lg="2" xl="2">
           <ProfilePic picString={picString}></ProfilePic>
         </Col>
-        <Col xs="12" sm="8" l="10" xl="10">
+        <Col xs="12" sm="10" l="10" xl="10">
           <Subtext size="small">your profile</Subtext>
           <Title>{userName}</Title>
           <Subtitle size="small">{userEmail}</Subtitle>

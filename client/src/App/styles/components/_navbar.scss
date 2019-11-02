@@ -46,11 +46,20 @@
   }
 
   &_brand {
-    font-family: 'Quicksand', sans-serif;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+    // font-family: 'Quicksand', sans-serif;
+    // font-family: 'Ubuntu', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
     font-size: 20px;
+    letter-spacing: 0px;
+    text-transform: uppercase;
     color: $dark-blue;
+
+    span {
+      color: $green;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
   }
 
   &_menu {
@@ -64,18 +73,67 @@
         margin: 0 5px;
         display: flex;
         align-items: center;
+        padding: 0 2px;
+
+        &:hover {
+          animation: navPop 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+        }
 
         a {
           text-decoration: none;
           text-transform: uppercase;
+          font-family: 'Nunito', sans-serif;
+          font-weight: 400;
           color: $dark-blue;
           font-size: 14px;
           font-weight: 400;
           display: flex;
           align-items: center;
+          position: relative;
+
+          &::after {
+            @include fade;
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            content: '';
+            background: $green;
+            width: auto;
+            margin: 0 100%;
+            height: 2px;
+            border-radius: 5px;
+          }
+
+          &:hover {
+            &::after {
+              position: absolute;
+              bottom: -8px;
+              left: 0;
+              right: 0;
+              content: '';
+              background: $green;
+              width: auto;
+              margin: 0 2px;
+              height: 2px;
+              border-radius: 5px;
+            }
+          }
 
           &.navbar_link_active {
             font-weight: 900;
+
+            &::after {
+              position: absolute;
+              bottom: -8px;
+              left: 0;
+              right: 0;
+              content: '';
+              background: $green;
+              margin: 0;
+              height: 2px;
+              border-radius: 5px;
+            }
           }
         }
       }
@@ -120,6 +178,8 @@
           a {
             text-decoration: none;
             text-transform: uppercase;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 400;
             color: $dark-blue;
             font-size: 18px;
             font-weight: 400;
@@ -128,10 +188,22 @@
 
             &.navbar_link_active {
               font-weight: 900;
+              color: $green;
             }
           }
         }
       }
     }
+  }
+}
+
+@keyframes navPop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
   }
 }

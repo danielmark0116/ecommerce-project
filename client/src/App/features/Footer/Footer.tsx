@@ -2,6 +2,8 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
+import Logo from '../../assets/dg_logo.png';
+
 import style from '../../styles/main.module.scss';
 
 interface IProps {
@@ -35,7 +37,11 @@ const Footer = (props: IProps) => {
             </ul>
           </div>
         </div>
-        <div className={style.footer_credits}>Coded by</div>
+        <a href="https://danielgrychtol.com" target="_blank">
+          <div className={style.footer_credits}>
+            Coded by <img src={Logo} alt="" />{' '}
+          </div>
+        </a>
       </Container>
     </div>
   );

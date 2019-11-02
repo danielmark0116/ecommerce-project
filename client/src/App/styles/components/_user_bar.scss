@@ -4,7 +4,7 @@
   overflow: hidden;
   background: $green;
   position: fixed;
-  top: 111px;
+  top: 113px;
   z-index: 8;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
   }
 
   @include large-phones {
-    top: 106px;
+    top: 108px;
   }
 
   //   @include phones {

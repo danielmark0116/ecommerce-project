@@ -123,7 +123,9 @@ const Navbar = (props: IProps & stateToProps & dispatchToProps) => {
         </div>
         <Container>
           <div className={style.navbar_container}>
-            <div className={style.navbar_brand}>ecommerce</div>
+            <div className={style.navbar_brand}>
+              <span>e</span>commerce
+            </div>
             <div className={style.navbar_btn}>
               <HamburgerBtn
                 onClick={toggleMobileMenu}
