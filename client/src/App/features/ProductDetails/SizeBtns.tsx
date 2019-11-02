@@ -4,13 +4,16 @@ import Center from '../../common/Center/Center';
 import Button from '../../common/Button/Button';
 import Text from '../../common/Text/Text';
 
+import _ from 'lodash';
+
 interface IProps {
   sizes: string[];
   action: Function;
+  allSizes: any;
 }
 
 const SizeBtns = (props: IProps) => {
-  const { sizes, action } = props;
+  const { sizes, action, allSizes } = props;
   const [activeSize, toggleActiveSize] = useState('');
   const [quantity, changeQuantity] = useState(1);
 
@@ -25,6 +28,7 @@ const SizeBtns = (props: IProps) => {
                 key={index}
                 action={() => {
                   toggleActiveSize(size);
+                  changeQuantity(1);
                 }}
                 type={size === activeSize ? 'primary' : 'secondary'}
               >
@@ -46,7 +50,17 @@ const SizeBtns = (props: IProps) => {
               </Button>
               <Text>{quantity}</Text>
               <Button
-                action={() => changeQuantity(quantity < 10 ? quantity + 1 : 10)}
+                action={() =>
+                  changeQuantity(
+                    _.get(allSizes, activeSize) < 10
+                      ? quantity < _.get(allSizes, activeSize)
+                        ? quantity + 1
+                        : _.get(allSizes, activeSize)
+                      : quantity < 10
+                      ? quantity + 1
+                      : 10
+                  )
+                }
                 disabled={activeSize === '' ? true : false}
                 type="transparent"
               >

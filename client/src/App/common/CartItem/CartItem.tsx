@@ -25,9 +25,23 @@ interface IProps {
 
 const CartItem = (props: IProps) => {
   const { edit, updateAction, deleteAction } = props;
-  const { name, price, img, category, sex, quantity, _id } = props.cartItem;
+  const {
+    name,
+    price,
+    img,
+    category,
+    sex,
+    quantity,
+    _id,
+    size
+  } = props.cartItem;
 
-  const renderCartItem = (productSize: string, sizeQ: any, index: number) => {
+  const renderCartItem = (
+    productSize: string,
+    availableProductsSizeQ: any,
+    sizeQ: any,
+    index: number
+  ) => {
     return (
       <div key={index} className={style.cart_item_container}>
         <Row>
@@ -66,6 +80,7 @@ const CartItem = (props: IProps) => {
                   <Text>Quantity: </Text>
                   <QuantityBtn
                     itemQ={sizeQ}
+                    availableQ={availableProductsSizeQ}
                     action={(quantity: number) =>
                       updateAction(_id, productSize, quantity)
                     }
@@ -73,7 +88,7 @@ const CartItem = (props: IProps) => {
                   <Button
                     size="small"
                     type="primary"
-                    action={() => deleteAction(_id)}
+                    action={() => deleteAction(_id, productSize)}
                   >
                     DELETE
                   </Button>
@@ -93,9 +108,14 @@ const CartItem = (props: IProps) => {
 
   return (
     <Fragment>
-      {Object.values(quantity).map((size, index) => {
-        if (size !== 0)
-          return renderCartItem(Object.keys(quantity)[index], size, index);
+      {Object.values(quantity).map((qSize, index) => {
+        if (qSize !== 0)
+          return renderCartItem(
+            Object.keys(quantity)[index],
+            Object.values(size)[index],
+            qSize,
+            index
+          );
         return null;
       })}
     </Fragment>

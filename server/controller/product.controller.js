@@ -44,7 +44,7 @@ exports.getCart = async (req, res) => {
   try {
     let response = await Product.find(
       { _id: { $in: req.query.ids } },
-      'name category sex price img'
+      'name category sex price img size'
     ).sort({
       name: '1'
     });

@@ -9,10 +9,11 @@ import Text from '../../common/Text/Text';
 interface IProps {
   itemQ: number;
   action: Function;
+  availableQ: number;
 }
 
 const SizeBtns = (props: IProps) => {
-  const { itemQ, action } = props;
+  const { itemQ, action, availableQ } = props;
   const [activeSize, toggleActiveSize] = useState('');
   const [quantity, changeQuantity] = useState(itemQ);
 
@@ -40,7 +41,15 @@ const SizeBtns = (props: IProps) => {
         <Text>{itemQ}</Text>
         <Button
           action={() => {
-            changeQuantity(quantity < 10 ? quantity + 1 : 10);
+            changeQuantity(
+              availableQ < 10
+                ? quantity < availableQ
+                  ? quantity + 1
+                  : availableQ
+                : quantity < 10
+                ? quantity + 1
+                : 10
+            );
           }}
           disabled={false}
           type="transparent"

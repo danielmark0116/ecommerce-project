@@ -80,6 +80,7 @@ const ProductDetails = (props: Props) => {
           </Subtitle>
           <SizeBtns
             action={addToCart}
+            allSizes={singleProduct && singleProduct.size}
             sizes={checkAvailableSizes(singleProduct && singleProduct.size)}
           ></SizeBtns>
         </Col>

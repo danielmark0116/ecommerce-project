@@ -86,9 +86,18 @@ export function cartReducer(state = initState, action: ActionTypes) {
     case types.CART_DELETE_ITEM:
       return {
         ...state,
-        cartProducts: state.cartProducts.filter(
-          item => item._id !== action.payload
-        )
+        cartProducts: state.cartProducts
+          .map(item => {
+            if (item._id === action.id) {
+              return {
+                ...item,
+                quantity: { ...item.quantity, [action.size]: 0 }
+              };
+            } else {
+              return item;
+            }
+          })
+          .filter(item => !Object.values(item.quantity).every(x => x === 0))
       };
     default:
       return { ...state };

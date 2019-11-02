@@ -7,6 +7,14 @@ export interface productCartData {
   sex: string;
   price: number;
   img: string;
+  size: {
+    xs: number;
+    s: number;
+    m: number;
+    l: number;
+    xl: number;
+    xxl: number;
+  };
 }
 
 export type cartItemsType = (productCartData & cartDataElements | any)[];

@@ -23,9 +23,10 @@ export const cartUpdate = (id: string, quantity: any): ActionTypes => ({
   }
 });
 
-export const cartDeleteItem = (payload: string): ActionTypes => ({
+export const cartDeleteItem = (id: string, size: string): ActionTypes => ({
   type: types.CART_DELETE_ITEM,
-  payload
+  id,
+  size
 });
 
 export const cartClearAction = (): ActionTypes => ({
@@ -68,7 +69,11 @@ export const cartGetThunk = (ids: string[]) => {
           cartItem => cartItem.id === item._id
         );
 
-        return { ...item, quantity: dataToMerge.quantity };
+        return {
+          ...item,
+          quantity: dataToMerge.quantity,
+          availableQuantity: item.size
+        };
       });
 
       dispatch(cartGet(finalCartData));
@@ -108,16 +113,29 @@ export const cartUpdateThunk = (id: string, size: string, quantity: number) => {
   };
 };
 
-export const cartDeleteItemThunk = (id: string) => {
+export const cartDeleteItemThunk = (id: string, productSize: string) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     try {
       let cartData: cartDataElements[] = getCart();
 
-      dispatch(cartDeleteItem(id));
+      dispatch(cartDeleteItem(id, productSize));
 
       localStorage.setItem(
         'cart',
-        JSON.stringify(cartData.filter(item => item.id !== id))
+        JSON.stringify(
+          cartData
+            .map(item => {
+              if (item.id === id) {
+                return {
+                  ...item,
+                  quantity: { ...item.quantity, [productSize]: 0 }
+                };
+              } else {
+                return item;
+              }
+            })
+            .filter(item => !Object.values(item.quantity).every(x => x === 0))
+        )
       );
     } catch (e) {
       //

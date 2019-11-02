@@ -118,7 +118,8 @@ interface cartUpdateActionType {
 
 interface cartDeleteItemActionType {
   type: typeof CART_DELETE_ITEM;
-  payload: string;
+  id: string;
+  size: string;
 }
 
 interface cartGetLoadingActionType {
