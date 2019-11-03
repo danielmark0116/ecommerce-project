@@ -1,5 +1,5 @@
 .navbar {
-  padding: 30px 0;
+  padding: 25px 0;
   border-bottom: 1px solid darken($white, 10);
   @include shadow(20px);
   z-index: 12;
@@ -54,6 +54,7 @@
     letter-spacing: 0px;
     text-transform: uppercase;
     color: $dark-blue;
+    padding: 5px 0;
 
     span {
       color: $green;
@@ -73,7 +74,7 @@
         margin: 0 5px;
         display: flex;
         align-items: center;
-        padding: 0 2px;
+        padding: 5px 2px;
 
         &:hover {
           animation: navPop 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
