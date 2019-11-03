@@ -29,28 +29,6 @@ const ProductDetails = (props: Props) => {
   const addToCart = (productSize: string, quantity: number) => {
     const { singleProduct } = props;
 
-    // const alreadyInCart = _.find(getCart(), [
-    //   'id',
-    //   singleProduct && singleProduct._id
-    // ]);
-
-    // if (alreadyInCart && singleProduct) {
-    //   appendCart(singleProduct._id, {
-    //     id: singleProduct._id,
-    //     quantity: {
-    //       ...alreadyInCart.quantity,
-    //       [productSize]:
-    //         _.get(alreadyInCart, ['quantity', productSize]) + quantity
-    //     }
-    //   });
-    // } else {
-    //   saveToLocalStore(
-    //     singleProduct ? singleProduct._id : '',
-    //     productSize,
-    //     quantity
-    //   );
-    // }
-
     saveToLocalStore(
       singleProduct ? singleProduct._id : '',
       productSize,
@@ -88,26 +66,41 @@ const ProductDetails = (props: Props) => {
           <Subtitle size="small">Available sizes:</Subtitle>
           <Text>
             <Fragment>
-              {checkAvailableSizes(singleProduct && singleProduct.size).map(
-                (size, index) => (
-                  <span key={index}>
-                    {index !== 0 ? '  |  ' : ''}
-                    {size && size.toUpperCase()}
-                  </span>
-                )
-              )}
+              {checkAvailableSizes(singleProduct && singleProduct.size)
+                .length === 0
+                ? 'SOLD OUT'
+                : checkAvailableSizes(singleProduct && singleProduct.size).map(
+                    (size, index) => (
+                      <span key={index}>
+                        {index !== 0 ? '  |  ' : ''}
+                        {size && size.toUpperCase()}
+                      </span>
+                    )
+                  )}
             </Fragment>
           </Text>
           <br />
           <Subtitle size="small" align="center">
             Choose a size:
           </Subtitle>
-          <SizeBtns
-            productId={singleProduct ? singleProduct._id : ''}
-            action={addToCart}
-            allSizes={singleProduct && singleProduct.size}
-            sizes={checkAvailableSizes(singleProduct && singleProduct.size)}
-          ></SizeBtns>
+          {checkAvailableSizes(singleProduct && singleProduct.size).length ===
+          0 ? (
+            <Fragment>
+              <Text align="center" color="danger">
+                SOLD OUT
+              </Text>
+              <Text align="center" color="primary">
+                We will re-stock shortly. Give us a week or two
+              </Text>
+            </Fragment>
+          ) : (
+            <SizeBtns
+              productId={singleProduct ? singleProduct._id : ''}
+              action={addToCart}
+              allSizes={singleProduct && singleProduct.size}
+              sizes={checkAvailableSizes(singleProduct && singleProduct.size)}
+            />
+          )}
         </Col>
       </Row>
     );

@@ -53,7 +53,7 @@ const mapDispatchToState = (
     dispatch(cartUpdateThunk(id, size, quantity)),
   deleteCartItem: (id: string, productSize: string) =>
     dispatch(cartDeleteItemThunk(id, productSize)),
-  createNewOrder: () => console.log('Creating new order')
+  createNewOrder: () => null
 });
 
 export default connect(

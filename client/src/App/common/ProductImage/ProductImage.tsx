@@ -29,16 +29,22 @@ const ProductImage = (props: IProps) => {
       <div className={style.product_image_hover_card}>
         <p>
           {imageSize === 'small' ? 'Sizes: ' : 'Available sizes: '}
-          {checkAvailableSizes(sizes).map((size, index) => (
-            <span key={index}>
-              {index !== 0 ? ' | ' : ''}
-              {size && size.toUpperCase()}
-            </span>
-          ))}
+          {checkAvailableSizes(sizes).length === 0
+            ? 'SOLD OUT'
+            : checkAvailableSizes(sizes).map((size, index) => (
+                <span key={index}>
+                  {index !== 0 ? ' | ' : ''}
+                  {size && size.toUpperCase()}
+                </span>
+              ))}
         </p>
       </div>
 
-      {props.ribbon && <div className={style.product_ribbon}>{ribbon}</div>}
+      {props.ribbon && (
+        <div className={style.product_ribbon}>
+          {checkAvailableSizes(sizes).length === 0 ? 'SOLD OUT' : ribbon}
+        </div>
+      )}
 
       {props.category && (
         <div className={style.product_category}>{category}</div>

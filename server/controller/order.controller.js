@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Order = require('../model/order.model');
+const Product = require('../model/product.model');
 
 exports.getOrderById = async (req, res) => {
   const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
@@ -42,7 +43,39 @@ exports.createOrder = async (req, res) => {
   const cartItems = req.body.cart;
 
   cartItems.forEach(item => {
-    console.log(item);
+    let sizes = item.quantity; // quantity of items sizes in cart
+    let productId = item._id;
+
+    Product.findOne({ _id: productId }, (err, prod) => {
+      if (err) throw err;
+
+      const soldQ = Object.values(sizes).reduce((a, b) => a + b);
+
+      console.log(soldQ);
+
+      prod
+        .update({
+          size: {
+            xs: prod.size.xs - sizes.xs,
+            s: prod.size.s - sizes.s,
+            m: prod.size.m - sizes.m,
+            l: prod.size.l - sizes.l,
+            xl: prod.size.xl - sizes.xl,
+            xxl: prod.size.xxl - sizes.xxl
+          },
+          soldItems: {
+            xs: prod.soldItems.xs + sizes.xs,
+            s: prod.soldItems.s + sizes.s,
+            m: prod.soldItems.m + sizes.m,
+            l: prod.soldItems.l + sizes.l,
+            xl: prod.soldItems.xl + sizes.xl,
+            xxl: prod.soldItems.xxl + sizes.xxl
+          },
+          sold: soldQ
+        })
+        .then(newProd => null)
+        .catch(e => console.log(e.message));
+    });
   });
 
   const newOrderData = {
