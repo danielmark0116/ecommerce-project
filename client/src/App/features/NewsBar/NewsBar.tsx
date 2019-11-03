@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import style from '../../styles/main.module.scss';
+
+import { fadeInDown } from '../../animations/fades';
+
 import { AppState } from '../../reducers';
 import { selectorGeneralsNewsBarText } from '../../reducers/generalsReducer';
 
 const NewsBar = (props: stateToProps) => {
   const { newsBarText } = props;
 
+  const barRef = React.createRef<HTMLDivElement>();
+
+  useEffect(() => {
+    fadeInDown(barRef.current);
+  }, ['']);
+
   return (
-    <div className={style.news_bar_container}>
+    <div ref={barRef} className={style.news_bar_container}>
       <div className={style.news_bar_text_container}>
         <p>{newsBarText}</p>
       </div>

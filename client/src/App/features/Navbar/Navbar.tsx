@@ -8,6 +8,9 @@ import HamburgerBtn from '../../common/HamburgerBtn/HamburgerBtn';
 import ProfileThumb from '../../common/ProfileThumb/ProfileThumb';
 
 import style from '../../styles/main.module.scss';
+
+import { fadeInDown } from '../../animations/fades';
+
 import { AppState } from '../../reducers';
 import {
   selectorAuthIsLoggedIn,
@@ -29,6 +32,12 @@ const Navbar = (props: IProps & stateToProps & dispatchToProps) => {
   const mobileMenuRef = React.createRef<HTMLDivElement>();
   const [showMenu, toggleMenu] = useState(false);
   const [showLoginBox, toggleLoginBox] = useState(false);
+
+  const navbarRef = React.createRef<HTMLElement>();
+
+  useEffect(() => {
+    fadeInDown(navbarRef.current);
+  }, ['']);
 
   const Links = (props: IProps) => (
     <ul>
@@ -112,7 +121,7 @@ const Navbar = (props: IProps & stateToProps & dispatchToProps) => {
   return (
     <Fragment>
       <LoginBox closeAction={closeLoginBox} active={showLoginBox}></LoginBox>
-      <nav className={style.navbar}>
+      <nav ref={navbarRef} className={style.navbar}>
         <div
           ref={mobileMenuRef}
           className={`${style.navbar_menu_mobile} ${

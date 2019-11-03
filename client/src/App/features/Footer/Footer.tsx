@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 import Logo from '../../assets/dg_logo.png';
 
 import style from '../../styles/main.module.scss';
+
+import { fadeInUp } from '../../animations/fades';
 
 interface IProps {
   paths: {
@@ -16,8 +18,14 @@ interface IProps {
 const Footer = (props: IProps) => {
   const { paths } = props;
 
+  const footerRef = React.createRef<HTMLDivElement>();
+
+  useEffect(() => {
+    fadeInUp(footerRef.current);
+  }, ['']);
+
   return (
-    <div className={style.footer}>
+    <div ref={footerRef} className={style.footer}>
       <Container>
         <div className={style.footer_container}>
           <div className={style.rights}>ECOMMERCE | All right reservered</div>
