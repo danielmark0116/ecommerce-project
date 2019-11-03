@@ -8,7 +8,7 @@ import { cartItemsType } from '../types/productCartData';
 import { clearCart } from '../helpers/cart';
 import { cartGet, cartGetThunk } from './cartActions';
 import { orderData } from '../types/orderData';
-import { async } from 'q';
+import { notify } from '../features/Notification/Notification';
 import { deleteCouponDataFromSession } from '../helpers/couponSessionStorage';
 import _ from 'lodash';
 
@@ -165,7 +165,6 @@ export const orderGetOneThunk = (id: string) => {
       dispatch(orderGetOneSuccess());
     } catch (e) {
       dispatch(orderGetOneFail(e.message));
-      console.log(e.message);
     }
   };
 };
@@ -180,8 +179,6 @@ export const orderPaymentThunk = (orderId: string, amount: number) => {
         orderId,
         amount
       });
-
-      // console.log(initPayRes);
 
       dispatch(paymentId(initPayRes.data.sessionId));
       dispatch(paymentRedirect());
@@ -201,6 +198,7 @@ export const orderPaymentFullFillThunk = (sessionId: string) => {
         sessionId
       });
 
+      notify('Order was succesfully paid', 5000);
       dispatch(paymentSuccess());
     } catch (e) {
       dispatch(paymentFail());

@@ -88,19 +88,14 @@ export default class Notification extends Component<{}, IState> {
       <div
         ref={notRef}
         onClick={() => {
-          notify('message', 5000);
+          emitter.emit('closeBtn');
         }}
         className={style.notification_container}
       >
-        <button
-          onClick={e => {
-            e.stopPropagation();
-            emitter.emit('closeBtn');
-          }}
-        >
-          close
-        </button>
-        {msg}
+        <div className={style.notification_icon}>
+          <i className="fas fa-info"></i>
+        </div>
+        <div className={style.notification_text}>{msg}</div>
       </div>
     );
   }

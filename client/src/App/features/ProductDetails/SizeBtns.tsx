@@ -128,7 +128,7 @@ const SizeBtns = (props: IProps) => {
               action(activeSize, quantity);
               changeQuantity(1);
               toggleIsInCart(true);
-              notify(`added to cart ${activeSize}`, 5000);
+              notify(`Size ${activeSize.toUpperCase()} added to cart`, 5000);
             }}
             disabled={activeSize === '' ? true : canIncrement ? false : true}
             type="primary"

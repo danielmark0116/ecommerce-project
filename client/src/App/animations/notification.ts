@@ -12,7 +12,7 @@ export const toggleNotification = (
 ) => {
   if (active) {
     TweenMax.to(node, animationTime, {
-      right: '0%',
+      right: '40px',
       ease: easing
     });
   } else {
@@ -34,7 +34,7 @@ export const popNotification = (node: any) => {
       ease: easingOut
     })
     .to(node, animationTime, {
-      right: '0%',
+      right: '40px',
       opacity: 1,
       ease: easingPop
     });

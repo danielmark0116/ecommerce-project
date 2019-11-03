@@ -1,9 +1,33 @@
 .notification_container {
   position: fixed;
-  top: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  top: 140px;
   right: -100%;
-  width: 200px;
-  height: 50px;
-  background: $purple;
+  min-width: 200px;
+  width: max-content;
+  height: auto;
+  background: $white;
+  padding: 20px;
   z-index: 100;
+  border-radius: 10px;
+  border: 1px solid rgba($dark-blue, 0.05);
+  @include shadow-strong(3px);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .notification_icon {
+    color: $dark-blue;
+    margin: 0 20px 0 10px;
+    font-size: 12px;
+  }
+
+  .notification_text {
+    font-family: 'Nunito', sans-serif;
+    color: $dark-blue;
+    font-size: 15px;
+  }
 }
