@@ -1,21 +1,50 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import Center from '../../common/Center/Center';
 import Button from '../../common/Button/Button';
 import Text from '../../common/Text/Text';
 
 import _ from 'lodash';
+import { getCart } from '../../helpers/cart';
 
 interface IProps {
   sizes: string[];
   action: Function;
-  allSizes: any;
+  allSizes: any; // available sizes for given item in stock
+  productId: string;
 }
 
 const SizeBtns = (props: IProps) => {
-  const { sizes, action, allSizes } = props;
+  const { sizes, action, allSizes, productId } = props;
   const [activeSize, toggleActiveSize] = useState('');
   const [quantity, changeQuantity] = useState(1);
+  const [canIncrement, toggleIncrement] = useState(true);
+  const [isInCart, toggleIsInCart] = useState(false);
+
+  useEffect(() => {
+    const alreadyInCart = _.find(getCart(), ['id', productId]);
+
+    if (alreadyInCart) {
+      const presentCartQValue = _.get(alreadyInCart.quantity, activeSize);
+      const availableQ = _.get(allSizes, activeSize);
+
+      if (presentCartQValue + quantity > availableQ) {
+        toggleIncrement(false);
+      } else {
+        toggleIncrement(true);
+      }
+
+      if (presentCartQValue > 0 && activeSize !== '') {
+        toggleIsInCart(true);
+      }
+
+      if (presentCartQValue === 0) {
+        toggleIsInCart(false);
+      }
+    } else {
+      toggleIncrement(true);
+    }
+  }, [quantity, activeSize]);
 
   if (sizes && sizes.length > 0)
     return (
@@ -37,7 +66,13 @@ const SizeBtns = (props: IProps) => {
             ))}
           </Fragment>
         </Center>
-        <br />
+        <Center>
+          <Text size="normal" color={canIncrement ? 'success' : 'danger'}>
+            {isInCart
+              ? `Already in cart. ${canIncrement ? 'You can add more:' : ''}`
+              : ''}
+          </Text>
+        </Center>
         {activeSize !== '' && (
           <Center>
             <Fragment>
@@ -51,6 +86,7 @@ const SizeBtns = (props: IProps) => {
               <Text>{quantity}</Text>
               <Button
                 action={() =>
+                  canIncrement &&
                   changeQuantity(
                     _.get(allSizes, activeSize) < 10
                       ? quantity < _.get(allSizes, activeSize)
@@ -72,11 +108,33 @@ const SizeBtns = (props: IProps) => {
         <br />
         <Center>
           <Button
-            action={() => action(activeSize, quantity)}
-            disabled={activeSize === '' ? true : false}
+            action={() => {
+              const alreadyInCart = _.find(getCart(), ['id', productId]);
+
+              if (alreadyInCart) {
+                const presentCartQValue = _.get(
+                  alreadyInCart.quantity,
+                  activeSize
+                );
+                const availableQ = _.get(allSizes, activeSize);
+
+                if (presentCartQValue + quantity === availableQ) {
+                  toggleIncrement(false);
+                }
+              }
+
+              action(activeSize, quantity);
+              changeQuantity(1);
+              toggleIsInCart(true);
+            }}
+            disabled={activeSize === '' ? true : canIncrement ? false : true}
             type="primary"
           >
-            {activeSize !== '' ? 'Add to cart' : 'Choose size first'}
+            {activeSize !== ''
+              ? canIncrement
+                ? 'Add to cart'
+                : 'Cannot add that much.'
+              : 'Choose size first'}
           </Button>
         </Center>
       </Fragment>

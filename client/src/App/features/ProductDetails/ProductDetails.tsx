@@ -9,8 +9,10 @@ import Text from '../../common/Text/Text';
 import SizeBtns from './SizeBtns';
 import Loader from '../../common/Loader/Loader';
 
+import _ from 'lodash';
+
 import { checkAvailableSizes } from '../../helpers/availableSizes';
-import { saveToLocalStore } from '../../helpers/cart';
+import { saveToLocalStore, getCart, appendCart } from '../../helpers/cart';
 
 import { stateToProps, dispatchToProps } from './ProductDetailsContainer';
 
@@ -26,6 +28,28 @@ const ProductDetails = (props: Props) => {
 
   const addToCart = (productSize: string, quantity: number) => {
     const { singleProduct } = props;
+
+    // const alreadyInCart = _.find(getCart(), [
+    //   'id',
+    //   singleProduct && singleProduct._id
+    // ]);
+
+    // if (alreadyInCart && singleProduct) {
+    //   appendCart(singleProduct._id, {
+    //     id: singleProduct._id,
+    //     quantity: {
+    //       ...alreadyInCart.quantity,
+    //       [productSize]:
+    //         _.get(alreadyInCart, ['quantity', productSize]) + quantity
+    //     }
+    //   });
+    // } else {
+    //   saveToLocalStore(
+    //     singleProduct ? singleProduct._id : '',
+    //     productSize,
+    //     quantity
+    //   );
+    // }
 
     saveToLocalStore(
       singleProduct ? singleProduct._id : '',
@@ -79,6 +103,7 @@ const ProductDetails = (props: Props) => {
             Choose a size:
           </Subtitle>
           <SizeBtns
+            productId={singleProduct ? singleProduct._id : ''}
             action={addToCart}
             allSizes={singleProduct && singleProduct.size}
             sizes={checkAvailableSizes(singleProduct && singleProduct.size)}

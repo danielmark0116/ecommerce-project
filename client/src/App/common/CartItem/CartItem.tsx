@@ -75,9 +75,8 @@ const CartItem = (props: IProps) => {
               </Flex>
             )}
             {edit && (
-              <Flex>
-                <Fragment>
-                  <Text>Quantity: </Text>
+              <Fragment>
+                <Flex>
                   <QuantityBtn
                     itemQ={sizeQ}
                     availableQ={availableProductsSizeQ}
@@ -85,6 +84,8 @@ const CartItem = (props: IProps) => {
                       updateAction(_id, productSize, quantity)
                     }
                   />
+                </Flex>
+                <Flex>
                   <Button
                     size="small"
                     type="primary"
@@ -92,8 +93,8 @@ const CartItem = (props: IProps) => {
                   >
                     DELETE
                   </Button>
-                </Fragment>
-              </Flex>
+                </Flex>
+              </Fragment>
             )}
             <Flex>
               <Fragment>

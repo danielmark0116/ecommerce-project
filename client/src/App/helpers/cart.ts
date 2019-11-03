@@ -1,4 +1,4 @@
-import { cartDataElements } from '../types/cartData';
+import { cartDataElements, cartData } from '../types/cartData';
 
 const sizes = {
   xs: 0,
@@ -7,6 +7,21 @@ const sizes = {
   l: 0,
   xl: 0,
   xxl: 0
+};
+
+export const appendCart = (id: string, data: cartDataElements) => {
+  const cart: string = localStorage.getItem('cart') || '[]';
+  const parsedCart: cartDataElements[] = JSON.parse(cart);
+
+  const newCart = parsedCart.map(item => {
+    if (item.id === id) {
+      return { ...item, quantity: data.quantity };
+    } else {
+      return { ...item };
+    }
+  });
+
+  localStorage.setItem('cart', JSON.stringify(newCart));
 };
 
 export const saveToLocalStore = (

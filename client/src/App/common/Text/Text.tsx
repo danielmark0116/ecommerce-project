@@ -6,10 +6,11 @@ interface IProps {
   children: React.ReactChild;
   align: 'left' | 'center' | 'right';
   color: 'primary' | 'success' | 'danger' | 'warning';
+  size: 'normal' | 'small';
 }
 
 const Text = (props: IProps) => {
-  const { children, align, color } = props;
+  const { children, align, color, size } = props;
 
   const alignClass = () => {
     switch (align) {
@@ -39,8 +40,19 @@ const Text = (props: IProps) => {
     }
   };
 
+  const sizeClass = () => {
+    switch (size) {
+      case 'normal':
+        return style.text_normal;
+      case 'small':
+        return style.text_small;
+      default:
+        return style.text_normal;
+    }
+  };
+
   return (
-    <p className={`${style.text} ${alignClass()} ${colorClass()}`}>
+    <p className={`${sizeClass()} ${alignClass()} ${colorClass()}`}>
       {children}
     </p>
   );
@@ -48,7 +60,8 @@ const Text = (props: IProps) => {
 
 Text.defaultProps = {
   align: 'left',
-  color: 'primary'
+  color: 'primary',
+  size: 'normal'
 };
 
 export default Text;

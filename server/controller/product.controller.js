@@ -165,8 +165,6 @@ exports.deleteProduct = async (req, res) => {
 const filterQuery = queries => {
   const { category, sex, title } = queries;
 
-  console.log(queries);
-
   return {
     category: category ? category : { $regex: /.*/, $options: 'i' },
     sex: sex ? sex : { $regex: /.*/, $options: 'i' },

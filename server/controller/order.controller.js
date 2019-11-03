@@ -39,6 +39,12 @@ exports.createOrder = async (req, res) => {
   const userName = userData.name;
   const userId = userData.userId;
 
+  const cartItems = req.body.cart;
+
+  cartItems.forEach(item => {
+    console.log(item);
+  });
+
   const newOrderData = {
     ...req.body,
     userId,

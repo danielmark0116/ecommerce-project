@@ -22,17 +22,20 @@ const SizeBtns = (props: IProps) => {
   }, [itemQ]);
 
   useEffect(() => {
-    action(quantity);
+    if (quantity !== itemQ) {
+      action(quantity);
+    }
   }, [quantity]);
 
   return (
     <Fragment>
+      <Text size="normal">Quantity:</Text>
       <Fragment>
         <Button
           action={() => {
             changeQuantity(quantity > 1 ? quantity - 1 : 1);
           }}
-          disabled={false}
+          disabled={quantity === 1 ? true : false}
           type="transparent"
           size="small"
         >
@@ -41,23 +44,18 @@ const SizeBtns = (props: IProps) => {
         <Text>{itemQ}</Text>
         <Button
           action={() => {
-            changeQuantity(
-              availableQ < 10
-                ? quantity < availableQ
-                  ? quantity + 1
-                  : availableQ
-                : quantity < 10
-                ? quantity + 1
-                : 10
-            );
+            changeQuantity(itemQ < availableQ ? quantity + 1 : availableQ);
           }}
-          disabled={false}
+          disabled={itemQ === availableQ ? true : false}
           type="transparent"
           size="small"
         >
           +
         </Button>
       </Fragment>
+      <Text size="small" color="danger">
+        {itemQ === availableQ ? 'No more items in stock' : ''}
+      </Text>
     </Fragment>
   );
 };

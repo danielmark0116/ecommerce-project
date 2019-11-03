@@ -2,8 +2,17 @@
   margin: 10px 0;
   padding: 0 10px;
   color: $dark-blue;
-  font-size: 15px;
   font-weight: 300;
   line-height: 22px;
   word-spacing: 1px;
+
+  &_small {
+    @extend .text;
+    font-size: 10px;
+  }
+
+  &_normal {
+    @extend .text;
+    font-size: 15px;
+  }
 }
