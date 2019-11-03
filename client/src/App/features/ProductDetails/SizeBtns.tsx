@@ -4,6 +4,8 @@ import Center from '../../common/Center/Center';
 import Button from '../../common/Button/Button';
 import Text from '../../common/Text/Text';
 
+import { notify } from '../Notification/Notification';
+
 import _ from 'lodash';
 import { getCart } from '../../helpers/cart';
 
@@ -126,6 +128,7 @@ const SizeBtns = (props: IProps) => {
               action(activeSize, quantity);
               changeQuantity(1);
               toggleIsInCart(true);
+              notify(`added to cart ${activeSize}`, 5000);
             }}
             disabled={activeSize === '' ? true : canIncrement ? false : true}
             type="primary"

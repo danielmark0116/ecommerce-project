@@ -16,6 +16,8 @@ import { saveToLocalStore, getCart, appendCart } from '../../helpers/cart';
 
 import { stateToProps, dispatchToProps } from './ProductDetailsContainer';
 
+import ReactDOM from 'react-dom';
+
 type Props = stateToProps & dispatchToProps;
 
 const ProductDetails = (props: Props) => {

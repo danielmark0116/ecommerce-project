@@ -1,0 +1,9 @@
+.notification_container {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 200px;
+  height: 50px;
+  background: $purple;
+  z-index: 100;
+}
