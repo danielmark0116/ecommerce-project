@@ -1,6 +1,4 @@
-import React, { Fragment } from 'react';
-
-import Form from '../../common/Form/Form';
+import React, { Fragment, useState } from 'react';
 
 import style from '../../styles/main.module.scss';
 
@@ -11,36 +9,36 @@ interface IProps {
 const ProductSearchBar = (props: IProps) => {
   const { submitForm } = props;
 
+  const [inputValue, handleInput] = useState('');
+
   return (
     <Fragment>
       <form
         onSubmit={e => {
-          //
+          e.preventDefault();
+          submitForm(inputValue);
         }}
         className={style.custom_form_container}
       >
-        <div className={style.form_field}>{/* input */}</div>
+        <div className={style.search_bar_container}>
+          <div className={style.search_bar_input}>
+            <input
+              type="text"
+              name="search"
+              id="search-bar"
+              value={inputValue}
+              placeholder="Search by name"
+              onChange={e => {
+                handleInput(e.target.value);
+              }}
+              autoComplete="off"
+            />
+            <button type="submit" className={style.search_bar_btn}>
+              SEARCH
+            </button>
+          </div>
+        </div>
       </form>
-      <Form
-        onSubmit={(data: any) => {
-          submitForm(data.title);
-        }}
-        cancelBtnText=""
-        onCancel={() => null}
-        submitBtnText=""
-        inputs={[
-          {
-            errorMsg: '',
-            extended: false,
-            fieldName: 'title',
-            fieldValue: '',
-            label: '',
-            placeholder: 'Search by name',
-            validateRegex: /&*/i,
-            onChange: () => null
-          }
-        ]}
-      />
     </Fragment>
   );
 };

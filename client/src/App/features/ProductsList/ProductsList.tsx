@@ -117,7 +117,9 @@ const ProductsList = (props: Props) => {
               {pending && <Loader></Loader>}
               {success && products.length === 0 && (
                 <Center>
-                  <Text align="center">No such products</Text>
+                  <Text color="warning" align="center">
+                    No such products
+                  </Text>
                 </Center>
               )}
               {success &&

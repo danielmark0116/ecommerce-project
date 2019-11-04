@@ -1,0 +1,22 @@
+.search_bar_container {
+  @extend .input_container;
+  margin: 0 20px;
+  width: auto;
+
+  .search_bar_input {
+    @extend .input;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    @include shadow(10px);
+
+    .search_bar_btn {
+      @extend .main_button_transparent;
+      background: $white;
+    }
+
+    input {
+      color: $dark-blue;
+    }
+  }
+}

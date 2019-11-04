@@ -66,17 +66,6 @@ const ProductFilters = (props: IProps) => {
           category="sex"
           inputs={['all', ...sexValues]}
         />
-
-        {/* <br />
-        <br />
-        <button
-          onClick={() => {
-            applyFilters();
-            triggerFiltersContainer(mobileFiltersRef.current, false);
-          }}
-        >
-          apply
-        </button> */}
       </Fragment>
     );
   };

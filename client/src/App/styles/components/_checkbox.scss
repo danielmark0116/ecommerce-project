@@ -5,13 +5,14 @@ $box_size: 15px;
   margin: 0 auto 40px;
   padding: 5px 10px 30px;
   min-height: 50px;
-  border-radius: 5px;
+  border-radius: $product-card-border;
   background: $white;
-  @include shadow-strong(10px);
+  @include shadow(10px);
   @include fade;
 
   @include large-tablets {
     max-width: 80%;
+    @include shadow-strong(10px);
   }
 
   @include hover-supported {
