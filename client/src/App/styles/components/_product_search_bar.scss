@@ -13,6 +13,10 @@
     .search_bar_btn {
       @extend .main_button_transparent;
       background: $white;
+
+      @include tablets {
+        display: none;
+      }
     }
 
     input {

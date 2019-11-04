@@ -8,7 +8,8 @@ import {
   selectorProductsCategoryValues,
   selectorProductsGetLatest,
   selectorProductsGetCarousel,
-  selectorProductsGetBestsellers
+  selectorProductsGetBestsellers,
+  selectorProductsGetSimilar
 } from '../../reducers/productReducer';
 import { productData } from '../../types/productData';
 import { ThunkDispatch } from 'redux-thunk';
@@ -27,7 +28,7 @@ interface IProps {
   scrollOnlyPhones: Boolean;
   initFiltrString: string;
   fetchAll: Boolean;
-  productsState: 'products' | 'carousel' | 'latest' | 'bestsellers';
+  productsState: 'products' | 'carousel' | 'latest' | 'bestsellers' | 'similar';
   productCardsSize: 'small' | 'normal';
 }
 
@@ -62,6 +63,8 @@ const mapStateToProps = (state: AppState, ownProps: IProps) => ({
       ? selectorProductsGetCarousel(state)
       : ownProps.productsState === 'bestsellers'
       ? selectorProductsGetBestsellers(state)
+      : ownProps.productsState === 'similar'
+      ? selectorProductsGetSimilar(state)
       : [],
   productsRequestData: selectorProductsRequestData(state),
   productsCount: selectorProductsCount(state),

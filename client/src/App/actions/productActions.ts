@@ -20,6 +20,11 @@ export const productsGetCarousel = (payload: productData[]): ActionTypes => ({
   payload
 });
 
+export const productsGetSimilar = (payload: productData[]): ActionTypes => ({
+  type: types.PRODUCTS_GET_SIMILAR,
+  payload
+});
+
 export const productsGetBestsellers = (
   payload: productData[]
 ): ActionTypes => ({
@@ -84,7 +89,12 @@ export const productsGetAllThunk = (
   skip: number = 0,
   limit: number = 0,
   filter: string = '',
-  productsType: 'products' | 'latest' | 'carousel' | 'bestsellers' = 'products'
+  productsType:
+    | 'products'
+    | 'latest'
+    | 'carousel'
+    | 'bestsellers'
+    | 'similar' = 'products'
 ) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(productsGetAllLoading());
@@ -105,6 +115,7 @@ export const productsGetAllThunk = (
       productsType === 'products' && dispatch(productsGetAll(products));
       productsType === 'latest' && dispatch(productsGetLatest(products));
       productsType === 'carousel' && dispatch(productsGetCarousel(products));
+      productsType === 'similar' && dispatch(productsGetSimilar(products));
       productsType === 'bestsellers' &&
         dispatch(productsGetBestsellers(products));
       dispatch(productsGetAllSuccess());

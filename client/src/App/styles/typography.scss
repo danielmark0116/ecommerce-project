@@ -29,6 +29,15 @@ p {
   text-align: right;
 }
 
+.text_paragraph {
+  text-align: left;
+  padding-left: 55px !important;
+
+  @include tablets {
+    padding-left: 30px !important;
+  }
+}
+
 .text_success {
   color: $green !important;
 }

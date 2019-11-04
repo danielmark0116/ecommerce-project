@@ -90,7 +90,9 @@ const SizeBtns = (props: IProps) => {
             <Fragment>
               <Button
                 action={() => changeQuantity(quantity > 1 ? quantity - 1 : 1)}
-                disabled={activeSize === '' ? true : false}
+                disabled={
+                  quantity === 1 ? true : activeSize === '' ? true : false
+                }
                 type="transparent"
               >
                 -
@@ -109,7 +111,15 @@ const SizeBtns = (props: IProps) => {
                       : 10
                   )
                 }
-                disabled={activeSize === '' ? true : false}
+                disabled={
+                  !canIncrement
+                    ? true
+                    : quantity === 10
+                    ? true
+                    : activeSize === ''
+                    ? true
+                    : false
+                }
                 type="transparent"
               >
                 +

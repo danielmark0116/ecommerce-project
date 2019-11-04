@@ -4,7 +4,7 @@ import style from '../../styles/main.module.scss';
 
 interface IProps {
   children: React.ReactChild;
-  align: 'left' | 'center' | 'right';
+  align: 'left' | 'center' | 'right' | 'paragraph';
   size: 'small' | 'large';
 }
 
@@ -19,6 +19,8 @@ const Title = (props: IProps) => {
         return style.text_center;
       case 'right':
         return style.text_right;
+      case 'paragraph':
+        return style.text_paragraph;
       default:
         return style.text_left;
     }

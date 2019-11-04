@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 
 import Image from '../../common/Image/Image';
@@ -11,6 +12,8 @@ import SizeBtns from './SizeBtns';
 import Loader from '../../common/Loader/Loader';
 import SizedBox from '../../common/SizedBox/SizedBox';
 
+import ProductsList from '../ProductsList/ProductsListContainer';
+
 import _ from 'lodash';
 
 import { fadeInUp } from '../../animations/fades';
@@ -19,11 +22,16 @@ import { checkAvailableSizes } from '../../helpers/availableSizes';
 import { saveToLocalStore } from '../../helpers/cart';
 
 import { stateToProps, dispatchToProps } from './ProductDetailsContainer';
+import { RouteComponentProps } from 'react-router';
 
-type Props = stateToProps & dispatchToProps;
+interface RouteProps {
+  id: string;
+}
+
+type Props = stateToProps & dispatchToProps & RouteComponentProps<RouteProps>;
 
 const ProductDetails = (props: Props) => {
-  const { productId, singleProduct, getProductById } = props;
+  const { productId, singleProduct, getProductById, match } = props;
   const { pending, success, error } = props.singleProductRequestData;
 
   const [valueInCart, updateValueInCart] = useState(0);
@@ -34,7 +42,7 @@ const ProductDetails = (props: Props) => {
 
   useEffect(() => {
     getProductById(productId);
-  }, ['']);
+  }, [match.params.id]);
 
   useEffect(() => {
     if (singleProduct && success) {
@@ -55,92 +63,129 @@ const ProductDetails = (props: Props) => {
 
   const renderProductDetails = () => {
     return (
-      <Row>
-        <Col md="12" xl="5">
-          <section ref={imageRef}>
-            <Image
-              ribbon={(singleProduct && singleProduct.ribbon) || ''}
-              picString={(singleProduct && singleProduct.img) || ''}
-            />
-          </section>
-        </Col>
-        <Col md="12" xl="7">
-          <section ref={descRef}>
-            <Title size="small">
-              {(singleProduct && singleProduct.name) || ''}
-            </Title>
-            <Subtext size="small">
-              <Fragment>
-                {(singleProduct && singleProduct.sex) || ''}
-                {' | '}
-                {(singleProduct && singleProduct.category) || ''}
-              </Fragment>
-            </Subtext>
-            <Subtitle>
-              <Fragment>
-                {(singleProduct && singleProduct.price) || ''} $
-              </Fragment>
-            </Subtitle>
-            <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
-            <br />
-            <Row>
-              <Col xl="6" sm="12">
-                <Subtitle size="small">Available sizes:</Subtitle>
-                <Text>
-                  <Fragment>
-                    {checkAvailableSizes(singleProduct && singleProduct.size)
-                      .length === 0
-                      ? 'SOLD OUT'
-                      : checkAvailableSizes(
-                          singleProduct && singleProduct.size
-                        ).map((size, index) => (
-                          <span key={index}>
-                            {index !== 0 ? '  |  ' : ''}
-                            {size && size.toUpperCase()}
-                          </span>
-                        ))}
-                  </Fragment>
-                </Text>
-              </Col>
-              <Col xl="6" sm="12">
-                <CartPill
-                  retrigger={valueInCartRetrigger}
-                  quantity={valueInCart}
-                ></CartPill>
-              </Col>
-            </Row>
-            <br />
-            <Subtitle size="small" align="center">
-              Choose a size:
-            </Subtitle>
-            {checkAvailableSizes(singleProduct && singleProduct.size).length ===
-            0 ? (
-              <Fragment>
-                <Text align="center" color="danger">
-                  SOLD OUT
-                </Text>
-                <Text align="center" color="primary">
-                  We will re-stock shortly. Give us a week or two
-                </Text>
-              </Fragment>
-            ) : (
-              <SizeBtns
-                callback={(data: number) => {
-                  updateValueInCart(data);
-
-                  if (valueInCart === data) {
-                    updateValueInCartRetrigger(!valueInCartRetrigger);
-                  }
-                }}
-                productId={singleProduct ? singleProduct._id : ''}
-                action={addToCart}
-                allSizes={singleProduct && singleProduct.size}
-                sizes={checkAvailableSizes(singleProduct && singleProduct.size)}
+      <Fragment>
+        <Row>
+          <Col md="12" xl="5">
+            <section ref={imageRef}>
+              <Image
+                ribbon={(singleProduct && singleProduct.ribbon) || ''}
+                picString={(singleProduct && singleProduct.img) || ''}
               />
-            )}
-          </section>
-        </Col>
-      </Row>
+            </section>
+          </Col>
+          <Col md="12" xl="7">
+            <section ref={descRef}>
+              <Title size="small">
+                {(singleProduct && singleProduct.name) || ''}
+              </Title>
+              <Subtext size="small">
+                <Fragment>
+                  {(singleProduct && singleProduct.sex) || ''}
+                  {' | '}
+                  {(singleProduct && singleProduct.category) || ''}
+                </Fragment>
+              </Subtext>
+              <Subtitle>
+                <Fragment>
+                  {(singleProduct && singleProduct.price) || ''} $
+                </Fragment>
+              </Subtitle>
+              <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
+              <br />
+              <Row>
+                <Col xl="6" sm="12">
+                  <Subtitle size="small">Available sizes:</Subtitle>
+                  <Text>
+                    <Fragment>
+                      {checkAvailableSizes(singleProduct && singleProduct.size)
+                        .length === 0
+                        ? 'SOLD OUT'
+                        : checkAvailableSizes(
+                            singleProduct && singleProduct.size
+                          ).map((size, index) => (
+                            <span key={index}>
+                              {index !== 0 ? '  |  ' : ''}
+                              {size && size.toUpperCase()}
+                            </span>
+                          ))}
+                    </Fragment>
+                  </Text>
+                </Col>
+                <Col xl="6" sm="12">
+                  <CartPill
+                    retrigger={valueInCartRetrigger}
+                    quantity={valueInCart}
+                  ></CartPill>
+                </Col>
+              </Row>
+              <br />
+              <Subtitle size="small" align="center">
+                Choose a size:
+              </Subtitle>
+              {checkAvailableSizes(singleProduct && singleProduct.size)
+                .length === 0 ? (
+                <Fragment>
+                  <Text align="center" color="danger">
+                    SOLD OUT
+                  </Text>
+                  <Text align="center" color="primary">
+                    We will re-stock shortly. Give us a week or two
+                  </Text>
+                </Fragment>
+              ) : (
+                <SizeBtns
+                  callback={(data: number) => {
+                    updateValueInCart(data);
+
+                    if (valueInCart === data) {
+                      updateValueInCartRetrigger(!valueInCartRetrigger);
+                    }
+                  }}
+                  productId={singleProduct ? singleProduct._id : ''}
+                  action={addToCart}
+                  allSizes={singleProduct && singleProduct.size}
+                  sizes={checkAvailableSizes(
+                    singleProduct && singleProduct.size
+                  )}
+                />
+              )}
+            </section>
+          </Col>
+        </Row>
+        <SizedBox></SizedBox>
+        <Title align="paragraph" size="small">
+          Similar products
+        </Title>
+        <ProductsList
+          productCardsSize="small"
+          fixedWidth={true}
+          horizontalScroll={true}
+          scrollOnlyPhones={false}
+          withFilters={false}
+          pagination={false}
+          itemsPerPage={5}
+          initFiltrString={`sort=sold-1&category=${singleProduct &&
+            singleProduct.category}`}
+          fetchAll={true}
+          productsState="similar"
+        />
+
+        <Title align="paragraph" size="small">
+          Our bestsellers
+        </Title>
+        <ProductsList
+          productCardsSize="small"
+          fixedWidth={true}
+          horizontalScroll={true}
+          scrollOnlyPhones={false}
+          withFilters={false}
+          pagination={false}
+          itemsPerPage={5}
+          initFiltrString="sort=sold-1"
+          fetchAll={true}
+          productsState="bestsellers"
+        />
+      </Fragment>
     );
   };
 
@@ -152,4 +197,4 @@ const ProductDetails = (props: Props) => {
   return <p>loading</p>;
 };
 
-export default ProductDetails;
+export default withRouter(ProductDetails);

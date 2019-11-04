@@ -1,15 +1,15 @@
 // VARs
 @import 'variables';
 
-// FONTS and TYPO
-@import 'fonts';
-@import 'typography';
-
 // MIXINS
 @import 'mixins/fade';
 @import 'mixins/hover';
 @import 'mixins/rwd';
 @import 'mixins/shadow';
+
+// FONTS and TYPO
+@import 'fonts';
+@import 'typography';
 
 // GRID
 @import 'layout/flex_grid';
