@@ -13,6 +13,8 @@ import Flex from '../FlexGrid/FlexContainer';
 
 import style from '../../styles/main.module.scss';
 
+import { fadeOut } from '../../animations/fades';
+
 import { notify } from '../../features/Notification/Notification';
 
 import { cartItemType } from '../../types/productCartData';
@@ -44,8 +46,10 @@ const CartItem = (props: IProps) => {
     sizeQ: any,
     index: number
   ) => {
+    const itemRef = React.createRef<HTMLDivElement>();
+
     return (
-      <div key={index} className={style.cart_item_container}>
+      <div ref={itemRef} key={index} className={style.cart_item_container}>
         <Row>
           <Col xs="12" sm="auto" md="3">
             <Link to={`/products/${_id}`}>
@@ -91,8 +95,10 @@ const CartItem = (props: IProps) => {
                     size="small"
                     type="primary"
                     action={() => {
-                      deleteAction(_id, productSize);
-                      notify(`${name} was deleted from the cart`, 5000);
+                      fadeOut(itemRef.current, () => {
+                        deleteAction(_id, productSize);
+                        notify(`${name} was deleted from the cart`, 5000);
+                      });
                     }}
                   >
                     DELETE

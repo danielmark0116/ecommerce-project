@@ -14,14 +14,20 @@ interface IProps {
   action: Function;
   allSizes: any; // available sizes for given item in stock
   productId: string;
+  callback: Function;
 }
 
 const SizeBtns = (props: IProps) => {
-  const { sizes, action, allSizes, productId } = props;
+  const { sizes, action, allSizes, productId, callback } = props;
   const [activeSize, toggleActiveSize] = useState('');
   const [quantity, changeQuantity] = useState(1);
   const [canIncrement, toggleIncrement] = useState(true);
   const [isInCart, toggleIsInCart] = useState(false);
+  const [presentQInCart, updateQFromCart] = useState(0);
+
+  useEffect(() => {
+    callback(presentQInCart);
+  }, [presentQInCart]);
 
   useEffect(() => {
     const alreadyInCart = _.find(getCart(), ['id', productId]);
@@ -43,8 +49,11 @@ const SizeBtns = (props: IProps) => {
       if (presentCartQValue === 0) {
         toggleIsInCart(false);
       }
+
+      updateQFromCart(presentCartQValue);
     } else {
       toggleIncrement(true);
+      updateQFromCart(0);
     }
   }, [quantity, activeSize]);
 
@@ -60,6 +69,7 @@ const SizeBtns = (props: IProps) => {
                 action={() => {
                   toggleActiveSize(size);
                   changeQuantity(1);
+                  callback(presentQInCart);
                 }}
                 type={size === activeSize ? 'primary' : 'secondary'}
               >
@@ -128,7 +138,11 @@ const SizeBtns = (props: IProps) => {
               action(activeSize, quantity);
               changeQuantity(1);
               toggleIsInCart(true);
-              notify(`Size ${activeSize.toUpperCase()} added to cart`, 5000);
+              notify(
+                `Size ${activeSize.toUpperCase()} (x${quantity}) added to cart`,
+                5000
+              );
+              updateQFromCart(presentQInCart + quantity);
             }}
             disabled={activeSize === '' ? true : canIncrement ? false : true}
             type="primary"

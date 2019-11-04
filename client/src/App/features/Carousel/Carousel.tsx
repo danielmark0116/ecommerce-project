@@ -72,7 +72,7 @@ const Carousel = () => {
                   <Image
                     size="small"
                     picString={
-                      'https://s3.house.pl/media/catalog/product/cache/1200/a4e40ebdc3e371adff845072e1c73f37/W/P/WP544-99X-001.jpg'
+                      'https://images.pexels.com/photos/2146756/pexels-photo-2146756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
                     }
                   />
                 </div>
@@ -88,7 +88,7 @@ const Carousel = () => {
                   <Image
                     size="medium"
                     picString={
-                      'https://s3.house.pl/media/catalog/product/cache/1200/a4e40ebdc3e371adff845072e1c73f37/W/P/WP544-99X-001.jpg'
+                      'https://images.pexels.com/photos/2146756/pexels-photo-2146756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
                     }
                   />
                 </div>
@@ -116,7 +116,7 @@ const Carousel = () => {
                   <Image
                     size="small"
                     picString={
-                      'https://s3.house.pl/media/catalog/product/cache/1200/a4e40ebdc3e371adff845072e1c73f37/W/P/WP544-99X-001.jpg'
+                      'https://images.pexels.com/photos/1879671/pexels-photo-1879671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
                     }
                   />
                 </div>
@@ -132,7 +132,7 @@ const Carousel = () => {
                   <Image
                     size="medium"
                     picString={
-                      'https://s3.house.pl/media/catalog/product/cache/1200/a4e40ebdc3e371adff845072e1c73f37/W/P/WP544-99X-001.jpg'
+                      'https://images.pexels.com/photos/1879671/pexels-photo-1879671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
                     }
                   />
                 </div>

@@ -1,13 +1,15 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Row, Col } from 'reactstrap';
 
 import Image from '../../common/Image/Image';
 import Title from '../../common/Title/Title';
+import CartPill from '../CartPill/CartPill';
 import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import Text from '../../common/Text/Text';
 import SizeBtns from './SizeBtns';
 import Loader from '../../common/Loader/Loader';
+import SizedBox from '../../common/SizedBox/SizedBox';
 
 import _ from 'lodash';
 
@@ -23,6 +25,8 @@ type Props = stateToProps & dispatchToProps;
 const ProductDetails = (props: Props) => {
   const { productId, singleProduct, getProductById } = props;
   const { pending, success, error } = props.singleProductRequestData;
+
+  const [valueInCart, updateValueInCart] = useState(0);
 
   const imageRef = React.createRef<HTMLElement>();
   const descRef = React.createRef<HTMLElement>();
@@ -78,22 +82,29 @@ const ProductDetails = (props: Props) => {
             </Subtitle>
             <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
             <br />
-            <Subtitle size="small">Available sizes:</Subtitle>
-            <Text>
-              <Fragment>
-                {checkAvailableSizes(singleProduct && singleProduct.size)
-                  .length === 0
-                  ? 'SOLD OUT'
-                  : checkAvailableSizes(
-                      singleProduct && singleProduct.size
-                    ).map((size, index) => (
-                      <span key={index}>
-                        {index !== 0 ? '  |  ' : ''}
-                        {size && size.toUpperCase()}
-                      </span>
-                    ))}
-              </Fragment>
-            </Text>
+            <Row>
+              <Col xl="6" sm="12">
+                <Subtitle size="small">Available sizes:</Subtitle>
+                <Text>
+                  <Fragment>
+                    {checkAvailableSizes(singleProduct && singleProduct.size)
+                      .length === 0
+                      ? 'SOLD OUT'
+                      : checkAvailableSizes(
+                          singleProduct && singleProduct.size
+                        ).map((size, index) => (
+                          <span key={index}>
+                            {index !== 0 ? '  |  ' : ''}
+                            {size && size.toUpperCase()}
+                          </span>
+                        ))}
+                  </Fragment>
+                </Text>
+              </Col>
+              <Col xl="6" sm="12">
+                <CartPill quantity={valueInCart}></CartPill>
+              </Col>
+            </Row>
             <br />
             <Subtitle size="small" align="center">
               Choose a size:
@@ -110,6 +121,7 @@ const ProductDetails = (props: Props) => {
               </Fragment>
             ) : (
               <SizeBtns
+                callback={(data: number) => updateValueInCart(data)}
                 productId={singleProduct ? singleProduct._id : ''}
                 action={addToCart}
                 allSizes={singleProduct && singleProduct.size}

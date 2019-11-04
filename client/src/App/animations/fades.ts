@@ -1,4 +1,4 @@
-import { TweenMax, Back } from 'gsap';
+import { TweenMax, Back, Power2 } from 'gsap';
 
 const animationTime = 1;
 const easing = Back.easeInOut.config(1);
@@ -25,4 +25,12 @@ export const fadeInDown = (node: any, index: number = 0) => {
     opacity: 0,
     ease: easing
   }).delay(initDelay * index);
+};
+
+export const fadeOut = (node: any, cb: Function = () => null) => {
+  TweenMax.to(node, animationTime * 0.5, {
+    opacity: 0,
+    ease: Power2.easeInOut,
+    onComplete: () => cb()
+  });
 };

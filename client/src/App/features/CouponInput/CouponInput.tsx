@@ -4,6 +4,8 @@ import _ from 'lodash';
 import Form from '../../common/Form/Form';
 import { couponsData } from '../../types/couponsData';
 
+import { notify } from '../Notification/Notification';
+
 interface IProps {
   coupons: couponsData;
   action: Function;
@@ -22,6 +24,8 @@ const CouponInput = (props: IProps) => {
           const couponName = _.get(appliedCoupon, 'name');
           const couponValue = _.get(appliedCoupon, 'value');
           const couponCode = _.get(appliedCoupon, 'code');
+
+          notify(`Succesfully applied ${couponName} promo code`, 5000);
 
           action(couponName, couponValue);
           sessionStorage.setItem('discountCode', JSON.stringify(couponCode));
