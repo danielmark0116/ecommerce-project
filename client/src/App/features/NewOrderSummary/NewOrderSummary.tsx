@@ -11,7 +11,9 @@ import PayBtn from '../../features/PaymentBtn/PaymentBtn';
 
 import { stateToProps, dispatchToProps } from './NewOrderSummaryContainer';
 
-import { injectStripe, Elements } from 'react-stripe-elements';
+import { notify } from '../Notification/Notification';
+
+import { injectStripe } from 'react-stripe-elements';
 
 type Props = stateToProps & dispatchToProps & any;
 
@@ -29,6 +31,10 @@ const NewOrderSummary = (props: Props) => {
       getOneOrder(newOrderId);
     }
   }, ['']);
+
+  useEffect(() => {
+    success && notify('Successfully created new order', 5000);
+  }, [success]);
 
   if (pending) return <Loader></Loader>;
   if (error) return <Redirect to="/"></Redirect>;

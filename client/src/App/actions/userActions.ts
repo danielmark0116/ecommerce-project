@@ -5,6 +5,8 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { updateToken } from '../helpers/fetchToken';
 
+import { notify } from '../features/Notification/Notification';
+
 // ACTIONS
 export const userGetAddresses = (payload: userAddress[]): ActionTypes => ({
   type: types.USER_GET_ADDRESSES,
@@ -77,6 +79,7 @@ export const userAddAddressThunk = (userAddress: userAddress) => {
 
       dispatch(userAddAddress(userAddresses));
       dispatch(userAddAddressSuccess());
+      notify('Successfully added new address', 5000);
     } catch (e) {
       dispatch(userAddAddressFail(e.message));
     }

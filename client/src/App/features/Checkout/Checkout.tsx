@@ -24,7 +24,7 @@ const Checkout = (props: Props) => {
   const [discount, toggleDiscount] = useState(false);
   const [discountValue, toggleDiscountValue] = useState(1);
   const [discountName, toggleDiscountName] = useState('');
-  const [activeAddress, toggleActiveAddress] = useState(0);
+  const [activeAddress, toggleActiveAddress] = useState(-1);
   const [addNewAddress, toggleaddNewAddress] = useState(false);
   const [activeDelivery, toggleActiveDelivery] = useState(0);
 
@@ -124,7 +124,12 @@ const Checkout = (props: Props) => {
           ))}
           <br />
           <Button
-            disabled={!isLoggedIn || newOrderLoading}
+            disabled={
+              !isLoggedIn ||
+              newOrderLoading ||
+              activeAddress === -1 ||
+              userAddresses.length === 0
+            }
             action={() => {
               createNewOrder(
                 userAddresses[activeAddress],
@@ -139,7 +144,13 @@ const Checkout = (props: Props) => {
             }}
             type="primary"
           >
-            {newOrderLoading ? 'Creating new order' : 'Order'}
+            {userAddresses.length === 0
+              ? 'Add you address first'
+              : activeAddress === -1
+              ? 'Choose address'
+              : newOrderLoading
+              ? 'Creating new order'
+              : 'Order'}
           </Button>
         </Col>
         <Col sm="12" xl="4">
