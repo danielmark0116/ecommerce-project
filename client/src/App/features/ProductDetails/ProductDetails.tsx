@@ -11,12 +11,12 @@ import Loader from '../../common/Loader/Loader';
 
 import _ from 'lodash';
 
+import { fadeInUp } from '../../animations/fades';
+
 import { checkAvailableSizes } from '../../helpers/availableSizes';
-import { saveToLocalStore, getCart, appendCart } from '../../helpers/cart';
+import { saveToLocalStore } from '../../helpers/cart';
 
 import { stateToProps, dispatchToProps } from './ProductDetailsContainer';
-
-import ReactDOM from 'react-dom';
 
 type Props = stateToProps & dispatchToProps;
 
@@ -24,9 +24,19 @@ const ProductDetails = (props: Props) => {
   const { productId, singleProduct, getProductById } = props;
   const { pending, success, error } = props.singleProductRequestData;
 
+  const imageRef = React.createRef<HTMLElement>();
+  const descRef = React.createRef<HTMLElement>();
+
   useEffect(() => {
     getProductById(productId);
   }, ['']);
+
+  useEffect(() => {
+    if (singleProduct && success) {
+      fadeInUp(imageRef.current, 1);
+      fadeInUp(descRef.current, 3);
+    }
+  }, [singleProduct, success]);
 
   const addToCart = (productSize: string, quantity: number) => {
     const { singleProduct } = props;
@@ -42,67 +52,71 @@ const ProductDetails = (props: Props) => {
     return (
       <Row>
         <Col md="12" xl="5">
-          <Image
-            ribbon={(singleProduct && singleProduct.ribbon) || ''}
-            picString={(singleProduct && singleProduct.img) || ''}
-          />
+          <section ref={imageRef}>
+            <Image
+              ribbon={(singleProduct && singleProduct.ribbon) || ''}
+              picString={(singleProduct && singleProduct.img) || ''}
+            />
+          </section>
         </Col>
         <Col md="12" xl="7">
-          <Title size="small">
-            {(singleProduct && singleProduct.name) || ''}
-          </Title>
-          <Subtext size="small">
-            <Fragment>
-              {(singleProduct && singleProduct.sex) || ''}
-              {' | '}
-              {(singleProduct && singleProduct.category) || ''}
-            </Fragment>
-          </Subtext>
-          <Subtitle>
-            <Fragment>
-              {(singleProduct && singleProduct.price) || ''} $
-            </Fragment>
-          </Subtitle>
-          <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
-          <br />
-          <Subtitle size="small">Available sizes:</Subtitle>
-          <Text>
-            <Fragment>
-              {checkAvailableSizes(singleProduct && singleProduct.size)
-                .length === 0
-                ? 'SOLD OUT'
-                : checkAvailableSizes(singleProduct && singleProduct.size).map(
-                    (size, index) => (
+          <section ref={descRef}>
+            <Title size="small">
+              {(singleProduct && singleProduct.name) || ''}
+            </Title>
+            <Subtext size="small">
+              <Fragment>
+                {(singleProduct && singleProduct.sex) || ''}
+                {' | '}
+                {(singleProduct && singleProduct.category) || ''}
+              </Fragment>
+            </Subtext>
+            <Subtitle>
+              <Fragment>
+                {(singleProduct && singleProduct.price) || ''} $
+              </Fragment>
+            </Subtitle>
+            <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
+            <br />
+            <Subtitle size="small">Available sizes:</Subtitle>
+            <Text>
+              <Fragment>
+                {checkAvailableSizes(singleProduct && singleProduct.size)
+                  .length === 0
+                  ? 'SOLD OUT'
+                  : checkAvailableSizes(
+                      singleProduct && singleProduct.size
+                    ).map((size, index) => (
                       <span key={index}>
                         {index !== 0 ? '  |  ' : ''}
                         {size && size.toUpperCase()}
                       </span>
-                    )
-                  )}
-            </Fragment>
-          </Text>
-          <br />
-          <Subtitle size="small" align="center">
-            Choose a size:
-          </Subtitle>
-          {checkAvailableSizes(singleProduct && singleProduct.size).length ===
-          0 ? (
-            <Fragment>
-              <Text align="center" color="danger">
-                SOLD OUT
-              </Text>
-              <Text align="center" color="primary">
-                We will re-stock shortly. Give us a week or two
-              </Text>
-            </Fragment>
-          ) : (
-            <SizeBtns
-              productId={singleProduct ? singleProduct._id : ''}
-              action={addToCart}
-              allSizes={singleProduct && singleProduct.size}
-              sizes={checkAvailableSizes(singleProduct && singleProduct.size)}
-            />
-          )}
+                    ))}
+              </Fragment>
+            </Text>
+            <br />
+            <Subtitle size="small" align="center">
+              Choose a size:
+            </Subtitle>
+            {checkAvailableSizes(singleProduct && singleProduct.size).length ===
+            0 ? (
+              <Fragment>
+                <Text align="center" color="danger">
+                  SOLD OUT
+                </Text>
+                <Text align="center" color="primary">
+                  We will re-stock shortly. Give us a week or two
+                </Text>
+              </Fragment>
+            ) : (
+              <SizeBtns
+                productId={singleProduct ? singleProduct._id : ''}
+                action={addToCart}
+                allSizes={singleProduct && singleProduct.size}
+                sizes={checkAvailableSizes(singleProduct && singleProduct.size)}
+              />
+            )}
+          </section>
         </Col>
       </Row>
     );

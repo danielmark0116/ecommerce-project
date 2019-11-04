@@ -13,6 +13,8 @@ import Flex from '../FlexGrid/FlexContainer';
 
 import style from '../../styles/main.module.scss';
 
+import { notify } from '../../features/Notification/Notification';
+
 import { cartItemType } from '../../types/productCartData';
 import Title from '../Title/Title';
 
@@ -55,13 +57,13 @@ const CartItem = (props: IProps) => {
               <Title size="small">{name}</Title>
             </Link>
             <Subtext size="small">{`${category}  |  ${sex}`}</Subtext>
-            <Subtitle size="small">{`Size: ${productSize.toUpperCase()}`}</Subtitle>
+            <Subtitle size="small">{`Size: ${productSize.toUpperCase()} | Price: ${price} $`}</Subtitle>
             {edit ? (
               <Flex>
-                <Fragment>
+                {/* <Fragment>
                   <Subtitle>{`${price} $`}</Subtitle>
                   <Subtext size="small">for one</Subtext>
-                </Fragment>
+                </Fragment> */}
               </Flex>
             ) : (
               <Flex>
@@ -75,8 +77,8 @@ const CartItem = (props: IProps) => {
               </Flex>
             )}
             {edit && (
-              <Fragment>
-                <Flex>
+              <Flex>
+                <Fragment>
                   <QuantityBtn
                     itemQ={sizeQ}
                     availableQ={availableProductsSizeQ}
@@ -84,17 +86,19 @@ const CartItem = (props: IProps) => {
                       updateAction(_id, productSize, quantity)
                     }
                   />
-                </Flex>
-                <Flex>
+
                   <Button
                     size="small"
                     type="primary"
-                    action={() => deleteAction(_id, productSize)}
+                    action={() => {
+                      deleteAction(_id, productSize);
+                      notify(`${name} was deleted from the cart`, 5000);
+                    }}
                   >
                     DELETE
                   </Button>
-                </Flex>
-              </Fragment>
+                </Fragment>
+              </Flex>
             )}
             <Flex>
               <Fragment>

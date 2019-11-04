@@ -23,6 +23,9 @@ const ProductImage = (props: IProps) => {
       }
     >
       <div className={style.product_image_container}>
+        <div className={style.product_image_loader}>
+          <i className="fas fa-spinner"></i>
+        </div>
         <img src={props.pic} alt="" />
       </div>
 

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import ProductImage from '../ProductImage/ProductImage';
 
 import style from '../../styles/main.module.scss';
+
+import { fadeInUp } from '../../animations/fades';
+
 import { productData } from '../../types/productData';
 
 interface IProps {
   productData: productData;
   cardSize: 'small' | 'normal';
+  cardIndex: number;
 }
 
 const ProductCard = (props: IProps) => {
@@ -23,10 +27,16 @@ const ProductCard = (props: IProps) => {
     size
   } = props.productData;
 
-  const { cardSize } = props;
+  const cardRef = React.createRef<HTMLDivElement>();
+
+  const { cardSize, cardIndex } = props;
+
+  useEffect(() => {
+    fadeInUp(cardRef.current, cardIndex);
+  }, ['']);
 
   return (
-    <div className={style.product_card_container}>
+    <div ref={cardRef} className={style.product_card_container}>
       <Link to={`/products/${_id}`}>
         <ProductImage
           imageSize={cardSize}
@@ -45,7 +55,6 @@ const ProductCard = (props: IProps) => {
         </Link>
       </div>
       <Link to={`/products/${_id}`}>
-        {/* <div className={style.product_more}>Click for details</div> */}
         <div className={style.product_price}>{price} $</div>
       </Link>
     </div>
@@ -53,7 +62,8 @@ const ProductCard = (props: IProps) => {
 };
 
 ProductCard.defaultProps = {
-  cardSize: 'normal'
+  cardSize: 'normal',
+  cardIndex: 0
 };
 
 export default ProductCard;

@@ -2,26 +2,27 @@ import { TweenMax, Back } from 'gsap';
 
 const animationTime = 1;
 const easing = Back.easeInOut.config(1);
+const initDelay = 0.1;
 
-export const fadeIn = (node: any) => {
+export const fadeIn = (node: any, index: number = 0) => {
   TweenMax.from(node, animationTime, {
     opacity: 0,
     ease: easing
-  });
+  }).delay(initDelay * index);
 };
 
-export const fadeInUp = (node: any) => {
+export const fadeInUp = (node: any, index: number = 0) => {
   TweenMax.from(node, animationTime, {
-    bottom: '-100px',
+    y: '-100px',
     opacity: 0,
     ease: easing
-  });
+  }).delay(initDelay * index);
 };
 
-export const fadeInDown = (node: any) => {
+export const fadeInDown = (node: any, index: number = 0) => {
   TweenMax.from(node, animationTime, {
     top: '-100px',
     opacity: 0,
     ease: easing
-  });
+  }).delay(initDelay * index);
 };

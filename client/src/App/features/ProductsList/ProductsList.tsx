@@ -124,6 +124,7 @@ const ProductsList = (props: Props) => {
                 products.map((product, index) => (
                   <FlexItem key={index}>
                     <ProductCard
+                      cardIndex={index}
                       cardSize={productCardsSize}
                       productData={product}
                     ></ProductCard>

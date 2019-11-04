@@ -12,6 +12,8 @@ import Center from '../../common/Center/Center';
 
 import style from '../../styles/main.module.scss';
 
+import { fadeInDown } from '../../animations/fades';
+
 import { handleCarousel } from '../../animations/carousel';
 
 const Carousel = () => {
@@ -19,6 +21,11 @@ const Carousel = () => {
   // props
 
   const carouselRef = React.createRef<HTMLDivElement>();
+  const carouselContainerRef = React.createRef<HTMLDivElement>();
+
+  useEffect(() => {
+    fadeInDown(carouselContainerRef.current, 3);
+  }, ['']);
 
   useEffect(() => {
     handleCarousel(carouselRef.current, carouselSlide);
@@ -29,7 +36,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className={style.custom_carousel_container}>
+    <div ref={carouselContainerRef} className={style.custom_carousel_container}>
       <div
         onClick={() => carouselSlide > 0 && carouselClick(-1)}
         className={style.carousel_btn_prev}

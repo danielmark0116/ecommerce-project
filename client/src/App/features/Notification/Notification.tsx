@@ -36,13 +36,14 @@ export default class Notification extends Component<{}, IState> {
     emitter.on('show', (msg: string) => {
       const { isActive } = this.state;
 
-      this.updateNotificationMsg(msg);
-
       clearTimeout(this.state.timer);
 
       if (isActive) {
-        popNotification(this.state.notRef.current);
+        popNotification(this.state.notRef.current, () => {
+          this.updateNotificationMsg(msg);
+        });
       } else {
+        this.updateNotificationMsg(msg);
         toggleNotification(this.state.notRef.current, true, () => null);
       }
 

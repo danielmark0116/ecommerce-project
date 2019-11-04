@@ -24,14 +24,15 @@ export const toggleNotification = (
   }
 };
 
-export const popNotification = (node: any) => {
+export const popNotification = (node: any, cb: Function = () => null) => {
   const timeL = new TimelineLite();
 
   timeL
     .to(node, animationTime, {
       opacity: 0,
       right: '-100%',
-      ease: easingOut
+      ease: easingOut,
+      onComplete: () => cb()
     })
     .to(node, animationTime, {
       right: '40px',
