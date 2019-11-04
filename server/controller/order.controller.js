@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Order = require('../model/order.model');
 const Product = require('../model/product.model');
+const mailer = require('../utils/mailer');
 
 exports.getOrderById = async (req, res) => {
   const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
@@ -88,6 +89,12 @@ exports.createOrder = async (req, res) => {
 
   try {
     let newOrder = await new Order(newOrderData).save();
+
+    mailer.sendEmailNotification(
+      userEmail,
+      'New Order',
+      'Your order was created'
+    );
 
     res.json({
       orders: new Array(newOrder),

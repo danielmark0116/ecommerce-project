@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const _ = require('lodash');
 const Order = require('../model/order.model');
+const mailer = require('../utils/mailer');
 
 exports.startPayment = async (req, res) => {
   const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
@@ -109,6 +110,12 @@ exports.fullfillPayment = async (req, res) => {
           orderData.paymentIntentId = piId;
 
           await orderData.save();
+
+          mailer.sendEmailNotification(
+            userEmail,
+            'Payment success',
+            'Your order was succesfully paid'
+          );
 
           res.json({
             msg: 'Order is in DB, payment fullfilled',
