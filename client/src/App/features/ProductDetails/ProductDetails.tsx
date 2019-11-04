@@ -27,6 +27,7 @@ const ProductDetails = (props: Props) => {
   const { pending, success, error } = props.singleProductRequestData;
 
   const [valueInCart, updateValueInCart] = useState(0);
+  const [valueInCartRetrigger, updateValueInCartRetrigger] = useState(false);
 
   const imageRef = React.createRef<HTMLElement>();
   const descRef = React.createRef<HTMLElement>();
@@ -102,7 +103,10 @@ const ProductDetails = (props: Props) => {
                 </Text>
               </Col>
               <Col xl="6" sm="12">
-                <CartPill quantity={valueInCart}></CartPill>
+                <CartPill
+                  retrigger={valueInCartRetrigger}
+                  quantity={valueInCart}
+                ></CartPill>
               </Col>
             </Row>
             <br />
@@ -121,7 +125,13 @@ const ProductDetails = (props: Props) => {
               </Fragment>
             ) : (
               <SizeBtns
-                callback={(data: number) => updateValueInCart(data)}
+                callback={(data: number) => {
+                  updateValueInCart(data);
+
+                  if (valueInCart === data) {
+                    updateValueInCartRetrigger(!valueInCartRetrigger);
+                  }
+                }}
                 productId={singleProduct ? singleProduct._id : ''}
                 action={addToCart}
                 allSizes={singleProduct && singleProduct.size}

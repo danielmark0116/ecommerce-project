@@ -6,10 +6,11 @@ import { animatePillBg, pillBounce } from '../../animations/cart_pill';
 
 interface IProps {
   quantity: number;
+  retrigger: Boolean;
 }
 
 const CartPill = (props: IProps) => {
-  const { quantity } = props;
+  const { quantity, retrigger } = props;
   const [renderedQuantity, reassignQuantity] = useState(quantity);
 
   const pillRef = React.createRef<HTMLDivElement>();
@@ -21,6 +22,10 @@ const CartPill = (props: IProps) => {
       reassignQuantity(quantity);
     });
   }, [quantity]);
+
+  useEffect(() => {
+    pillBounce(pillRef.current);
+  }, [retrigger]);
 
   return (
     <div ref={pillRef} className={style.cart_pill_container}>
