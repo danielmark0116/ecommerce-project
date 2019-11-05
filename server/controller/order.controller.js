@@ -52,7 +52,7 @@ exports.createOrder = async (req, res) => {
 
       const soldQ = Object.values(sizes).reduce((a, b) => a + b);
 
-      console.log(soldQ);
+      // console.log(soldQ);
 
       prod
         .update({
@@ -90,11 +90,10 @@ exports.createOrder = async (req, res) => {
   try {
     let newOrder = await new Order(newOrderData).save();
 
-    mailer.sendEmailNotification(
-      userEmail,
-      'New Order',
-      'Your order was created'
-    );
+    mailer.orderCreate(userEmail, 'New Order', {
+      userName,
+      orderId: newOrder._id
+    });
 
     res.json({
       orders: new Array(newOrder),
@@ -103,6 +102,7 @@ exports.createOrder = async (req, res) => {
       msg: 'Created new order'
     });
   } catch (e) {
+    console.log(e.message);
     res.status(500).json({
       success: false,
       error: true,

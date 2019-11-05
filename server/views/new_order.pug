@@ -1,0 +1,14 @@
+extends mail_layout.pug
+
+block content
+    h2 Hello #{userName}
+    p 
+    | Your order of number 
+    - var url = `http://localhost:3000/order/${orderId}`;
+    b: a(href=url) #{orderId} 
+    | was succesfully created!
+    p You can check the details by visiting the link from above.
+    p After successfull payment you should receive another email confirmation
+    p After receiving the payment, we will ship everything to you as soon as possible
+    p In case of any questions, feel free to reach us by e-mail or by phone. All the contact info below
+    p Message was generated automatically. Please do not reply to this address

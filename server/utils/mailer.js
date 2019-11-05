@@ -1,5 +1,7 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
+const pug = require('pug');
+const path = require('path');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -9,22 +11,44 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-exports.sendEmailNotification = function(recipient, subject, text) {
+const senderEmail = 'ECOMMERCE | Notification <ecommerce.danielmark@gmail.com>';
+
+exports.orderCreate = function(recipient, subject, data) {
   const mailOptions = {
-    from: 'ECOMMERCE <ecommerce.danielmark@gmail.com>',
+    from: senderEmail,
     to: recipient,
     subject: subject,
-    text: text
+    html: pug.renderFile(__dirname + '/../views/new_order.pug', {
+      userName: data.userName,
+      orderId: data.orderId
+    })
   };
-
-  // TEMPLATING
-  // https://stackoverflow.com/questions/39489229/pass-variable-to-html-template-in-nodemailer
 
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
     } else {
-      console.log('Email sent: ' + info.response);
+      return null;
+    }
+  });
+};
+
+exports.paymentFullfill = function(recipient, subject, data) {
+  const mailOptions = {
+    from: senderEmail,
+    to: recipient,
+    subject: subject,
+    html: pug.renderFile(__dirname + '/../views/payment_fullfill.pug', {
+      userName: data.userName,
+      orderId: data.orderId
+    })
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      return null;
     }
   });
 };

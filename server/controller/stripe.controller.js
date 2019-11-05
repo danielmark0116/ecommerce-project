@@ -74,6 +74,7 @@ const errorResponse = (res, msg) => {
 exports.fullfillPayment = async (req, res) => {
   const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
   const userEmail = userData.email;
+  const userName = userData.name;
   const userId = userData.userId;
   const paymentSessionId = req.body.sessionId;
 
@@ -111,11 +112,10 @@ exports.fullfillPayment = async (req, res) => {
 
           await orderData.save();
 
-          mailer.sendEmailNotification(
-            userEmail,
-            'Payment success',
-            'Your order was succesfully paid'
-          );
+          mailer.paymentFullfill(userEmail, 'Payment success', {
+            userName,
+            orderId: orderData._id
+          });
 
           res.json({
             msg: 'Order is in DB, payment fullfilled',
