@@ -2,10 +2,12 @@ extends mail_layout.pug
 
 block content
     h2 Hello #{userName}
+    h3 New order
     p 
     | Your order of number 
-    - var url = `http://localhost:3000/order/${orderId}`;
-    b: a(href=url) #{orderId} 
+    - var link = `/order/${orderId}`;
+    - var urlDomain = `${domain}`;
+    b: a(href=urlDomain + link) #{orderId} 
     | was succesfully created!
     p You can check the details by visiting the link from above.
     p After successfull payment you should receive another email confirmation

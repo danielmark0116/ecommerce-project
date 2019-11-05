@@ -2,10 +2,12 @@ extends mail_layout.pug
 
 block content
     h2 Hello #{userName}
+    h3 Successfull payment
     p 
     | Your order of number 
-    - var url = `http://localhost:3000/order/${orderId}`;
-    b: a(href=url) #{orderId} 
+    - var link = `/order/${orderId}`;
+    - var urlDomain = `${domain}`;
+    b: a(href=urlDomain + link) #{orderId} 
     | was succesfully paid!
     p We will ship to you shortly
     p In case of any questions, feel free to reach us by e-mail or by phone. All the contact info below
