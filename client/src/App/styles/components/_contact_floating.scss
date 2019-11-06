@@ -1,0 +1,98 @@
+$contact-floating-size: 58px;
+
+.contact_floating_container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 30px;
+  right: 20px;
+  width: $contact-floating-size;
+  height: $contact-floating-size;
+  background: $green;
+  border-radius: 50%;
+  z-index: 30;
+  transition: width 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  @include shadow-strong(10px);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .inner_border {
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
+    border: 2px solid $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include shadow(10px);
+
+    i {
+      color: $white;
+      @include shadow(10px);
+    }
+  }
+
+  .contact_data_container {
+    width: 100%;
+    display: none;
+    color: $white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+
+    .title {
+      color: $white;
+    }
+  }
+
+  &_active {
+    @extend .contact_floating_container;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+
+    .inner_border {
+      display: none;
+    }
+
+    .contact_data_container {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .msg_blob {
+    position: absolute;
+    top: -50px;
+    left: -200px;
+    height: 30px;
+    width: 210px;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding: 0 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: $dark-blue;
+    border-radius: $border-radius * 2;
+    background: $white;
+    @include shadow-strong(10px);
+
+    &::before {
+      content: '';
+      background: inherit;
+      position: absolute;
+      bottom: -10px;
+      right: 5px;
+      width: 15px;
+      height: 15px;
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+    }
+  }
+}

@@ -28,12 +28,12 @@ const UserBar = (props: stateToProps & dispatchToProps) => {
     <div ref={userBarRef} className={style.user_bar}>
       <Container>
         <p>
-          Hi there, <b>{userName}! </b>
+          Hi, <b>{userName}! </b>
           {orderActiveQ !== null ? (
             <span>
-              You have <b>{orderActiveQ}</b> active orders.
+              You have <b>{orderActiveQ} </b>active orders.
               <Link to="/profile">
-                <b> Check your profile</b>
+                <b> More info</b>
               </Link>
             </span>
           ) : (

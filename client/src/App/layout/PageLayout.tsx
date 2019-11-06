@@ -9,6 +9,7 @@ import Footer from '../features/Footer/Footer';
 import NewsBar from '../features/NewsBar/NewsBar';
 import UserBar from '../features/UserBar/UserBar';
 import Notification from '../features/Notification/Notification';
+import ContactFloating from '../features/ContactFloating/ContactFloating';
 
 import style from '../styles/main.module.scss';
 import { AppState } from '../reducers';
@@ -30,6 +31,7 @@ const PageLayout = (props: IProps & stateToProps) => {
   return (
     <Fragment>
       <Notification></Notification>
+      <ContactFloating></ContactFloating>
       <NewsBar></NewsBar>
       <Navbar paths={paths} />
       {isLoggedIn && <UserBar />}
