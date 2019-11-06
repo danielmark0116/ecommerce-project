@@ -102,7 +102,31 @@ exports.createOrder = async (req, res) => {
       msg: 'Created new order'
     });
   } catch (e) {
-    console.log(e.message);
+    res.status(500).json({
+      success: false,
+      error: true,
+      msg: e.message
+    });
+  }
+};
+
+exports.getUsersActiveOrdersQ = async (req, res) => {
+  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userId = userData.userId;
+
+  try {
+    let response = await Order.countDocuments({
+      userId,
+      status: { $in: ['init', 'paid', 'processing', 'sent'] }
+    });
+
+    res.json({
+      response,
+      success: true,
+      error: false,
+      msg: 'Checked the number of users active orders'
+    });
+  } catch (e) {
     res.status(500).json({
       success: false,
       error: true,

@@ -9,6 +9,10 @@ export const selectorOrderNewOrderId = (state: AppState): string => {
   return state.order.newOrderId;
 };
 
+export const selectorOrderActiveQuantity = (state: AppState): number | null => {
+  return state.order.userActiveOrdersQuantity;
+};
+
 export const selectorOrderNewOrderRequestData = (
   state: AppState
 ): requestData => {
@@ -50,6 +54,7 @@ interface initState {
   singleOrderRequestData: requestData;
   userOrders: orderShortData[];
   userOrdersRequestData: requestData;
+  userActiveOrdersQuantity: number | null;
   paymentPending: Boolean;
   paymentSuccess: Boolean;
   paymentFail: Boolean;
@@ -79,6 +84,7 @@ const initState: initState = {
     error: false,
     msg: ''
   },
+  userActiveOrdersQuantity: null,
   paymentPending: false,
   paymentSuccess: false,
   paymentFail: false,
@@ -88,6 +94,8 @@ const initState: initState = {
 
 export function orderReducer(state = initState, action: ActionTypes) {
   switch (action.type) {
+    case types.ORDER_GET_ACTIVE_Q:
+      return { ...state, userActiveOrdersQuantity: action.payload };
     case types.PAYMENT_REDIRECT:
       return { ...state, paymentRedirect: true };
     case types.PAYMENT_ID:

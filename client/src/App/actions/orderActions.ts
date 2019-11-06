@@ -66,6 +66,13 @@ export const orderGetOneFail = (payload: string): ActionTypes => ({
   payload
 });
 
+export const orderGetAllUsersActiveQ = (
+  payload: number | null
+): ActionTypes => ({
+  type: types.ORDER_GET_ACTIVE_Q,
+  payload
+});
+
 export const paymentLoading = (): ActionTypes => ({
   type: types.PAYMENT_LOADING
 });
@@ -125,6 +132,7 @@ export const orderCreateThunk = (
       dispatch(orderCreateSuccess());
       dispatch(orderGetOneThunk(data.orders[0]._id));
       clearCart();
+      dispatch(orderGetUsersActiveOrdersQuantityThunk());
     } catch (e) {
       dispatch(orderCreateFail(e.message));
     }
@@ -132,7 +140,7 @@ export const orderCreateThunk = (
 };
 
 export const orderGetAllUsersThunk = () => {
-  return async (dispatch: Dispatch<ActionTypes>) => {
+  return async (dispatch: Dispatch<ActionTypes | any>) => {
     updateToken();
     dispatch(orderGetAllUsersLoading());
 
@@ -143,6 +151,7 @@ export const orderGetAllUsersThunk = () => {
 
       dispatch(orderGetAllUsers(data.response));
       dispatch(orderGetAllUsersSuccess());
+      dispatch(orderGetUsersActiveOrdersQuantityThunk());
     } catch (e) {
       dispatch(orderGetAllUsersFail(e.message));
     }
@@ -165,6 +174,22 @@ export const orderGetOneThunk = (id: string) => {
       dispatch(orderGetOneSuccess());
     } catch (e) {
       dispatch(orderGetOneFail(e.message));
+    }
+  };
+};
+
+export const orderGetUsersActiveOrdersQuantityThunk = () => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
+    updateToken();
+
+    try {
+      let activeOrders = await axios.get(`/api/order/activeOrdersNumber`);
+
+      let data = await activeOrders.data;
+
+      dispatch(orderGetAllUsersActiveQ(data.response));
+    } catch (e) {
+      dispatch(orderGetAllUsersActiveQ(null));
     }
   };
 };

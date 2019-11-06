@@ -244,6 +244,8 @@ export const ORDER_GET_ALL_USERS_LOADING = 'ORDER_GET_ALL_USERS_LOADING';
 export const ORDER_GET_ALL_USERS_SUCCESS = 'ORDER_GET_ALL_USERS_SUCCESS';
 export const ORDER_GET_ALL_USERS_FAIL = 'ORDER_GET_ALL_USERS_FAIL';
 
+export const ORDER_GET_ACTIVE_Q = 'ORDER_GET_ACTIVE_Q';
+
 export const PAYMENT_LOADING = 'PAYMENT_LOADING';
 export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
 export const PAYMENT_FAIL = 'PAYMENT_FAIL';
@@ -302,6 +304,11 @@ interface orderGetAllUsersSuccessActionType {
 interface orderGetAllUsersFailActionType {
   type: typeof ORDER_GET_ALL_USERS_FAIL;
   payload: string;
+}
+
+interface orderGetAllUsersActiveOrdersQActionType {
+  type: typeof ORDER_GET_ACTIVE_Q;
+  payload: number | null;
 }
 
 interface paymentLoadingActionType {
@@ -375,6 +382,7 @@ export type ActionTypes =
   | orderGetAllUsersLoadingActionType
   | orderGetAllUsersSuccessActionType
   | orderGetAllUsersFailActionType
+  | orderGetAllUsersActiveOrdersQActionType
   | paymentLoadingActionType
   | paymentSuccessActionType
   | paymentFailActionType

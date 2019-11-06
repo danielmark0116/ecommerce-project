@@ -12,6 +12,12 @@ router.get(
 );
 
 router.get(
+  '/activeOrdersNumber',
+  passport.authenticate('jwt', { session: false }),
+  orderController.getUsersActiveOrdersQ
+);
+
+router.get(
   '/:id',
   passport.authenticate('jwt', { session: false }),
   orderController.getOrderById
