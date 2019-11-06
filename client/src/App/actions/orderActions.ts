@@ -73,6 +73,11 @@ export const orderGetAllUsersActiveQ = (
   payload
 });
 
+export const orderGetAllUsersQ = (payload: number): ActionTypes => ({
+  type: types.ORDER_GET_ALL_Q,
+  payload
+});
+
 export const paymentLoading = (): ActionTypes => ({
   type: types.PAYMENT_LOADING
 });
@@ -139,19 +144,23 @@ export const orderCreateThunk = (
   };
 };
 
-export const orderGetAllUsersThunk = () => {
+export const orderGetAllUsersThunk = (skip: number = 0, limit: number = 1) => {
   return async (dispatch: Dispatch<ActionTypes | any>) => {
     updateToken();
     dispatch(orderGetAllUsersLoading());
 
     try {
-      let response = await axios.get('/api/order');
+      // let response = await axios.get('/api/order');
+      let response = await axios.get(`/api/order/${skip}/${limit}`);
 
       let data = await response.data;
+
+      let ordersQuantity = data.ordersQuantity;
 
       dispatch(orderGetAllUsers(data.response));
       dispatch(orderGetAllUsersSuccess());
       dispatch(orderGetUsersActiveOrdersQuantityThunk());
+      dispatch(orderGetAllUsersQ(ordersQuantity));
     } catch (e) {
       dispatch(orderGetAllUsersFail(e.message));
     }

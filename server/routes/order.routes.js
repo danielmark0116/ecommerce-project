@@ -12,6 +12,12 @@ router.get(
 );
 
 router.get(
+  '/:skip/:limit',
+  passport.authenticate('jwt', { session: false }),
+  orderController.getUsersOrdersInChunks
+);
+
+router.get(
   '/activeOrdersNumber',
   passport.authenticate('jwt', { session: false }),
   orderController.getUsersActiveOrdersQ

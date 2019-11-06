@@ -69,12 +69,14 @@ const Carousel = () => {
                 <br />
 
                 <div className={style.carousel_mobile_image}>
-                  <Image
-                    size="small"
-                    picString={
-                      'https://images.pexels.com/photos/2146756/pexels-photo-2146756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-                    }
-                  />
+                  <Link to="/products">
+                    <Image
+                      size="small"
+                      picString={
+                        'https://images.pexels.com/photos/2146756/pexels-photo-2146756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+                      }
+                    />
+                  </Link>
                 </div>
 
                 <Center>
@@ -85,12 +87,14 @@ const Carousel = () => {
               </Col>
               <Col sm="12" xl="6">
                 <div className={style.carousel_desktop_image}>
-                  <Image
-                    size="medium"
-                    picString={
-                      'https://images.pexels.com/photos/2146756/pexels-photo-2146756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-                    }
-                  />
+                  <Link to="/products">
+                    <Image
+                      size="medium"
+                      picString={
+                        'https://images.pexels.com/photos/2146756/pexels-photo-2146756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+                      }
+                    />
+                  </Link>
                 </div>
               </Col>
             </Row>
@@ -113,12 +117,14 @@ const Carousel = () => {
                 <br />
 
                 <div className={style.carousel_mobile_image}>
-                  <Image
-                    size="small"
-                    picString={
-                      'https://images.pexels.com/photos/1879671/pexels-photo-1879671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-                    }
-                  />
+                  <Link to="/products">
+                    <Image
+                      size="small"
+                      picString={
+                        'https://images.pexels.com/photos/1879671/pexels-photo-1879671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+                      }
+                    />
+                  </Link>
                 </div>
 
                 <Center>
@@ -129,12 +135,14 @@ const Carousel = () => {
               </Col>
               <Col sm="12" xl="6">
                 <div className={style.carousel_desktop_image}>
-                  <Image
-                    size="medium"
-                    picString={
-                      'https://images.pexels.com/photos/1879671/pexels-photo-1879671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-                    }
-                  />
+                  <Link to="/products">
+                    <Image
+                      size="medium"
+                      picString={
+                        'https://images.pexels.com/photos/1879671/pexels-photo-1879671.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+                      }
+                    />
+                  </Link>
                 </div>
               </Col>
             </Row>

@@ -169,3 +169,46 @@ exports.getUsersOrders = async (req, res) => {
     });
   }
 };
+
+exports.getUsersOrdersInChunks = async (req, res) => {
+  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userId = userData.userId;
+  const skipValue = parseInt(req.params.skip);
+  const limitValue = parseInt(req.params.limit);
+
+  try {
+    let allOrersQuantity = await Order.countDocuments();
+
+    let response = await Order.find({ userId }, [
+      '_id',
+      'userId',
+      'userEmail',
+      'status',
+      'totalValue',
+      'deliveryValue',
+      'status'
+    ])
+      .sort({ createdAt: 'desc' })
+      .skip(skipValue)
+      .limit(limitValue);
+
+    //   _id: string;
+    // userId: string;
+    // userEmail: string;
+    // status: string;
+    // totalValue: number;
+
+    res.json({
+      success: true,
+      error: false,
+      response,
+      ordersQuantity: allOrersQuantity
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      error: true,
+      msg: e.message
+    });
+  }
+};

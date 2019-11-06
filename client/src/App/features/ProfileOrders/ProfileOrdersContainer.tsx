@@ -5,7 +5,8 @@ import { requestData } from '../../types/requestData';
 import { AppState } from '../../reducers';
 import {
   selectorOrderGetAllUsers,
-  selectorOrderGetAllUsersRequestData
+  selectorOrderGetAllUsersRequestData,
+  selectorOrderAllQuantity
 } from '../../reducers/orderReducer';
 import { ThunkDispatch } from 'redux-thunk';
 import { ActionTypes } from '../../actions/actionTypes';
@@ -14,6 +15,7 @@ import { orderGetAllUsersThunk } from '../../actions/orderActions';
 export interface stateToProps {
   userOrders: orderShortData[];
   userOrdersRequestData: requestData;
+  userAllOrdersQuantity: number;
 }
 
 export interface dispatchToProps {
@@ -22,13 +24,15 @@ export interface dispatchToProps {
 
 const mapStateToProps = (state: AppState) => ({
   userOrders: selectorOrderGetAllUsers(state),
+  userAllOrdersQuantity: selectorOrderAllQuantity(state),
   userOrdersRequestData: selectorOrderGetAllUsersRequestData(state)
 });
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, ActionTypes>
 ) => ({
-  getAllUsersOrders: () => dispatch(orderGetAllUsersThunk())
+  getAllUsersOrders: (skip: number = 0, limit: number = 2) =>
+    dispatch(orderGetAllUsersThunk(skip, limit))
 });
 
 export default connect(
