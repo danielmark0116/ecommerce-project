@@ -113,7 +113,13 @@ const ProductsList = (props: Props) => {
             scrollOnlyPhones={scrollOnlyPhones}
           >
             <Fragment>
-              {error && <p>Error</p>}
+              {error && (
+                <Center>
+                  <Text color="danger" align="center">
+                    Seems like there is a problem. Try again later
+                  </Text>
+                </Center>
+              )}
               {pending && <Loader></Loader>}
               {success && products.length === 0 && (
                 <Center>
