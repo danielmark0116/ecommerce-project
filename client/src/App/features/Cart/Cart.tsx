@@ -10,6 +10,8 @@ import Subtext from '../../common/Subtext/Subtext';
 import CartItem from '../../common/CartItem/CartItem';
 import Loader from '../../common/Loader/Loader';
 import Button from '../../common/Button/Button';
+import EmptyCart from '../../common/EmptyCart/EmptyCart';
+import Error from '../../common/Error/Error';
 
 import { evalCartTotal } from '../../helpers/evalCartTotal';
 import CouponInput from '../CouponInput/CouponInput';
@@ -107,13 +109,8 @@ const Cart = (props: Props) => {
       </Fragment>
     );
   if (pending) return <Loader></Loader>;
-  if (error) return <p>Upss... Sth went wrong</p>;
-  if (success)
-    return (
-      <Subtitle size="small" align="center">
-        Cart is empty
-      </Subtitle>
-    );
+  if (error) return <Error />;
+  if (success) return <EmptyCart />;
   return null;
 };
 
