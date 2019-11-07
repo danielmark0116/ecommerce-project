@@ -11,6 +11,7 @@ import Text from '../../common/Text/Text';
 import SizeBtns from './SizeBtns';
 import Loader from '../../common/Loader/Loader';
 import SizedBox from '../../common/SizedBox/SizedBox';
+import Error from '../../common/Error/Error';
 
 import ProductsList from '../ProductsList/ProductsListContainer';
 
@@ -192,9 +193,13 @@ const ProductDetails = (props: Props) => {
   if (pending) return <Loader></Loader>;
   if (success && singleProduct !== null) return renderProductDetails();
   if (singleProduct === null && success)
-    return <p>No such product available</p>;
-  if (error) return <p>sth went wrong</p>;
-  return <p>loading</p>;
+    return (
+      <Text color="warning" align="center">
+        No such product available
+      </Text>
+    );
+  if (error) return <Error />;
+  return <Loader />;
 };
 
 export default withRouter(ProductDetails);

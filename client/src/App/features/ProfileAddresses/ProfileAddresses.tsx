@@ -8,7 +8,7 @@ import Button from '../../common/Button/Button';
 import Loader from '../../common/Loader/Loader';
 import AddressThumb from '../../common/AddressThumb/AddressThumb';
 import NewAddressForm from '../../features/NewAddressForm/NewAddressForm';
-import { userAddAddress } from '../../actions/userActions';
+import Error from '../../common/Error/Error';
 
 type Props = stateToProps & dispatchToProps;
 
@@ -28,8 +28,7 @@ const ProfileAddresses = (props: Props) => {
   }, ['']);
 
   if (pending) return <Loader></Loader>;
-  if (error)
-    return <Text>We could not get your address data. Try again later</Text>;
+  if (error) return <Error />;
   if (success)
     return (
       <Fragment>

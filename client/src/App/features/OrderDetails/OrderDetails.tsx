@@ -9,6 +9,7 @@ import Center from '../../common/Center/Center';
 import CartItem from '../../common/CartItem/CartItem';
 import AddressThumb from '../../common/AddressThumb/AddressThumb';
 import Loader from '../../common/Loader/Loader';
+import Error from '../../common/Error/Error';
 
 import _ from 'lodash';
 
@@ -29,20 +30,13 @@ const OrderDetails = (props: Props) => {
   if (orderData === null && success)
     return (
       <Fragment>
-        <Title size="small" align="center">
+        <Title size="small" color="warning" align="center">
           No such order
         </Title>
       </Fragment>
     );
   if (orderData === null || pending) return <Loader></Loader>;
-  if (error)
-    return (
-      <Fragment>
-        <Title size="small" align="center">
-          Something went wrong... Try again later
-        </Title>
-      </Fragment>
-    );
+  if (error) return <Error />;
 
   return (
     <Fragment>

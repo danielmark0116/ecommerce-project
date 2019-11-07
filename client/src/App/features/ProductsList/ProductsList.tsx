@@ -14,6 +14,7 @@ import { productFilters } from '../../types/productFilters';
 import ProductSearchBar from '../ProductSearchBar/ProductSearchBar';
 import Center from '../../common/Center/Center';
 import Text from '../../common/Text/Text';
+import Error from '../../common/Error/Error';
 
 interface IProps {}
 
@@ -113,13 +114,7 @@ const ProductsList = (props: Props) => {
             scrollOnlyPhones={scrollOnlyPhones}
           >
             <Fragment>
-              {error && (
-                <Center>
-                  <Text color="danger" align="center">
-                    Seems like there is a problem. Try again later
-                  </Text>
-                </Center>
-              )}
+              {error && <Error />}
               {pending && <Loader></Loader>}
               {success && products.length === 0 && (
                 <Center>

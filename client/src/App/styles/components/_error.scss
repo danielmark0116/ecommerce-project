@@ -1,0 +1,15 @@
+.error_container {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .error_icon {
+    color: $red;
+    font-size: 58px;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 10px rgba($dark-blue, 0.05);
+  }
+}
