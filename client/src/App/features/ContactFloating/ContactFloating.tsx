@@ -9,7 +9,9 @@ import style from '../../styles/main.module.scss';
 
 import {
   contactFloEnter,
-  contactFloBlobEnter
+  contactFloBlobEnter,
+  floatingClickIn,
+  floatingClickOut
 } from '../../animations/_contact_floating';
 
 const ContactFloating = () => {
@@ -19,39 +21,87 @@ const ContactFloating = () => {
   const floatingBlobRef = React.createRef<HTMLDivElement>();
 
   useEffect(() => {
-    contactFloEnter(floatingRef.current, 4);
-    contactFloBlobEnter(floatingBlobRef.current, 5);
+    contactFloEnter(floatingRef.current, 3);
+    contactFloBlobEnter(floatingBlobRef.current, 3.5);
   }, ['']);
 
-  return (
-    <div
-      ref={floatingRef}
-      onClick={() => {
-        toggleActive(!active);
-      }}
-      className={
-        active
-          ? style.contact_floating_container_active
-          : style.contact_floating_container
-      }
-    >
-      <div ref={floatingBlobRef} className={style.msg_blob}>
-        Have any questions? Contact us!
-      </div>
-      <div className={style.inner_border}>
-        <i className="fas fa-phone"></i>
-      </div>
+  const clickIn = () => {
+    floatingClickIn(floatingRef.current);
+  };
 
-      <div className={style.contact_data_container}>
-        <Center>
-          <Title>Contact us!</Title>
-        </Center>
-        <Center>567-567-345</Center>
-        <br />
-        <Center>765th Blue Sky Avenue</Center>
-        <Center>City, Florida</Center>
+  const clickOut = () => {
+    floatingClickOut(floatingRef.current);
+  };
+
+  return (
+    <Fragment>
+      <div
+        ref={floatingRef}
+        onClick={() => {
+          toggleActive(!active);
+        }}
+        onMouseDown={() => {
+          clickIn();
+        }}
+        onTouchStart={() => {
+          clickIn();
+        }}
+        onTouchCancel={() => {
+          clickOut();
+        }}
+        onTouchEnd={() => {
+          clickOut();
+        }}
+        onMouseLeave={() => {
+          clickOut();
+        }}
+        onMouseUp={() => {
+          clickOut();
+        }}
+        className={
+          active
+            ? style.contact_floating_container_active
+            : style.contact_floating_container
+        }
+      >
+        <div ref={floatingBlobRef} className={style.msg_blob}>
+          Have any questions? Contact us!
+        </div>
+        <div className={style.inner_border}>
+          <i className={`fas fa-phone ${style.phone}`}></i>
+          <i className={`fas fa-times ${style.close}`}></i>
+        </div>
       </div>
-    </div>
+      <div
+        className={
+          active
+            ? style.contact_data_container_active
+            : style.contact_data_container
+        }
+      >
+        <Title align="center" color="white">
+          Contact us!
+        </Title>
+        <Text align="center" size="small" color="white">
+          PHONE:
+        </Text>
+        <Subtitle align="center" size="small" color="white">
+          567-567-345
+        </Subtitle>
+        <Text align="center" size="small" color="white">
+          EMAIL:
+        </Text>
+        <Subtitle align="center" size="small" color="white">
+          mail@mail.com
+        </Subtitle>
+        <Text align="center" size="small" color="white">
+          ADDRESS:
+        </Text>
+        <Subtitle align="center" size="small" color="white">
+          267th Sunny Avenue, Cool State, City
+        </Subtitle>
+      </div>
+    </Fragment>
   );
 };
 

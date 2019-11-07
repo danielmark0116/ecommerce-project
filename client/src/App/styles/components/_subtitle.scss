@@ -3,10 +3,13 @@
   font-weight: 400;
   margin: 10px 0;
   padding: 0 10px;
-  // font-family: 'Quicksand', sans-serif;
+  // font-family: 'Nunito', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: $dark-blue;
 
   &.subtitle_small {
+    // font-family: 'Nunito', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 700;
   }

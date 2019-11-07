@@ -11,9 +11,12 @@ $contact-floating-size: 58px;
   height: $contact-floating-size;
   background: $green;
   border-radius: 50%;
-  z-index: 30;
-  transition: width 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: 31;
   @include shadow-strong(10px);
+
+  @include tablets {
+    bottom: 40px;
+  }
 
   &:hover {
     cursor: pointer;
@@ -32,37 +35,33 @@ $contact-floating-size: 58px;
     i {
       color: $white;
       @include shadow(10px);
-    }
-  }
 
-  .contact_data_container {
-    width: 100%;
-    display: none;
-    color: $white;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
+      &.close {
+        display: none;
+      }
 
-    .title {
-      color: $white;
+      &.phone {
+        display: block;
+      }
     }
   }
 
   &_active {
     @extend .contact_floating_container;
-    bottom: 0;
-    right: 0;
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
+    background: $white;
 
     .inner_border {
-      display: none;
-    }
+      i {
+        color: $dark-blue;
 
-    .contact_data_container {
-      width: 100%;
-      display: block;
+        &.close {
+          display: block;
+        }
+
+        &.phone {
+          display: none;
+        }
+      }
     }
   }
 
@@ -94,5 +93,29 @@ $contact-floating-size: 58px;
       height: 15px;
       clip-path: polygon(100% 0, 0 0, 100% 100%);
     }
+  }
+}
+
+.contact_data_container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: $green;
+  top: 0;
+  right: 0;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  z-index: 30;
+  transform: translateX(100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+  @include fade;
+
+  &_active {
+    @extend .contact_data_container;
+    transform: translateX(0);
   }
 }

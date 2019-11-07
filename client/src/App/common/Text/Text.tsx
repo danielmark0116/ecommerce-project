@@ -5,7 +5,7 @@ import style from '../../styles/main.module.scss';
 interface IProps {
   children: React.ReactChild;
   align: 'left' | 'center' | 'right';
-  color: 'primary' | 'success' | 'danger' | 'warning';
+  color: 'primary' | 'success' | 'danger' | 'warning' | 'white';
   size: 'normal' | 'small';
 }
 
@@ -35,6 +35,8 @@ const Text = (props: IProps) => {
         return style.text_danger;
       case 'warning':
         return style.text_warning;
+      case 'white':
+        return style.text_white;
       default:
         return '';
     }
