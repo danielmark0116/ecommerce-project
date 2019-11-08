@@ -45,11 +45,11 @@ const Footer = (props: IProps) => {
             </ul>
           </div>
         </div>
-        <a href="https://danielgrychtol.com" target="_blank">
-          <div className={style.footer_credits}>
+        <div className={style.footer_credits}>
+          <a href="https://danielgrychtol.com" target="_blank">
             Coded by <img src={Logo} alt="" />{' '}
-          </div>
-        </a>
+          </a>
+        </div>
       </Container>
     </div>
   );
