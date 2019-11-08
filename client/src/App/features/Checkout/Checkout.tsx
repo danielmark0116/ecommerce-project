@@ -13,6 +13,7 @@ import Button from '../../common/Button/Button';
 import NewAddressForm from '../NewAddressForm/NewAddressForm';
 import AddressThumb from '../../common/AddressThumb/AddressThumb';
 import DeliveryTab from '../../common/DeliveryTab/DeliveryTab';
+import Error from '../../common/Error/Error';
 
 import { evalCartTotal } from '../../helpers/evalCartTotal';
 import Text from '../../common/Text/Text';
@@ -190,7 +191,7 @@ const Checkout = (props: Props) => {
       </Row>
     );
   if (pending || userLoading) return <Loader></Loader>;
-  if (error || userError) return <p>Upss... Sth went wrong</p>;
+  if (error || userError) return <Error />;
   if (cartItems.length === 0) return <Redirect push to="/cart"></Redirect>;
   return null;
 };
