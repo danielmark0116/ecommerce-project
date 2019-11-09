@@ -13,7 +13,7 @@ const ProductsPage = () => {
       pagination={true}
       itemsPerPage={6}
       initFiltrString=""
-      fetchAll={true}
+      fetchAll={false}
       productsState="products"
     />
   );

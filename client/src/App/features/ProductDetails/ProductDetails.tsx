@@ -54,7 +54,7 @@ const ProductDetails = (props: Props) => {
   }, [match.params.id]);
 
   useEffect(() => {
-    if (singleProduct && success) {
+    if (singleProduct && success && singleProduct.published) {
       fadeInUp(imageRef.current, 1);
       fadeInUp(descRef.current, 3);
     }
@@ -70,151 +70,159 @@ const ProductDetails = (props: Props) => {
     );
   };
 
-  const renderProductDetails = () => {
-    return (
-      <Fragment>
-        <Row>
-          <Col md="12" xl="5">
-            <section ref={imageRef}>
-              <Image
-                ribbon={(singleProduct && singleProduct.ribbon) || ''}
-                picString={(singleProduct && singleProduct.img) || ''}
-              />
-            </section>
-          </Col>
-          <Col md="12" xl="7">
-            <section ref={descRef}>
-              <Title size="small">
-                {(singleProduct && singleProduct.name) || ''}
-              </Title>
-              <Subtext size="small">
-                <Fragment>
-                  {(singleProduct && singleProduct.sex) || ''}
-                  {' | '}
-                  {(singleProduct && singleProduct.category) || ''}
-                </Fragment>
-              </Subtext>
-              <Flex>
-                <Fragment>
-                  <Title size="small">
-                    <Fragment>{actualPrice} $</Fragment>
-                  </Title>
-                  {singleProduct && singleProduct.salePrice > 0 && (
-                    <CrossedPrice>
-                      {(singleProduct &&
-                        singleProduct.price.toString() + ' $') ||
-                        ''}
-                    </CrossedPrice>
-                  )}
-                </Fragment>
-              </Flex>
-              <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
-              <br />
-              <Row>
-                <Col xl="6" sm="12">
-                  <Subtitle size="small">Available sizes:</Subtitle>
-                  <Text>
-                    <Fragment>
-                      {checkAvailableSizes(singleProduct && singleProduct.size)
-                        .length === 0
-                        ? 'SOLD OUT'
-                        : checkAvailableSizes(
-                            singleProduct && singleProduct.size
-                          ).map((size, index) => (
-                            <span key={index}>
-                              {index !== 0 ? '  |  ' : ''}
-                              {size && size.toUpperCase()}
-                            </span>
-                          ))}
-                    </Fragment>
-                  </Text>
-                </Col>
-                <Col xl="6" sm="12">
-                  <CartPill
-                    retrigger={valueInCartRetrigger}
-                    quantity={valueInCart}
-                  ></CartPill>
-                </Col>
-              </Row>
-              <br />
-              <Subtitle size="small" align="center">
-                Choose a size:
-              </Subtitle>
-              {checkAvailableSizes(singleProduct && singleProduct.size)
-                .length === 0 ? (
-                <Fragment>
-                  <Text align="center" color="danger">
-                    SOLD OUT
-                  </Text>
-                  <Text align="center" color="primary">
-                    We will re-stock shortly. Give us a week or two
-                  </Text>
-                </Fragment>
-              ) : (
-                <SizeBtns
-                  callback={(data: number) => {
-                    updateValueInCart(data);
-
-                    if (valueInCart === data) {
-                      updateValueInCartRetrigger(!valueInCartRetrigger);
-                    }
-                  }}
-                  productId={singleProduct ? singleProduct._id : ''}
-                  action={addToCart}
-                  allSizes={singleProduct && singleProduct.size}
-                  sizes={checkAvailableSizes(
-                    singleProduct && singleProduct.size
-                  )}
-                />
-              )}
-            </section>
-          </Col>
-        </Row>
-        <SizedBox></SizedBox>
-        <Title align="paragraph" size="small">
-          Similar products
-        </Title>
-        <ProductsList
-          productCardsSize="small"
-          fixedWidth={true}
-          horizontalScroll={true}
-          scrollOnlyPhones={false}
-          withFilters={false}
-          pagination={false}
-          itemsPerPage={5}
-          initFiltrString={`sort=sold-1&category=${singleProduct &&
-            singleProduct.category}`}
-          fetchAll={true}
-          productsState="similar"
-        />
-
-        <Title align="paragraph" size="small">
-          Our bestsellers
-        </Title>
-        <ProductsList
-          productCardsSize="small"
-          fixedWidth={true}
-          horizontalScroll={true}
-          scrollOnlyPhones={false}
-          withFilters={false}
-          pagination={false}
-          itemsPerPage={5}
-          initFiltrString="sort=sold-1"
-          fetchAll={true}
-          productsState="bestsellers"
-        />
-      </Fragment>
-    );
-  };
-
-  if (pending) return <Loader></Loader>;
-  if (success && singleProduct !== null) return renderProductDetails();
-  if (singleProduct === null && success)
+  const renderNoSuchProduct = () => {
     return (
       <Text color="warning" align="center">
         No such product available
       </Text>
     );
+  };
+
+  const renderProductDetails = () => {
+    if (singleProduct && singleProduct.published) {
+      return (
+        <Fragment>
+          <Row>
+            <Col md="12" xl="5">
+              <section ref={imageRef}>
+                <Image
+                  ribbon={(singleProduct && singleProduct.ribbon) || ''}
+                  picString={(singleProduct && singleProduct.img) || ''}
+                />
+              </section>
+            </Col>
+            <Col md="12" xl="7">
+              <section ref={descRef}>
+                <Title size="small">
+                  {(singleProduct && singleProduct.name) || ''}
+                </Title>
+                <Subtext size="small">
+                  <Fragment>
+                    {(singleProduct && singleProduct.sex) || ''}
+                    {' | '}
+                    {(singleProduct && singleProduct.category) || ''}
+                  </Fragment>
+                </Subtext>
+                <Flex>
+                  <Fragment>
+                    <Title size="small">
+                      <Fragment>{actualPrice} $</Fragment>
+                    </Title>
+                    {singleProduct && singleProduct.salePrice > 0 && (
+                      <CrossedPrice>
+                        {(singleProduct &&
+                          singleProduct.price.toString() + ' $') ||
+                          ''}
+                      </CrossedPrice>
+                    )}
+                  </Fragment>
+                </Flex>
+                <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
+                <br />
+                <Row>
+                  <Col xl="6" sm="12">
+                    <Subtitle size="small">Available sizes:</Subtitle>
+                    <Text>
+                      <Fragment>
+                        {checkAvailableSizes(
+                          singleProduct && singleProduct.size
+                        ).length === 0
+                          ? 'SOLD OUT'
+                          : checkAvailableSizes(
+                              singleProduct && singleProduct.size
+                            ).map((size, index) => (
+                              <span key={index}>
+                                {index !== 0 ? '  |  ' : ''}
+                                {size && size.toUpperCase()}
+                              </span>
+                            ))}
+                      </Fragment>
+                    </Text>
+                  </Col>
+                  <Col xl="6" sm="12">
+                    <CartPill
+                      retrigger={valueInCartRetrigger}
+                      quantity={valueInCart}
+                    ></CartPill>
+                  </Col>
+                </Row>
+                <br />
+                <Subtitle size="small" align="center">
+                  Choose a size:
+                </Subtitle>
+                {checkAvailableSizes(singleProduct && singleProduct.size)
+                  .length === 0 ? (
+                  <Fragment>
+                    <Text align="center" color="danger">
+                      SOLD OUT
+                    </Text>
+                    <Text align="center" color="primary">
+                      We will re-stock shortly. Give us a week or two
+                    </Text>
+                  </Fragment>
+                ) : (
+                  <SizeBtns
+                    callback={(data: number) => {
+                      updateValueInCart(data);
+
+                      if (valueInCart === data) {
+                        updateValueInCartRetrigger(!valueInCartRetrigger);
+                      }
+                    }}
+                    productId={singleProduct ? singleProduct._id : ''}
+                    action={addToCart}
+                    allSizes={singleProduct && singleProduct.size}
+                    sizes={checkAvailableSizes(
+                      singleProduct && singleProduct.size
+                    )}
+                  />
+                )}
+              </section>
+            </Col>
+          </Row>
+          <SizedBox></SizedBox>
+          <Title align="paragraph" size="small">
+            Similar products
+          </Title>
+          <ProductsList
+            productCardsSize="small"
+            fixedWidth={true}
+            horizontalScroll={true}
+            scrollOnlyPhones={false}
+            withFilters={false}
+            pagination={false}
+            itemsPerPage={5}
+            initFiltrString={`sort=sold-1&category=${singleProduct &&
+              singleProduct.category}`}
+            fetchAll={false}
+            productsState="similar"
+          />
+
+          <Title align="paragraph" size="small">
+            Our bestsellers
+          </Title>
+          <ProductsList
+            productCardsSize="small"
+            fixedWidth={true}
+            horizontalScroll={true}
+            scrollOnlyPhones={false}
+            withFilters={false}
+            pagination={false}
+            itemsPerPage={5}
+            initFiltrString="sort=sold-1"
+            fetchAll={false}
+            productsState="bestsellers"
+          />
+        </Fragment>
+      );
+    } else {
+      return renderNoSuchProduct();
+    }
+  };
+
+  if (pending) return <Loader></Loader>;
+  if (success && singleProduct !== null) return renderProductDetails();
+  if (singleProduct === null && success) return renderNoSuchProduct();
   if (error) return <Error />;
   return <Loader />;
 };

@@ -20,6 +20,7 @@ const populateProducts = () => {
           category: category,
           sex: sex,
           ribbon: '',
+          published: true,
           price:
             category === 't-shirt'
               ? 19.99

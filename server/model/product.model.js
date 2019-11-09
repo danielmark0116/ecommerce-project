@@ -52,6 +52,11 @@ const Product = new mongoose.Schema(
       type: String,
       required: true
     },
+    imgSecondary: {
+      type: String,
+      required: false,
+      default: ''
+    },
     published: {
       type: Boolean,
       default: false

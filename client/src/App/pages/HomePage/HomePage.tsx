@@ -21,7 +21,7 @@ const HomePage = () => {
         pagination={false}
         itemsPerPage={8}
         initFiltrString="sort=price1"
-        fetchAll={true}
+        fetchAll={false}
         productsState="latest"
       />
       <SizedBox></SizedBox>
@@ -38,7 +38,7 @@ const HomePage = () => {
         pagination={false}
         itemsPerPage={8}
         initFiltrString="sort=sold-1"
-        fetchAll={true}
+        fetchAll={false}
         productsState="bestsellers"
       />
     </Fragment>
