@@ -29,6 +29,11 @@ const Product = new mongoose.Schema(
       required: true,
       default: 19.99
     },
+    salePrice: {
+      type: Number,
+      required: false,
+      default: 0
+    },
     size: {
       type: Object,
       required: true,

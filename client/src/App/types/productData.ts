@@ -6,6 +6,7 @@ export interface productData {
   sex: string;
   ribbon: string;
   price: number;
+  salePrice: number;
   size: {
     xs: number;
     s: number;
@@ -35,6 +36,7 @@ export interface productDataElements {
   sex?: string;
   ribbon?: string;
   price?: number;
+  salePrice?: number;
   size?: {
     xs: number;
     s: number;

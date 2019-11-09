@@ -8,10 +8,12 @@ import CartPill from '../CartPill/CartPill';
 import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import Text from '../../common/Text/Text';
+import Flex from '../../common/FlexGrid/FlexContainer';
 import SizeBtns from './SizeBtns';
 import Loader from '../../common/Loader/Loader';
 import SizedBox from '../../common/SizedBox/SizedBox';
 import Error from '../../common/Error/Error';
+import CrossedPrice from '../../common/CrossedPrice/CrossedPrice';
 
 import ProductsList from '../ProductsList/ProductsListContainer';
 
@@ -40,6 +42,12 @@ const ProductDetails = (props: Props) => {
 
   const imageRef = React.createRef<HTMLElement>();
   const descRef = React.createRef<HTMLElement>();
+
+  const actualPrice = singleProduct
+    ? singleProduct.salePrice > 0
+      ? singleProduct.salePrice
+      : singleProduct.price
+    : 0;
 
   useEffect(() => {
     getProductById(productId);
@@ -86,11 +94,20 @@ const ProductDetails = (props: Props) => {
                   {(singleProduct && singleProduct.category) || ''}
                 </Fragment>
               </Subtext>
-              <Subtitle>
+              <Flex>
                 <Fragment>
-                  {(singleProduct && singleProduct.price) || ''} $
+                  <Title size="small">
+                    <Fragment>{actualPrice} $</Fragment>
+                  </Title>
+                  {singleProduct && singleProduct.salePrice > 0 && (
+                    <CrossedPrice>
+                      {(singleProduct &&
+                        singleProduct.price.toString() + ' $') ||
+                        ''}
+                    </CrossedPrice>
+                  )}
                 </Fragment>
-              </Subtitle>
+              </Flex>
               <Text>{(singleProduct && singleProduct.desc) || ''}</Text>
               <br />
               <Row>
