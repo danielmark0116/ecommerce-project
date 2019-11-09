@@ -21,7 +21,7 @@ const CheckoutItem = (props: IProps) => {
 
   const renderCartItem = (productSize: string, sizeQ: any, index: number) => {
     return (
-      <div key={index} className={style.cart_item_container}>
+      <div key={index} className={style.cart_item_container_small}>
         <Row>
           <Col xs="2" md="2" xl="3">
             <Link to={`/products/${_id}`}>
