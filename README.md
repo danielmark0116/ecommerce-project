@@ -53,6 +53,8 @@ REACT_APP_CLIENT_ID_GOOGLE=google client id (same as above)
 
 \* in `development` mode, Redux DEVTOOLS are active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/App/config.js
 
+\*\* If you don't have my MONGO_URI connection string, both dbs will be empty, you can populate it with script (see below)
+
 ---
 
 After installing all the dependencies and setting vars in .env files, run
