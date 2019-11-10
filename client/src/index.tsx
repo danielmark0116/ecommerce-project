@@ -30,12 +30,7 @@ ReactDOM.render(<Root />, document.getElementById('root'));
 
 store.dispatch(authCheckThunk());
 
-// store.dispatch(orderGetOneThunk('5db6ff64fe4b864d6a99a3aa'));
-// store.dispatch(orderGetOneThunk('5db70065b9fb494de09e9217'));
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-
-// 5db6ff64fe4b864d6a99a3aa
+serviceWorker.register();
