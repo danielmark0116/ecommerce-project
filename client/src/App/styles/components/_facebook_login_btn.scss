@@ -1,0 +1,31 @@
+.fb_btn {
+  font-size: 14px;
+  font-family: inherit;
+  border: none;
+  border-radius: 3px;
+  border: 1px solid rgba($grey, 0.2);
+  padding: 10px;
+  background: $white;
+  color: $dark-blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 0px rgba($grey, 0.7);
+
+  @include hover-supported {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &:before {
+    content: '';
+    margin-right: 10px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCA0OCA0OCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48cGF0aCBmaWxsPSIjM2Y1MWI1IiBkPSJNMjQgNEEyMCAyMCAwIDEgMCAyNCA0NEEyMCAyMCAwIDEgMCAyNCA0WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yOS4zNjgsMjRIMjZ2MTJoLTVWMjRoLTN2LTRoM3YtMi40MWMwLjAwMi0zLjUwOCwxLjQ1OS01LjU5LDUuNTkyLTUuNTlIMzB2NGgtMi4yODcgQzI2LjEwNCwxNiwyNiwxNi42LDI2LDE3LjcyM1YyMGg0TDI5LjM2OCwyNHoiPjwvcGF0aD48L3N2Zz4=')
+      50% 50% no-repeat;
+    background-size: 100%;
+  }
+}

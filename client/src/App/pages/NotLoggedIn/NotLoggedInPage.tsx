@@ -2,11 +2,13 @@ import React, { Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { AppState } from '../../reducers';
+import { selectorAuthIsLoggedIn } from '../../reducers/authReducer';
+
 import Title from '../../common/Title/Title';
 import Text from '../../common/Text/Text';
 import GoogleLoginBtn from '../../features/GoogleLoginBtn/GoogleLoginBtn';
-import { AppState } from '../../reducers';
-import { selectorAuthIsLoggedIn } from '../../reducers/authReducer';
+import FacebookLoginBtn from '../../features/FacebookLoginBtn/FacebookLoginBtn';
 
 const HomePage = (props: stateToProps) => {
   const { isLoggedIn } = props;
@@ -23,6 +25,8 @@ const HomePage = (props: stateToProps) => {
       </Text>
       <br />
       <GoogleLoginBtn></GoogleLoginBtn>
+      <br />
+      <FacebookLoginBtn></FacebookLoginBtn>
     </Fragment>
   );
 };

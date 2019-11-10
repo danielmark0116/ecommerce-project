@@ -9,6 +9,7 @@ import Subtext from '../../common/Subtext/Subtext';
 import SizedBox from '../../common/SizedBox/SizedBox';
 import Loader from '../../common/Loader/Loader';
 import GoogleLoginBtn from '../GoogleLoginBtn/GoogleLoginBtn';
+import FacebookLoginBtn from '../FacebookLoginBtn/FacebookLoginBtn';
 
 import style from '../../styles/main.module.scss';
 
@@ -29,15 +30,8 @@ interface IProps {
   closeAction: Function;
 }
 
-const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
-  const {
-    children,
-    active,
-    closeAction,
-    loginThunk,
-    isLoggedIn,
-    authLoading
-  } = props;
+const LoginBox = (props: IProps & stateToProps) => {
+  const { children, active, closeAction, isLoggedIn, authLoading } = props;
   const loginBoxRef = React.createRef<HTMLDivElement>();
   const overlayRef = React.createRef<HTMLDivElement>();
 
@@ -53,18 +47,6 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
       closeAction();
     }
   }, [isLoggedIn]);
-
-  const handleFacebookLogin = (data: any) => {
-    const providerData: providerUserData = {
-      providerId: data.id,
-      name: data.name,
-      email: data.email,
-      userPic: data.picture.data.url,
-      providerToken: data.signedRequest
-    };
-
-    loginThunk('facebook', providerData);
-  };
 
   return (
     <Fragment>
@@ -89,17 +71,7 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
             <Fragment>
               <GoogleLoginBtn></GoogleLoginBtn>
               <br />
-              <Center>
-                <FacebookLogin
-                  appId="2451717065086054"
-                  autoLoad={false}
-                  fields="name,email,picture"
-                  cssClass={style.fb_btn}
-                  onClick={() => null}
-                  callback={handleFacebookLogin}
-                  onFailure={() => null}
-                />
-              </Center>
+              <FacebookLoginBtn></FacebookLoginBtn>
             </Fragment>
           </SizedBox>
         )}
@@ -122,23 +94,9 @@ interface stateToProps {
   authLoading: Boolean;
 }
 
-interface dispatchToProps {
-  loginThunk: Function;
-}
-
 const mapStateToProps = (state: AppState) => ({
   isLoggedIn: selectorAuthIsLoggedIn(state),
   authLoading: selectorAuthRequestData(state).pending
 });
 
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<any, any, ActionTypes>
-) => ({
-  loginThunk: (provider: 'facebook' | 'google', userData: providerUserData) =>
-    dispatch(authLoginThunk(provider, userData))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginBox);
+export default connect(mapStateToProps)(LoginBox);
