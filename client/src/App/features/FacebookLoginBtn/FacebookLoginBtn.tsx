@@ -30,6 +30,11 @@ const FacebookLoginBtn = (props: dispatchToProps) => {
         appId={process.env.REACT_APP_CLIENT_ID_FACEBOOK}
         autoLoad={false}
         fields="name,email,picture"
+        redirectUri={
+          process.env.REACT_APP_MODE === 'production'
+            ? 'https://grychtol.com.pl'
+            : 'http://localhost:300'
+        }
         cssClass={style.fb_btn}
         onClick={() => null}
         callback={handleFacebookLogin}
