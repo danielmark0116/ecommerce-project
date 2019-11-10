@@ -7,9 +7,6 @@ const cors = require('cors');
 const app = express();
 const passport = require('passport');
 const initJwtMiddleware = require('./middleware/JWTAuth.passport');
-const isAdmin = require('./middleware/isAdmin');
-
-const axios = require('axios');
 
 // DB
 const db = require('./utils/dbConnect');
@@ -31,26 +28,11 @@ const userRotues = require('./routes/user.routes');
 const stripeRotues = require('./routes/stripe.routes');
 const orderRoutes = require('./routes/order.routes');
 
-app.get(
-  '/secret',
-  passport.authenticate('jwt', { session: false }),
-  isAdmin.checkIfUserIsAdmin,
-  (req, res) => {
-    res.json({
-      succes: true
-    });
-  }
-);
-
 app.use('/api/products', productsRotues);
 app.use('/api/auth', authRotues);
 app.use('/api/user', userRotues);
 app.use('/api/stripe', stripeRotues);
 app.use('/api/order', orderRoutes);
-
-app.get('/api/test', (req, res) => {
-  console.log('sdojfsdijf');
-});
 
 if (process.env.MODE === 'production') {
   app.use(express.static(path.join(__dirname, '/../client/build/')));
