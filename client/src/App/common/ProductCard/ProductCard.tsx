@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import ProductImage from '../ProductImage/ProductImage';
+import CrossedPrice from '../../common/CrossedPrice/CrossedPrice';
+import Flex from '../../common/FlexGrid/FlexContainer';
 
 import style from '../../styles/main.module.scss';
 
@@ -24,7 +26,8 @@ const ProductCard = (props: IProps) => {
     price,
     ribbon,
     _id,
-    size
+    size,
+    salePrice
   } = props.productData;
 
   const cardRef = React.createRef<HTMLDivElement>();
@@ -44,6 +47,7 @@ const ProductCard = (props: IProps) => {
           pic={img}
           category={category}
           ribbon={ribbon}
+          sale={salePrice !== 0 ? true : false}
         />
       </Link>
       <br />
@@ -55,7 +59,14 @@ const ProductCard = (props: IProps) => {
         </Link>
       </div>
       <Link to={`/products/${_id}`}>
-        <div className={style.product_price}>{price} $</div>
+        <Flex>
+          <Fragment>
+            <div className={style.product_price}>
+              {salePrice !== 0 ? salePrice : price} $
+            </div>
+            {salePrice !== 0 && <CrossedPrice>{`${price} $`}</CrossedPrice>}
+          </Fragment>
+        </Flex>
       </Link>
     </div>
   );

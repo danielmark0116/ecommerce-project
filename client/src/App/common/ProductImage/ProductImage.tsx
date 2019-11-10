@@ -10,11 +10,12 @@ interface IProps {
   category: string;
   ribbon: string;
   sizes: sizeData;
+  sale: Boolean;
   imageSize: 'small' | 'normal';
 }
 
 const ProductImage = (props: IProps) => {
-  const { ribbon, category, sizes, imageSize } = props;
+  const { ribbon, category, sizes, imageSize, sale } = props;
 
   return (
     <div
@@ -23,6 +24,7 @@ const ProductImage = (props: IProps) => {
       }
     >
       <div className={style.product_image_container}>
+        {sale && <div className={style.sale_ribbon}>SALE</div>}
         <div className={style.product_image_loader}>
           <i className="fas fa-spinner"></i>
         </div>

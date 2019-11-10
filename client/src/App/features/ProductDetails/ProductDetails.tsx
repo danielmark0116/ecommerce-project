@@ -9,11 +9,13 @@ import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import Text from '../../common/Text/Text';
 import Flex from '../../common/FlexGrid/FlexContainer';
+import Center from '../../common/Center/Center';
 import SizeBtns from './SizeBtns';
 import Loader from '../../common/Loader/Loader';
 import SizedBox from '../../common/SizedBox/SizedBox';
 import Error from '../../common/Error/Error';
 import CrossedPrice from '../../common/CrossedPrice/CrossedPrice';
+import ImageToggler from '../../common/ImageToggler/ImageToggler';
 
 import ProductsList from '../ProductsList/ProductsListContainer';
 
@@ -39,6 +41,7 @@ const ProductDetails = (props: Props) => {
 
   const [valueInCart, updateValueInCart] = useState(0);
   const [valueInCartRetrigger, updateValueInCartRetrigger] = useState(false);
+  const [showSecPic, toggleSecPic] = useState(false);
 
   const imageRef = React.createRef<HTMLElement>();
   const descRef = React.createRef<HTMLElement>();
@@ -59,6 +62,12 @@ const ProductDetails = (props: Props) => {
       fadeInUp(descRef.current, 3);
     }
   }, [singleProduct, success]);
+
+  useEffect(() => {
+    if (singleProduct && success && singleProduct.published) {
+      fadeInUp(imageRef.current, 0);
+    }
+  }, [showSecPic]);
 
   const addToCart = (productSize: string, quantity: number) => {
     const { singleProduct } = props;
@@ -87,8 +96,35 @@ const ProductDetails = (props: Props) => {
               <section ref={imageRef}>
                 <Image
                   ribbon={(singleProduct && singleProduct.ribbon) || ''}
-                  picString={(singleProduct && singleProduct.img) || ''}
+                  sale={
+                    singleProduct && singleProduct.salePrice !== 0
+                      ? true
+                      : false
+                  }
+                  picString={
+                    (singleProduct && showSecPic
+                      ? singleProduct.imgSecondary
+                      : singleProduct.img) || ''
+                  }
                 />
+                <Center>
+                  <Fragment>
+                    <ImageToggler
+                      action={() => {
+                        toggleSecPic(false);
+                      }}
+                      picString={singleProduct.img}
+                    />
+                    {singleProduct.imgSecondary && (
+                      <ImageToggler
+                        action={() => {
+                          toggleSecPic(true);
+                        }}
+                        picString={singleProduct.imgSecondary}
+                      />
+                    )}
+                  </Fragment>
+                </Center>
               </section>
             </Col>
             <Col md="12" xl="7">

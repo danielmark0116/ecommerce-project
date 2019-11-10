@@ -25,6 +25,7 @@ export interface productData {
   };
   sold: number;
   img: string;
+  imgSecondary: string;
   published: Boolean;
 }
 
@@ -55,5 +56,6 @@ export interface productDataElements {
   };
   sold?: number;
   img?: string;
+  imgSecondary?: string;
   published?: Boolean;
 }

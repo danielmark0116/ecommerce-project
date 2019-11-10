@@ -6,10 +6,11 @@ interface IProps {
   picString: string;
   ribbon: string;
   size: 'normal' | 'small' | 'medium';
+  sale: Boolean;
 }
 
 const Image = (props: IProps) => {
-  const { picString, ribbon, size } = props;
+  const { picString, ribbon, size, sale } = props;
 
   const sizeClass = () => {
     switch (size) {
@@ -27,6 +28,7 @@ const Image = (props: IProps) => {
   return (
     <Fragment>
       <div className={sizeClass()}>
+        {sale && <div className={style.sale_ribbon}>SALE</div>}
         <img src={picString} className={style.image} alt="" />
         <div className={style.image_ribbon}>{ribbon}</div>
       </div>
@@ -36,7 +38,8 @@ const Image = (props: IProps) => {
 
 Image.defaultProps = {
   ribbon: '',
-  size: 'normal'
+  size: 'normal',
+  sale: false
 };
 
 export default Image;

@@ -46,6 +46,7 @@ $border-radius: $product-card-border;
     top: 5px;
     background: transparent;
     font-weight: 400;
+    text-shadow: 1px 1px 0 $white;
   }
 
   .product_image_container {
@@ -58,6 +59,22 @@ $border-radius: $product-card-border;
     border: 1px solid $white;
     position: relative;
     z-index: 0;
+
+    .sale_ribbon {
+      position: absolute;
+      text-align: center;
+      padding: 5px 10px;
+      color: $white;
+      font-size: 12px;
+      top: 5px;
+      right: -50px;
+      width: 150px;
+      height: auto;
+      background: $red;
+      font-family: 'Nunito', sans-serif;
+      transform: rotate(35deg);
+      @include shadow-strong(10px);
+    }
 
     .product_image_loader {
       position: absolute;

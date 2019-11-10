@@ -41,7 +41,25 @@ $ribbon_position: 20px;
     font-weight: 300;
     font-size: 15px;
     color: $dark-blue;
+    text-shadow: 1px 1px 0 $white;
     text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .sale_ribbon {
+    position: absolute;
+    text-align: center;
+    padding: 5px 10px;
+    color: $white;
+    font-size: 15px;
+    top: 20px;
+    right: -45px;
+    width: 200px;
+    height: auto;
+    background: $red;
+    font-family: 'Nunito', sans-serif;
+    transform: rotate(35deg);
+    @include shadow-strong(10px);
   }
 
   img.image {
