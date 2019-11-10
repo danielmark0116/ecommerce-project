@@ -40,7 +40,9 @@ mailerMail=email address (mail notifications feature)
 mailerPass=password for email (mail notifications feature)
 ```
 
-\*\* leave PORT 8000 - there's a proxy set in the client react app. Or change it but remember to change it also in the react package.json
+\* leave PORT 8000 - there's a proxy set in the client react app. Or change it but remember to change it also in the react package.json
+
+\*\* If you don't have my MONGO_URI connection string, both dbs will be empty, you can populate it with script (see below)
 
 ---
 
@@ -52,8 +54,6 @@ REACT_APP_CLIENT_ID_GOOGLE=google client id (same as above)
 ```
 
 \* in `development` mode, Redux DEVTOOLS are active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/App/config.js
-
-\*\* If you don't have my MONGO_URI connection string, both dbs will be empty, you can populate it with script (see below)
 
 ---
 
