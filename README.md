@@ -8,6 +8,7 @@ https://grychtol.com.pl
 - cart feature
 - checkout with promo codes feature
 - notifications (e-mail ones and popup ones)
+- disabling the ability to add more of the product than there is in stock
 - disabling the ability to add sth to cart when product is not in stock
 - each new order updates products stock
 - payments with stripe
