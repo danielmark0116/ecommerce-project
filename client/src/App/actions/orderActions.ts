@@ -127,8 +127,6 @@ export const orderCreateThunk = (
     };
 
     try {
-      await new Promise((res, rej) => setTimeout(res, 1000));
-
       let response = await axios.post(`/api/order`, newOrder);
 
       let data = await response.data;
@@ -173,8 +171,6 @@ export const orderGetOneThunk = (id: string) => {
     updateToken();
 
     try {
-      await new Promise((res, rej) => setTimeout(res, 1000));
-
       let response = await axios.get(`/api/order/${id}`);
 
       const data = await response.data;

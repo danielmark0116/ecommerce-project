@@ -43,11 +43,9 @@ const ProductImage = (props: IProps) => {
         </p>
       </div>
 
-      {props.ribbon && (
-        <div className={style.product_ribbon}>
-          {checkAvailableSizes(sizes).length === 0 ? 'SOLD OUT' : ribbon}
-        </div>
-      )}
+      <div className={style.product_ribbon}>
+        {checkAvailableSizes(sizes).length === 0 ? 'SOLD OUT' : ribbon}
+      </div>
 
       {props.category && (
         <div className={style.product_category}>{category}</div>

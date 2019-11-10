@@ -9,11 +9,13 @@
   },
   "scripts": {
     "postinstall": "npm-run-all -p -l postinst:*",
-    "postinst:server": "cd server && yarn add",
-    "postinst:client": "cd client && yarn add",
+    "postinst:server": "cd server && yarn install",
+    "postinst:client": "cd client && yarn install",
+    "build": "cd client && yarn build",
     "start": "cd server && yarn start",
     "server": "cd server && yarn server",
     "dev": "npm-run-all -p -l dev:*",
+    "populatedb": "cd server && yarn populatedb",
     "dev:server": "cd server && yarn server",
     "dev:client": "cd client && yarn start"
   }

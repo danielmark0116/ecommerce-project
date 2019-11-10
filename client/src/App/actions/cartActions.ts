@@ -52,8 +52,6 @@ export const cartGetThunk = (ids: string[]) => {
     dispatch(cartGetLoading());
 
     try {
-      await new Promise((res, rej) => setTimeout(res, 500));
-
       let response = await axios.get(`/api/products/cart`, {
         params: {
           ids
