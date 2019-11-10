@@ -52,6 +52,8 @@ yarn dev
 
 This will start the server on port localhost:8000 and react app on localhost:3000
 
+DB hosted on mongoDB Atlas will be used. To use local DB edit variable in /server/config.js (to populate DB: see below)
+
 ---
 
 # FURTHER CONFIGURATION
