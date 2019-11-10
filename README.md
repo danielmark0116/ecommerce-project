@@ -40,7 +40,7 @@ REACT_APP_MODE=development
 REACT_APP_CLIENT_ID_GOOGLE=google client id (same as above)
 ```
 
-\* in `development` mode, Redux DEVTOOLS are active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/config.js
+\* in `development` mode, Redux DEVTOOLS are active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/App/config.js
 
 ---
 
@@ -51,8 +51,6 @@ yarn dev
 ```
 
 This will start the server on port localhost:8000 and react app on localhost:3000
-
-\* When in PRODUCTION mode, redux devtools will be deactiveted. When in DEVELOPMENT, they will be active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/config.js
 
 ---
 
