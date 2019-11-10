@@ -31,10 +31,10 @@ const SizeBtns = (props: IProps) => {
 
   useEffect(() => {
     const alreadyInCart = _.find(getCart(), ['id', productId]);
+    const availableQ = _.get(allSizes, activeSize);
 
     if (alreadyInCart) {
       const presentCartQValue = _.get(alreadyInCart.quantity, activeSize);
-      const availableQ = _.get(allSizes, activeSize);
 
       if (presentCartQValue + quantity > availableQ) {
         toggleIncrement(false);
@@ -81,7 +81,13 @@ const SizeBtns = (props: IProps) => {
         <Center>
           <Text size="normal" color={canIncrement ? 'success' : 'danger'}>
             {isInCart
-              ? `Already in cart. ${canIncrement ? 'You can add more:' : ''}`
+              ? `Already in cart. ${
+                  canIncrement
+                    ? 'You can add more:'
+                    : 'We do not have more in stock'
+                }`
+              : _.get(allSizes, activeSize) === quantity
+              ? 'We do not have more in stock for now'
               : ''}
           </Text>
         </Center>
@@ -112,13 +118,15 @@ const SizeBtns = (props: IProps) => {
                   )
                 }
                 disabled={
-                  !canIncrement
-                    ? true
-                    : quantity === 10
-                    ? true
-                    : activeSize === ''
-                    ? true
-                    : false
+                  isInCart
+                    ? !canIncrement
+                      ? true
+                      : quantity === 10
+                      ? true
+                      : activeSize === ''
+                      ? true
+                      : false
+                    : _.get(allSizes, activeSize) === quantity
                 }
                 type="transparent"
               >
