@@ -2,6 +2,17 @@
 
 https://grychtol.com.pl
 
+# IMPLEMENTED FEATURES
+
+- product filtering by different params
+- cart feature
+- checkout with promo codes feature
+- notifications (e-mail ones and popup ones)
+- disabling the ability to add sth to cart when product is not in stock
+- each new order updates products stock
+- payments with stripe
+- user auth with Google and JWT Tokens
+
 # INSTALLATION & QUICK START
 
 ---
