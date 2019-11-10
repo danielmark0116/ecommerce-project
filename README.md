@@ -28,6 +28,8 @@ yarn install
 After installing the dependencies, create .env file inside SERVER dir.
 Add variables to it:
 
+###### To the KODILLA mentor - I messaged these variables to you, just copy them :)
+
 ```
 MODE=development
 PORT=8000
@@ -42,7 +44,7 @@ mailerPass=password for email (mail notifications feature)
 
 \* leave PORT 8000 - there's a proxy set in the client react app. Or change it but remember to change it also in the react package.json
 
-\*\* If you don't have my MONGO_URI connection string, both dbs will be empty, you can populate it with script (see below)
+\*\* If you don't have my MONGO_URI connection string, both dbs (local and Atlas) will be empty, you can populate it with script (see below)
 
 ---
 
@@ -121,4 +123,6 @@ In PRODUCTION, the app will use production DB (Atlas - thus you need to add MONG
 
 # POPULATING LOCAL DB
 
-You can populate the local DB with some dummy data by running `yarn populatedb` either from root or from server dir
+You can populate the local DB with some dummy data by running `yarn populatedb` either from root or from server dir.
+
+Remember to update the connection string of local DB in /server/utils/dbConnect.js and /server/utils/dbPopulate.js
