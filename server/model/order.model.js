@@ -70,6 +70,11 @@ const Order = new mongoose.Schema(
       type: String,
       required: false,
       default: ''
+    },
+    paymentDate: {
+      type: Date,
+      required: false,
+      default: null
     }
   },
   { timestamps: true }

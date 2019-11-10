@@ -109,6 +109,7 @@ exports.fullfillPayment = async (req, res) => {
               : 'init';
 
           orderData.paymentIntentId = piId;
+          orderData.paymentDate = Date.now();
 
           await orderData.save();
 

@@ -48,6 +48,20 @@ const OrderDetails = (props: Props) => {
       </Text>
       <Text>
         <Fragment>
+          <b>Order created:</b> {new Date(orderData.createdAt).toLocaleString()}
+        </Fragment>
+      </Text>
+      {['paid', 'processing'].includes(orderData.status) &&
+        orderData.paymentDate && (
+          <Text>
+            <Fragment>
+              <b>Order paid:</b>{' '}
+              {new Date(orderData.paymentDate).toLocaleString()}
+            </Fragment>
+          </Text>
+        )}
+      <Text>
+        <Fragment>
           <b>Status:</b>{' '}
           {orderData.status === 'init' && (
             <span className={style.text_warning}>PAYMENT NOT RECEIVED</span>

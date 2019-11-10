@@ -8,7 +8,9 @@ export interface orderData {
   userPatron: Boolean;
   userName: string;
   address: userAddress;
+  paymentDate: Date | null;
   deliveryType: string;
+  createdAt: Date;
   deliveryValue: number;
   cart: cartItemType[];
   cartValue: number;
