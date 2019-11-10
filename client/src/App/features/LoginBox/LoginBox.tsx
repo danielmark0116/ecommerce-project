@@ -1,6 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
 import Center from '../../common/Center/Center';
@@ -9,6 +8,7 @@ import Subtitle from '../../common/Subtitle/Subtitle';
 import Subtext from '../../common/Subtext/Subtext';
 import SizedBox from '../../common/SizedBox/SizedBox';
 import Loader from '../../common/Loader/Loader';
+import GoogleLoginBtn from '../GoogleLoginBtn/GoogleLoginBtn';
 
 import style from '../../styles/main.module.scss';
 
@@ -54,18 +54,6 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
     }
   }, [isLoggedIn]);
 
-  const handleGoogleLogin = (data: any) => {
-    const providerData: providerUserData = {
-      providerId: data.googleId,
-      name: `${data.profileObj.givenName} ${data.profileObj.familyName}`,
-      email: data.profileObj.email,
-      userPic: data.profileObj.imageUrl,
-      providerToken: data.Zi.id_token
-    };
-
-    loginThunk('google', providerData);
-  };
-
   const handleFacebookLogin = (data: any) => {
     const providerData: providerUserData = {
       providerId: data.id,
@@ -99,17 +87,7 @@ const LoginBox = (props: IProps & stateToProps & dispatchToProps) => {
         ) : (
           <SizedBox>
             <Fragment>
-              <Center>
-                <GoogleLogin
-                  clientId={process.env.REACT_APP_CLIENT_ID_GOOGLE}
-                  buttonText="Login with Google"
-                  onSuccess={handleGoogleLogin}
-                  onFailure={(data: any) =>
-                    console.log('google login error', data)
-                  }
-                  cookiePolicy={'single_host_origin'}
-                />
-              </Center>
+              <GoogleLoginBtn></GoogleLoginBtn>
               <br />
               <Center>
                 <FacebookLogin

@@ -15,6 +15,7 @@ import NewOrderPage from './App/pages/NewOrder/NewOrgerPage';
 import ProfilePage from './App/pages/ProfilePage/ProfilePage';
 import FullfillPaymentPage from './App/pages/FullfillPaymentPage/FullfillPaymentPage';
 import OrderPage from './App/pages/OrderPage/OrderPage';
+import NotLoggedInPage from './App/pages/NotLoggedIn/NotLoggedInPage';
 
 import { AppState } from './App/reducers';
 import {
@@ -65,7 +66,7 @@ const Routes = (props: stateToProps) => {
           {PritaveRoute(ProfilePage)}
         </Route>
         <Route exact path="/login">
-          <h2>you are not logged in page</h2>
+          <NotLoggedInPage></NotLoggedInPage>
         </Route>
       </Switch>
     </PageLayout>
