@@ -2,7 +2,7 @@
 
 https://grychtol.com.pl
 
-# INSTALLATION
+# INSTALLATION & QUICK START
 
 ---
 
@@ -18,7 +18,7 @@ After installing the dependencies, create .env file inside SERVER dir.
 Add variables to it:
 
 ```
-MODE=development | production
+MODE=development
 PORT=8000
 JWT_SECRET=your secret for signing JWT tokens
 GOOGLE_CLIENT_ID= you google client id for google log in feature
@@ -29,10 +29,6 @@ mailerMail=email address (mail notifications feature)
 mailerPass=password for email (mail notifications feature)
 ```
 
-In PRODUCTION, the app will use production DB (Atlas). When in development, app will use either production DB or local (use `exports.useProductionDb = true;` in /server/config.js to toggle between these two)\*.
-
-\* remember to have `mongod` running when using local db + the local db will be empty by default. You can populate it with some dummy data by running `yarn populatedb` either from root or from server dir
-
 \*\* leave PORT 8000 - there's a proxy set in the client react app. Or change it but remember to change it also in the react package.json
 
 ---
@@ -40,21 +36,76 @@ In PRODUCTION, the app will use production DB (Atlas). When in development, app 
 Do the same in CLIENT dir
 
 ```
-REACT_APP_MODE=development | production
+REACT_APP_MODE=development
 REACT_APP_CLIENT_ID_GOOGLE=google client id (same as above)
 ```
+
+\* in `development` mode, Redux DEVTOOLS are active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/config.js
+
+---
+
+After installing all the dependencies and setting vars in .env files, run
+
+```
+yarn dev
+```
+
+This will start the server on port localhost:8000 and react app on localhost:3000
 
 \* When in PRODUCTION mode, redux devtools will be deactiveted. When in DEVELOPMENT, they will be active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/config.js
 
 ---
 
-To run the SERVER app and REACT app simultaneously, in DEVELOPMENT mode, set environmental MODE vars to DEVELOPMENT and type
-`yarn dev` from root DIR
+# FURTHER CONFIGURATION
 
-To run the SERVER app with client BUILD, build client app, first
-`yarn build` from ROOT or from CLIENT DIR
-\+ have env MODE vars set to PRODUCTION
-and then
-`yarn start` from root DIR or `yarn server` if you have nodemon installed
+You can run the app in `production` mode. This will use Atlas DB only + the server will serve the BUILD from react app.
+
+Also, Redux Devtools will be disabled.
+
+To do so, first edit vars in both .env files
+
+```
+// /server
+...
+MODE=production
+
+```
+
+&
+
+```
+// /client
+...
+REACT_APP_MODE=production
+
+```
+
+Then, build the app.
+
+Run `yarn build` either from ROOT or from CLIENT dir
+
+After successfull build, run either:
+
+```
+yarn server
+```
+
+or
+
+```
+yarn start
+```
+
+`yarn server` will run the server with nodemon, `yarn start` will run the server without it
 
 ---
+
+# SWITCHING BETWEEN DBs IN DEVELOPMENT MODE
+
+In PRODUCTION, the app will use production DB (Atlas - thus you need to add MONGO_URI to env file). When in development, app will use either production DB or local (use `exports.useProductionDb = true;` in /server/config.js to toggle between these two)\*.
+
+\* remember to have `mongod` running when using local db + the local db will be empty by default. You can populate it: see below
+
+# POPULATING LOCAL DB
+
+You can populate the local DB with some dummy data by running `yarn populatedb` either from root or from server dir
