@@ -10,7 +10,8 @@ import { RouteComponentProps } from 'react-router';
 import { orderData } from '../../types/orderData';
 import {
   selectorOrderGetOne,
-  selectorOrderGetOneRequestData
+  selectorOrderGetOneRequestData,
+  selectorOrderGetOneUnauthorized
 } from '../../reducers/orderReducer';
 import { requestData } from '../../types/requestData';
 
@@ -22,6 +23,7 @@ export interface stateToProps {
   orderId: string;
   orderData: orderData | null;
   orderRequestData: requestData;
+  orderUnauthorized: Boolean;
 }
 
 export interface dispatchToProps {
@@ -34,7 +36,8 @@ const mapStateToProps = (
 ) => ({
   orderId: ownProps.match.params.orderId,
   orderData: selectorOrderGetOne(state),
-  orderRequestData: selectorOrderGetOneRequestData(state)
+  orderRequestData: selectorOrderGetOneRequestData(state),
+  orderUnauthorized: selectorOrderGetOneUnauthorized(state)
 });
 
 const mapDispatchToProps = (

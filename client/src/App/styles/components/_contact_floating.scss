@@ -93,6 +93,10 @@ $contact-floating-size: 58px;
       height: 15px;
       clip-path: polygon(100% 0, 0 0, 100% 100%);
     }
+
+    @include large-phones {
+      display: none;
+    }
   }
 }
 

@@ -51,11 +51,16 @@ export const selectorOrderPaymentId = (state: AppState): string | null => {
   return state.order.paymentId;
 };
 
+export const selectorOrderGetOneUnauthorized = (state: AppState): Boolean => {
+  return state.order.singleOrderUnauthorized;
+};
+
 interface initState {
   newOrderId: string;
   newOrderRequestData: requestData;
   singleOrder: orderData | null;
   singleOrderRequestData: requestData;
+  singleOrderUnauthorized: Boolean;
   userOrders: orderShortData[];
   userOrdersRequestData: requestData;
   userActiveOrdersQuantity: number | null;
@@ -82,6 +87,7 @@ const initState: initState = {
     error: false,
     msg: ''
   },
+  singleOrderUnauthorized: false,
   userOrders: [],
   userOrdersRequestData: {
     pending: false,
@@ -100,6 +106,8 @@ const initState: initState = {
 
 export function orderReducer(state = initState, action: ActionTypes) {
   switch (action.type) {
+    case types.ORDER_GET_ONE_UNAUTHORIZED:
+      return { ...state, singleOrderUnauthorized: action.payload };
     case types.ORDER_GET_ALL_Q:
       return { ...state, userAllOrdersQuantity: action.payload };
     case types.ORDER_GET_ACTIVE_Q:

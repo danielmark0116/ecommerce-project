@@ -83,4 +83,14 @@
       }
     }
   }
+
+  &.drag_hold_mode {
+    cursor: grabbing;
+  }
+
+  &.disable_children {
+    .flex_item {
+      z-index: -10 !important;
+    }
+  }
 }

@@ -253,6 +253,8 @@ export const PAYMENT_FAIL = 'PAYMENT_FAIL';
 export const PAYMENT_ID = 'PAYMENT_ID';
 export const PAYMENT_REDIRECT = 'PAYMENT_REDIRECT';
 
+export const ORDER_GET_ONE_UNAUTHORIZED = 'ORDER_GET_ONE_UNAUTHORIZED';
+
 interface orderCreateActionType {
   type: typeof ORDER_CREATE;
   payload: string;
@@ -338,6 +340,11 @@ interface paymentRedirectActionType {
   type: typeof PAYMENT_REDIRECT;
 }
 
+interface orderGetOneUnauthorizedActionType {
+  type: typeof ORDER_GET_ONE_UNAUTHORIZED;
+  payload: Boolean;
+}
+
 export type ActionTypes =
   | productsCountActionType
   | productsGetAllActionType
@@ -394,4 +401,5 @@ export type ActionTypes =
   | paymentSuccessActionType
   | paymentFailActionType
   | paymentIdActionType
-  | paymentRedirectActionType;
+  | paymentRedirectActionType
+  | orderGetOneUnauthorizedActionType;

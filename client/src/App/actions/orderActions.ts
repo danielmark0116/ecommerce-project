@@ -99,6 +99,11 @@ export const paymentRedirect = (): ActionTypes => ({
   type: types.PAYMENT_REDIRECT
 });
 
+export const orderGetOneUnauthorized = (payload: Boolean): ActionTypes => ({
+  type: types.ORDER_GET_ONE_UNAUTHORIZED,
+  payload
+});
+
 // THUNKS
 export const orderCreateThunk = (
   address: userAddress,
@@ -148,7 +153,6 @@ export const orderGetAllUsersThunk = (skip: number = 0, limit: number = 1) => {
     dispatch(orderGetAllUsersLoading());
 
     try {
-      // let response = await axios.get('/api/order');
       let response = await axios.get(`/api/order/${skip}/${limit}`);
 
       let data = await response.data;
@@ -169,15 +173,21 @@ export const orderGetOneThunk = (id: string) => {
   return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(orderGetOneLoading());
     updateToken();
+    dispatch(orderGetOneUnauthorized(false));
 
     try {
       let response = await axios.get(`/api/order/${id}`);
 
       const data = await response.data;
 
+      console.log(response.status);
+
       dispatch(orderGetOne(data.orders[0]));
       dispatch(orderGetOneSuccess());
     } catch (e) {
+      if (e.message.includes('401')) {
+        dispatch(orderGetOneUnauthorized(true));
+      }
       dispatch(orderGetOneFail(e.message));
     }
   };

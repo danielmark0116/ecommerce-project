@@ -10,6 +10,7 @@ import CartItem from '../../common/CartItem/CartItem';
 import AddressThumb from '../../common/AddressThumb/AddressThumb';
 import Loader from '../../common/Loader/Loader';
 import Error from '../../common/Error/Error';
+import NotYourOrder from '../../common/NotYourOrder/NotYourOrder';
 
 import _ from 'lodash';
 
@@ -20,7 +21,13 @@ import { stateToProps, dispatchToProps } from './OrderDetailsContainer';
 type Props = stateToProps & dispatchToProps;
 
 const OrderDetails = (props: Props) => {
-  const { getOrderById, orderId, orderData, orderRequestData } = props;
+  const {
+    getOrderById,
+    orderId,
+    orderData,
+    orderRequestData,
+    orderUnauthorized
+  } = props;
   const { pending, error, success } = orderRequestData;
 
   useEffect(() => {
@@ -35,8 +42,9 @@ const OrderDetails = (props: Props) => {
         </Title>
       </Fragment>
     );
-  if (orderData === null || pending) return <Loader></Loader>;
+  if (error && orderUnauthorized) return <NotYourOrder></NotYourOrder>;
   if (error) return <Error />;
+  if (orderData === null || pending) return <Loader></Loader>;
 
   return (
     <Fragment>

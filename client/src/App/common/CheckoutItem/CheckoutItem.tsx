@@ -23,12 +23,12 @@ const CheckoutItem = (props: IProps) => {
     return (
       <div key={index} className={style.cart_item_container_small}>
         <Row>
-          <Col xs="2" md="2" xl="3">
+          <Col xs="3" md="3" xl="3">
             <Link to={`/products/${_id}`}>
               <Image size="small" picString={img}></Image>
             </Link>
           </Col>
-          <Col xs="10" md="10" xl="9">
+          <Col xs="9" md="9" xl="9">
             <Link to={`/products/${_id}`}>
               <Subtitle size="small">{name}</Subtitle>
             </Link>
