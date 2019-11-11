@@ -29,8 +29,8 @@ const CartPill = (props: IProps) => {
   }, [retrigger]);
 
   return (
-    <Link to="/cart">
-      <div ref={pillRef} className={style.cart_pill_container}>
+    <div ref={pillRef} className={style.cart_pill_container}>
+      <Link to="/cart">
         <div
           className={
             quantity === 0
@@ -42,8 +42,8 @@ const CartPill = (props: IProps) => {
         </div>
         <div ref={bgPillRef} className={style.pill_bg}></div>
         <div className={style.cart_pill_content}>{renderedQuantity}</div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
