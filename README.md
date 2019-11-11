@@ -8,17 +8,19 @@ https://grychtol.com.pl
 - cart feature
 - checkout with promo codes feature
 - notifications (e-mail ones and popup ones)
-- disabling the ability to add more of the product than there is in stock
-- disabling the ability to add sth to cart when product is not in stock
+- disabling the ability to add more of the product than there it is in stock
+- disabling the ability to add to cart when product is not in stock
 - each new order updates products stock
 - payments with stripe
-- user auth with Google and JWT Tokens
+- user auth with Google, Facebook and JWT Tokens
+- hold & drag scrollable horizontal products list
+- animations with GSAP and CSS
 
 # INSTALLATION & QUICK START
 
 ---
 
-To run the app on your local machine, install all the dependencies:
+To run the app on your local machine, clone the repo and install all the dependencies:
 
 ```
 yarn install
@@ -41,6 +43,8 @@ STRIPE_SECRET_KEY=as above, but private
 MONGO_URI=mongodb connection string
 mailerMail=email address (mail notifications feature)
 mailerPass=password for email (mail notifications feature)
+FACEBOOK_APP_ID=facebook app id
+FACEBOOK_APP_SECRET=facebook app secret
 ```
 
 \* leave PORT 8000 - there's a proxy set in the client react app. Or change it but remember to change it also in the react package.json
@@ -54,13 +58,14 @@ Do the same in CLIENT dir
 ```
 REACT_APP_MODE=development
 REACT_APP_CLIENT_ID_GOOGLE=google client id (same as above)
+REACT_APP_CLIENT_ID_FACEBOOK=facebook app id
 ```
 
 \* in `development` mode, Redux DEVTOOLS are active. You can quickly disable it though by editing `devToolsMode = false | true` in /client/src/App/config.js
 
 ---
 
-After installing all the dependencies and setting vars in .env files, run
+After installing all the dependencies and setting vars in .env files, run project from root
 
 ```
 yarn dev
