@@ -31,8 +31,9 @@ const FlexContainer = (props: IProps) => {
       if (scrollRef.current) {
         const checkScroll = -(scrollX + e.clientX - initScroll);
         const scrollRefWidth = scrollRef.current.scrollWidth;
+        const containerWidth = scrollRef.current.offsetWidth;
 
-        if (checkScroll < scrollRefWidth - window.innerWidth + 100) {
+        if (checkScroll < scrollRefWidth - containerWidth + 100) {
           setScrollValue(-(scrollX + e.clientX - initScroll));
 
           setScrollX(scrollX + e.clientX - initScroll);
