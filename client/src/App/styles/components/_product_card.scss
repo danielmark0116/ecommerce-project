@@ -22,7 +22,6 @@
     font-size: 18px;
     text-align: center;
     margin-top: 10px;
-
     span {
       color: $grey;
       font-weight: 300;
@@ -44,5 +43,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
     color: inherit;
+    display: flex;
+    align-items: center;
   }
 }
