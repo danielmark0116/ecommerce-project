@@ -180,8 +180,6 @@ export const orderGetOneThunk = (id: string) => {
 
       const data = await response.data;
 
-      console.log(response.status);
-
       dispatch(orderGetOne(data.orders[0]));
       dispatch(orderGetOneSuccess());
     } catch (e) {
