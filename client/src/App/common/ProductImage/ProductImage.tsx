@@ -19,6 +19,7 @@ const ProductImage = (props: IProps) => {
 
   return (
     <div
+      draggable={false}
       className={
         imageSize === 'small' ? style.product_image_small : style.product_image
       }

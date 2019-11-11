@@ -90,7 +90,9 @@
 
   &.disable_children {
     .flex_item {
-      z-index: -10 !important;
+      user-select: none;
+      pointer-events: none;
+      -webkit-user-drag: none !important;
     }
   }
 }

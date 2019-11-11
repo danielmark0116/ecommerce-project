@@ -9,7 +9,19 @@ interface IProps {
 const FlexItem = (props: IProps) => {
   const { children } = props;
 
-  return <div className={style.flex_item}>{children}</div>;
+  const preventDragHandler = (e: any) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div
+      onDragStart={preventDragHandler}
+      draggable={false}
+      className={style.flex_item}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default FlexItem;

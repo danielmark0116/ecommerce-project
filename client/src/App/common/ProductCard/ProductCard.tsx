@@ -39,7 +39,11 @@ const ProductCard = (props: IProps) => {
   }, ['']);
 
   return (
-    <div ref={cardRef} className={style.product_card_container}>
+    <div
+      draggable={false}
+      ref={cardRef}
+      className={style.product_card_container}
+    >
       <Link to={`/products/${_id}`}>
         <ProductImage
           imageSize={cardSize}

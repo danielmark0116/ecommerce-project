@@ -16,6 +16,7 @@ const FlexContainer = (props: IProps) => {
   const [initScroll, setInitScroll] = useState(0);
   const [scrollX, setScrollX] = useState(0);
   const [disableChildren, toggleDisableChildren] = useState(false);
+  const [scrollValue, setScrollValue] = useState(0);
 
   const scrollRef = React.createRef<HTMLDivElement>();
 
@@ -24,32 +25,31 @@ const FlexContainer = (props: IProps) => {
 
     if (initClickPosition !== initScroll && mouseDown) {
       toggleDisableChildren(true);
-    } else {
-      toggleDisableChildren(false);
     }
 
     if (mouseDown && (horizontalScroll || scrollOnlyPhones)) {
       if (scrollRef.current) {
-        let scrollValue = -(scrollX + e.clientX - initScroll) * 1.3;
-        const scrollRefWidth = scrollRef.current.offsetWidth;
+        const checkScroll = -(scrollX + e.clientX - initScroll);
+        const scrollRefWidth = scrollRef.current.scrollWidth;
 
-        if (scrollValue > scrollRefWidth) {
-          scrollValue = scrollRefWidth;
-        } else if (scrollValue < 0) {
-          scrollValue = 0;
+        if (checkScroll < scrollRefWidth - window.innerWidth + 100) {
+          setScrollValue(-(scrollX + e.clientX - initScroll));
+
+          setScrollX(scrollX + e.clientX - initScroll);
+          setInitScroll(e.clientX);
         }
 
-        scrollRef.current.scroll({
-          left: scrollValue
-        });
-
-        scrollValue < scrollRefWidth &&
-          scrollValue > 0 &&
-          setScrollX(scrollX + e.clientX - initScroll);
-        scrollValue < scrollRefWidth &&
-          scrollValue > 0 &&
-          setInitScroll(e.clientX);
+        scrollRef.current.scrollLeft = scrollValue;
       }
+    }
+  };
+
+  const resetOverflowingScrollValue = () => {
+    if (scrollValue < 0) {
+      setScrollValue(0);
+      setInitScroll(0);
+      setScrollX(0);
+      setInitClickPosition(0);
     }
   };
 
@@ -64,10 +64,12 @@ const FlexContainer = (props: IProps) => {
       onMouseLeave={() => {
         toggleMouseDown(false);
         toggleDisableChildren(false);
+        resetOverflowingScrollValue();
       }}
       onMouseUp={() => {
         toggleMouseDown(false);
         toggleDisableChildren(false);
+        resetOverflowingScrollValue();
       }}
       onMouseMove={(e: any) => {
         handleMouseMove(e);
