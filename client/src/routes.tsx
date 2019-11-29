@@ -1,28 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import PageLayout from './App/layout/PageLayout';
+import PageLayout from "./App/layout/PageLayout";
 
-import Loader from './App/common/Loader/Loader';
+import Loader from "./App/common/Loader/Loader";
 
-import HomePage from './App/pages/HomePage/HomePage';
-import ProductsPage from './App/pages/ProductsPage/ProductsPage';
-import ProductPage from './App/pages/ProductPage/ProductPage';
-import CartPage from './App/pages/CartPage/CartPage';
-import CheckoutPage from './App/pages/CheckoutPage/CheckoutPage';
-import NewOrderPage from './App/pages/NewOrder/NewOrgerPage';
-import ProfilePage from './App/pages/ProfilePage/ProfilePage';
-import FullfillPaymentPage from './App/pages/FullfillPaymentPage/FullfillPaymentPage';
-import OrderPage from './App/pages/OrderPage/OrderPage';
-import NotLoggedInPage from './App/pages/NotLoggedIn/NotLoggedInPage';
+import HomePage from "./App/pages/HomePage/HomePage";
+import ProductsPage from "./App/pages/ProductsPage/ProductsPage";
+import ProductPage from "./App/pages/ProductPage/ProductPage";
+import CartPage from "./App/pages/CartPage/CartPage";
+import CheckoutPage from "./App/pages/CheckoutPage/CheckoutPage";
+import NewOrderPage from "./App/pages/NewOrder/NewOrgerPage";
+import ProfilePage from "./App/pages/ProfilePage/ProfilePage";
+import FullfillPaymentPage from "./App/pages/FullfillPaymentPage/FullfillPaymentPage";
+import OrderPage from "./App/pages/OrderPage/OrderPage";
+import NotLoggedInPage from "./App/pages/NotLoggedIn/NotLoggedInPage";
 
-import { AppState } from './App/reducers';
+import { AppState } from "./App/reducers";
 import {
   selectorAuthIsLoggedIn,
   selectorAuthRequestData
-} from './App/reducers/authReducer';
-import { requestData } from './App/types/requestData';
+} from "./App/reducers/authReducer";
+import { requestData } from "./App/types/requestData";
 
 const Routes = (props: stateToProps) => {
   const { isLoggedIn } = props;

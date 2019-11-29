@@ -1,20 +1,20 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Row, Col } from 'reactstrap';
+import React, { Fragment, useState, useEffect } from "react";
+import { Row, Col } from "reactstrap";
 
-import { stateToProps, dispatchToProps } from './ProductsListContainer';
-import { formatFilterString } from '../../helpers/filterStringFormatter';
+import { stateToProps, dispatchToProps } from "./ProductsListContainer";
+import { formatFilterString } from "../../helpers/filterStringFormatter";
 
-import Loader from '../../common/Loader/Loader';
-import FlexContainer from '../../common/FlexGrid/FlexContainer';
-import FlexItem from '../../common/FlexGrid/FlexItem';
-import ProductCard from '../../common/ProductCard/ProductCard';
-import ProductFilters from '../ProductFilters/ProductFilters';
-import Pagination from '../../common/Pagination/Pagination';
-import { productFilters } from '../../types/productFilters';
-import ProductSearchBar from '../ProductSearchBar/ProductSearchBar';
-import Center from '../../common/Center/Center';
-import Text from '../../common/Text/Text';
-import Error from '../../common/Error/Error';
+import Loader from "../../common/Loader/Loader";
+import FlexContainer from "../../common/FlexGrid/FlexContainer";
+import FlexItem from "../../common/FlexGrid/FlexItem";
+import ProductCard from "../../common/ProductCard/ProductCard";
+import ProductFilters from "../ProductFilters/ProductFilters";
+import Pagination from "../../common/Pagination/Pagination";
+import { productFilters } from "../../types/productFilters";
+import ProductSearchBar from "../ProductSearchBar/ProductSearchBar";
+import Center from "../../common/Center/Center";
+import Text from "../../common/Text/Text";
+import Error from "../../common/Error/Error";
 
 interface IProps {}
 
@@ -23,7 +23,7 @@ type Props = stateToProps & dispatchToProps & IProps;
 const ProductsList = (props: Props) => {
   const [activePage, setActivePage] = useState(1);
   const [filterString, setFilterString] = useState(props.initFiltrString);
-  const [titleString, setTitleFilterString] = useState('');
+  const [titleString, setTitleFilterString] = useState("");
 
   const {
     products,
@@ -107,7 +107,7 @@ const ProductsList = (props: Props) => {
             ></ProductFilters>
           </Col>
         )}
-        <Col md="12" xl={withFilters ? '9' : '12'}>
+        <Col md="12" xl={withFilters ? "9" : "12"}>
           <FlexContainer
             fixedWidth={fixedWidth}
             horizontalScroll={horizontalScroll}
