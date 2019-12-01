@@ -53,7 +53,7 @@ exports.createOrder = async (req, res) => {
       const soldQ = Object.values(sizes).reduce((a, b) => a + b);
 
       await prod
-        .update({
+        .updateOne({
           size: {
             xs: prod.size.xs - sizes.xs,
             s: prod.size.s - sizes.s,
