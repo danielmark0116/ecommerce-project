@@ -15,11 +15,21 @@ db();
 const port = process.env.PORT || 8000;
 
 app.use(helmet());
-app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 initJwtMiddleware();
+
+if (process.env.MODE === "production") {
+  app.use(
+    cors({
+      origin: "https://grychtol.com.pl",
+      optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+    })
+  );
+} else {
+  app.use(cors());
+}
 
 // ROUTES
 const productsRotues = require("./routes/products.routes");
