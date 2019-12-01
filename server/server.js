@@ -27,12 +27,18 @@ const authRotues = require("./routes/auth.routes");
 const userRotues = require("./routes/user.routes");
 const stripeRotues = require("./routes/stripe.routes");
 const orderRoutes = require("./routes/order.routes");
+const rateLimit = require("express-rate-limit");
 
-app.use("/api/products", productsRotues);
-app.use("/api/auth", authRotues);
-app.use("/api/user", userRotues);
-app.use("/api/stripe", stripeRotues);
-app.use("/api/order", orderRoutes);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+
+app.use("/api/products", limiter, productsRotues);
+app.use("/api/auth", limiter, authRotues);
+app.use("/api/user", limiter, userRotues);
+app.use("/api/stripe", limiter, stripeRotues);
+app.use("/api/order", limiter, orderRoutes);
 
 if (process.env.MODE === "production") {
   app.use(express.static(path.join(__dirname, "/../client/build/")));
