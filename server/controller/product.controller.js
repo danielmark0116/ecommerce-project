@@ -1,16 +1,16 @@
-const Product = require('../model/product.model');
+const Product = require("../model/product.model");
 
 exports.getPublished = async (req, res) => {
   try {
     let response = await Product.find({ published: true }).sort({
-      createdAt: 'desc'
+      createdAt: "desc"
     });
 
     res.json({
       response,
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -23,13 +23,13 @@ exports.getPublished = async (req, res) => {
 
 exports.getAll = async (req, res) => {
   try {
-    let response = await Product.find().sort({ createdAt: 'desc' });
+    let response = await Product.find().sort({ createdAt: "desc" });
 
     res.json({
       response,
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -44,9 +44,9 @@ exports.getCart = async (req, res) => {
   try {
     let response = await Product.find(
       { _id: { $in: req.query.ids } },
-      'name category sex price img size'
+      "name category sex price img size"
     ).sort({
-      name: '1'
+      name: "1"
     });
 
     res.json({
@@ -69,7 +69,7 @@ exports.getById = async (req, res) => {
       response,
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -88,7 +88,7 @@ exports.postProduct = async (req, res) => {
       response,
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -109,7 +109,7 @@ exports.editProduct = async (req, res) => {
       response: [response],
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -132,7 +132,7 @@ exports.publishProduct = async (req, res) => {
       response: [response],
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -151,7 +151,7 @@ exports.deleteProduct = async (req, res) => {
       response: [response],
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -167,32 +167,32 @@ const filterQuery = queries => {
 
   const titleRegexValue = title
     ? title
-        .split(' ')
+        .split(" ")
         .map(it => `(?=.*${it})`)
-        .join('') + '.*'
-    : '.*';
+        .join("") + ".*"
+    : ".*";
 
   return {
-    category: category ? category : { $regex: /.*/, $options: 'i' },
-    sex: sex ? sex : { $regex: /.*/, $options: 'i' },
-    name: { $regex: new RegExp(titleRegexValue), $options: 'gi' }
+    category: category ? category : { $regex: /.*/, $options: "i" },
+    sex: sex ? sex : { $regex: /.*/, $options: "i" },
+    name: { $regex: new RegExp(titleRegexValue), $options: "gi" }
   };
 };
 
 const sortQuery = queries => {
-  const defaultSort = ['createdAt', 'desc'];
+  const defaultSort = ["createdAt", "desc"];
   const { sort } = queries;
 
   return sort
     ? [
         /date/.test(sort)
-          ? ['createdAt', parseInt(sort.split('date')[1])]
+          ? ["createdAt", parseInt(sort.split("date")[1])]
           : /price/.test(sort)
-          ? ['price', parseInt(sort.split('price')[1])]
+          ? ["price", parseInt(sort.split("price")[1])]
           : /name/.test(sort)
-          ? ['name', parseInt(sort.split('name')[1])]
+          ? ["name", parseInt(sort.split("name")[1])]
           : /sold/.test(sort)
-          ? ['sold', parseInt(sort.split('sold')[1])]
+          ? ["sold", parseInt(sort.split("sold")[1])]
           : defaultSort
       ]
     : [defaultSort];
@@ -218,7 +218,7 @@ exports.productsFilters = async (req, res) => {
       response,
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({
@@ -245,7 +245,7 @@ exports.productsAllFilters = async (req, res) => {
       response,
       error: false,
       success: true,
-      msg: ''
+      msg: ""
     });
   } catch (e) {
     res.status(500).json({

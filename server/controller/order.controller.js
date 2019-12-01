@@ -1,15 +1,15 @@
-const jwt = require('jsonwebtoken');
-const Order = require('../model/order.model');
-const Product = require('../model/product.model');
-const mailer = require('../utils/mailer');
+const jwt = require("jsonwebtoken");
+const Order = require("../model/order.model");
+const Product = require("../model/product.model");
+const mailer = require("../utils/mailer");
 
 exports.getOrderById = async (req, res) => {
-  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
   const userEmail = userData.email;
 
   try {
     let response = await Order.findOne({ _id: req.params.id }, [
-      '-paymentIntentId'
+      "-paymentIntentId"
     ]);
 
     if (response.userEmail === userEmail) {
@@ -17,13 +17,13 @@ exports.getOrderById = async (req, res) => {
         orders: [response],
         error: false,
         success: true,
-        msg: 'Authorized. Access to data about the order'
+        msg: "Authorized. Access to data about the order"
       });
     } else {
       res.status(401).json({
         error: true,
         success: false,
-        msg: 'Order user does not match user making the request'
+        msg: "Order user does not match user making the request"
       });
     }
   } catch (e) {
@@ -36,7 +36,7 @@ exports.getOrderById = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
-  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
   const userEmail = userData.email;
   const userName = userData.name;
   const userId = userData.userId;
@@ -47,14 +47,12 @@ exports.createOrder = async (req, res) => {
     let sizes = item.quantity; // quantity of items sizes in cart
     let productId = item._id;
 
-    Product.findOne({ _id: productId }, (err, prod) => {
+    Product.findOne({ _id: productId }, async (err, prod) => {
       if (err) throw err;
 
       const soldQ = Object.values(sizes).reduce((a, b) => a + b);
 
-      // console.log(soldQ);
-
-      prod
+      await prod
         .update({
           size: {
             xs: prod.size.xs - sizes.xs,
@@ -75,7 +73,7 @@ exports.createOrder = async (req, res) => {
           sold: soldQ
         })
         .then(newProd => null)
-        .catch(e => console.log(e.message));
+        .catch(e => console.log("Order controller error: " + e.message));
     });
   });
 
@@ -84,13 +82,13 @@ exports.createOrder = async (req, res) => {
     userId,
     userEmail,
     userName,
-    status: 'init'
+    status: "init"
   };
 
   try {
     let newOrder = await new Order(newOrderData).save();
 
-    mailer.orderCreate(userEmail, 'New Order', {
+    mailer.orderCreate(userEmail, "New Order", {
       userName,
       orderId: newOrder._id
     });
@@ -99,7 +97,7 @@ exports.createOrder = async (req, res) => {
       orders: new Array(newOrder),
       success: true,
       error: false,
-      msg: 'Created new order'
+      msg: "Created new order"
     });
   } catch (e) {
     res.status(500).json({
@@ -111,20 +109,20 @@ exports.createOrder = async (req, res) => {
 };
 
 exports.getUsersActiveOrdersQ = async (req, res) => {
-  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
   const userId = userData.userId;
 
   try {
     let response = await Order.countDocuments({
       userId,
-      status: { $in: ['init', 'paid', 'processing', 'sent'] }
+      status: { $in: ["init", "paid", "processing", "sent"] }
     });
 
     res.json({
       response,
       success: true,
       error: false,
-      msg: 'Checked the number of users active orders'
+      msg: "Checked the number of users active orders"
     });
   } catch (e) {
     res.status(500).json({
@@ -136,19 +134,19 @@ exports.getUsersActiveOrdersQ = async (req, res) => {
 };
 
 exports.getUsersOrders = async (req, res) => {
-  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
   const userId = userData.userId;
 
   try {
     let response = await Order.find({ userId }, [
-      '_id',
-      'userId',
-      'userEmail',
-      'status',
-      'totalValue',
-      'deliveryValue',
-      'status'
-    ]).sort({ createdAt: 'desc' });
+      "_id",
+      "userId",
+      "userEmail",
+      "status",
+      "totalValue",
+      "deliveryValue",
+      "status"
+    ]).sort({ createdAt: "desc" });
 
     //   _id: string;
     // userId: string;
@@ -171,7 +169,7 @@ exports.getUsersOrders = async (req, res) => {
 };
 
 exports.getUsersOrdersInChunks = async (req, res) => {
-  const userData = jwt.decode(req.headers.authorization.split(' ')[1]);
+  const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
   const userId = userData.userId;
   const skipValue = parseInt(req.params.skip);
   const limitValue = parseInt(req.params.limit);
@@ -180,15 +178,15 @@ exports.getUsersOrdersInChunks = async (req, res) => {
     let allOrersQuantity = await Order.countDocuments();
 
     let response = await Order.find({ userId }, [
-      '_id',
-      'userId',
-      'userEmail',
-      'status',
-      'totalValue',
-      'deliveryValue',
-      'status'
+      "_id",
+      "userId",
+      "userEmail",
+      "status",
+      "totalValue",
+      "deliveryValue",
+      "status"
     ])
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: "desc" })
       .skip(skipValue)
       .limit(limitValue);
 

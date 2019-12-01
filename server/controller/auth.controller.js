@@ -1,19 +1,19 @@
-require('dotenv').config();
-const User = require('../model/user.model');
-const jwt = require('jsonwebtoken');
-const axios = require('axios');
-const jws = require('jws-jwk');
-const chalk = require('chalk');
+require("dotenv").config();
+const User = require("../model/user.model");
+const jwt = require("jsonwebtoken");
+const axios = require("axios");
+const jws = require("jws-jwk");
+const chalk = require("chalk");
 
 const tokenValidMinutes = 60;
 
 exports.loginUserGoogle = async (req, res) => {
-  const provider = 'google';
+  const provider = "google";
   const { email, name, providerId, userPic, providerToken } = req.body;
 
   try {
     const idConfig = await axios.get(
-      'https://accounts.google.com/.well-known/openid-configuration'
+      "https://accounts.google.com/.well-known/openid-configuration"
     );
     const jwkResponse = await axios.get(idConfig.data.jwks_uri);
     const jwkKey = jwkResponse.data;
@@ -27,7 +27,7 @@ exports.loginUserGoogle = async (req, res) => {
       decodedProviderToken &&
       decodedProviderToken.exp > nowInEpoch &&
       decodedProviderToken.aud === process.env.GOOGLE_CLIENT_ID &&
-      decodedProviderToken.iss === 'accounts.google.com' &&
+      decodedProviderToken.iss === "accounts.google.com" &&
       verifySignature
     ) {
       let userToLog = await User.find({ email: decodedProviderToken.email });
@@ -55,7 +55,7 @@ exports.loginUserGoogle = async (req, res) => {
 
         res.json({
           authToken: newToken,
-          msg: 'Verified, created user, issued token',
+          msg: "Verified, created user, issued token",
           error: false,
           success: true
         });
@@ -80,14 +80,14 @@ exports.loginUserGoogle = async (req, res) => {
 
         res.json({
           authToken: newToken,
-          msg: 'Verified, user exists, issued token',
+          msg: "Verified, user exists, issued token",
           error: false,
           success: true
         });
       }
     } else {
       res.status(500).json({
-        msg: 'Not verified, cannot issue an auth token',
+        msg: "Not verified, cannot issue an auth token",
         error: true,
         success: false
       });
@@ -103,15 +103,15 @@ exports.loginUserGoogle = async (req, res) => {
 
 exports.loginUserFacebook = async (req, res) => {
   const appAccessTokenLink =
-    'https://graph.facebook.com/oauth/access_token?client_id=' +
+    "https://graph.facebook.com/oauth/access_token?client_id=" +
     process.env.FACEBOOK_APP_ID +
-    '&client_secret=' +
+    "&client_secret=" +
     process.env.FACEBOOK_APP_SECRET +
-    '&grant_type=client_credentials';
+    "&grant_type=client_credentials";
 
   const { name, email, userPic, providerId } = req.body;
   const accessToken = req.body.providerToken;
-  const provider = 'facebook';
+  const provider = "facebook";
 
   try {
     let response = await axios.get(appAccessTokenLink);
@@ -152,7 +152,7 @@ exports.loginUserFacebook = async (req, res) => {
 
         res.json({
           authToken: newToken,
-          msg: 'Verified, created user, issued token',
+          msg: "Verified, created user, issued token",
           error: false,
           success: true
         });
@@ -177,7 +177,7 @@ exports.loginUserFacebook = async (req, res) => {
 
         res.json({
           authToken: newToken,
-          msg: 'Verified, user exists, issued token',
+          msg: "Verified, user exists, issued token",
           error: false,
           success: true
         });
