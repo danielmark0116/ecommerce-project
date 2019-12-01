@@ -24,7 +24,7 @@ if (process.env.MODE === "production") {
   app.use(
     cors({
       origin: "https://grychtol.com.pl",
-      optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+      optionsSuccessStatus: 200
     })
   );
 } else {
