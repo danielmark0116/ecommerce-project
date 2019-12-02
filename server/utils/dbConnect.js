@@ -19,7 +19,9 @@ module.exports = () => {
     reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
     reconnectInterval: 500, // Reconnect every 500ms
     poolSize: 10,
-    bufferMaxEntries: 0
+    bufferMaxEntries: 0,
+    keepAlive: true,
+    keepAliveInitialDelay: 300000
   });
 
   db = mongoose.connection;
