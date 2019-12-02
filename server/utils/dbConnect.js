@@ -15,12 +15,26 @@ module.exports = () => {
   mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    server: { auto_reconnect: true }
   });
 
   db = mongoose.connection;
 
-  db.on("error", e => console.log("Connection error: " + e));
+  db.on("error", e => {
+    console.log("Connection error: " + e);
+    mongoose.disconnect();
+  });
+  db.on("disconnected", function() {
+    console.log("MongoDB disconnected! Trying to reconnect");
+
+    mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      server: { auto_reconnect: true }
+    });
+  });
   db.once("open", () => {
     console.log("Connected to the DB");
   });
