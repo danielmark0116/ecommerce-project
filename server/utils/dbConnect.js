@@ -31,4 +31,8 @@ module.exports = () => {
   db.once("open", () => {
     console.log("Connected to the DB");
   });
+
+  db.once("reconnected", () => {
+    console.log("Reconnected to the DB");
+  });
 };
