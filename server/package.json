@@ -15,7 +15,7 @@
     "jws-jwk": "^0.1.4",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.5",
-    "nodemailer": "^6.3.1",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "pug": "^2.0.4",
